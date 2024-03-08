@@ -63,6 +63,7 @@ C 135, 245, 251
 </details>
 
 ## Study resources
+- [MLX42](https://github.com/codam-coding-college/MLX42)
 - [Resources jotavare 42 Porto](https://github.com/jotavare/42-resources?tab=readme-ov-file#04-cub3d)
 - [Formula](https://lodev.org/cgtutor/raycasting.html)
 - [Raycasting](https://permadi.com/1996/05/ray-casting-tutorial-table-of-contents/)
