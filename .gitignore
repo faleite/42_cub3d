@@ -4,6 +4,11 @@
 ### Obsidian ###
 # config dir
 .obsidian/
+.bashrc
+.bash_history
+Dockerfile
+so_long/
+tools/
 
 ### Tester ###
 
