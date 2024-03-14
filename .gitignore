@@ -6,7 +6,7 @@
 .obsidian/
 .bashrc
 .bash_history
-Dockerfile
+dcs/Dockerfile
 so_long/
 ./mlx_linux/.github
 

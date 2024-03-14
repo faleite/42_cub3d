@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/12 22:12:04 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/03/14 20:36:45 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,14 @@
 # define BUFFER_CUB 1024
 
 /* images */
+
+/* elements */
+# define F "F"
+# define C "C"
+# define NO "NO"
+# define SO "SO"
+# define WE "WE"
+# define EA "EA"
 
 /* keycode */
 # define W 119
@@ -48,6 +56,8 @@ typedef struct s_cub
 	void	*mlx_ptr;
 	void	*win_ptr;
 	char	**scene;
+	int		start_map;
+	int		end_map;
 	int		x;
 	int		y;
 	int		size_x;
@@ -61,16 +71,20 @@ t_cub	*cub(void);
 
 /* tools */
 void	err_case(char *msg);
-void	free_map(char **map);
+void	free_scene(char **scene);
 
 /* checks */
 int		check_type(char *str);
-int		count_line(char *file);
+int		check_scene(void);
+int		map_location(void);
+int		check_first_element(void);
 
 /* data */
 char	**get_scene(char *file);
+int		count_line(char *file);
+int		clean_nl(void);
 
 /* debugs */
-void	print_scene(char **file);
+void	print_scene(char **file, int nl);
 
 #endif /* CUB3D_H */

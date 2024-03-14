@@ -9,8 +9,8 @@ CFLAGS		= -Wall -Wextra -Werror -g #-fsanitize=address
 SRC			= ./src/
 GET			= ./get_next_line/
 FILES 		= $(GET)get_next_line.c $(GET)get_next_line_utils.c\
-			  $(SRC)cub3d.c $(SRC)tools.c $(SRC)check_utils.c\
-			  $(SRC)get_scene.c
+			  $(SRC)cub3d.c $(SRC)tools.c $(SRC)check_scene_utils.c\
+			  $(SRC)check_scene.c $(SRC)get_scene.c
 OBJS		= $(FILES:.c=.o)
 MLX_L		= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 LIBFT		= ./libft/libft.a

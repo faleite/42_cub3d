@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 16:59:47 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/12 22:13:04 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/03/14 21:59:14 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,17 @@ void	validate_map(int argc, char *arg)
 		err_case("Error\nUse: ./prog file.cub\n");
 	check_type(arg);
 	cub()->scene = get_scene(arg);
-	print_scene(cub()->scene);
-	// check_map();
+	clean_nl();
+	if (map_location() < 6)
+		err_case("Error\nThe file does not have a valid scene\n");
+	check_first_element();
+	printf("Start MAP: %d\n", cub()->start_map);
+	printf("End MAP: %d\n", cub()->end_map);
+	print_scene(cub()->scene, 0);
+	// check_scene();
 	// if (playable_map())
 	// 	err_case("Error\nThe map is not valid\n");
-	free_map(cub()->scene);
+	free_scene(cub()->scene);
 	// map()->matrix = copy_map(argv);
 }
 

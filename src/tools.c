@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:11:42 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/12 22:12:27 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/03/14 21:46:05 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,26 +33,29 @@ t_cub	*cub(void)
 // 	return (&i);
 // }
 
-void	free_map(char **map)
+void	free_scene(char **scene)
 {
 	int	i;
 
 	i = 0;
-	while (map[i] != NULL)
+	while (scene[i] != NULL)
 	{
-		free(map[i++]);
+		free(scene[i++]);
 	}
-	free(map);
+	free(scene);
 }
 
-void	print_scene(char **file)
+void	print_scene(char **file, int nl)
 {
 	int	i;
 
 	i = 0;
 	while (file[i] != NULL)
 	{
-		printf("%s", file[i++]);
+		if (nl)
+			printf("%s\n", file[i++]);
+		else if (!nl)
+			printf("%s", file[i++]);
 	}
 	printf("\n");
 }
@@ -60,7 +63,7 @@ void	print_scene(char **file)
 void	err_case(char *msg)
 {
 	ft_putstr_fd(msg, 2);
-	// if (map()->matrix)
-	// 	free_map(map()->matrix);
+	if (cub()->scene)
+		free_scene(cub()->scene);
 	exit(EXIT_FAILURE);
 }
