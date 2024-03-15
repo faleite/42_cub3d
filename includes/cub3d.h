@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/14 20:36:45 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/03/15 21:05:29 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,14 @@ typedef struct s_cub
 	void	*mlx_ptr;
 	void	*win_ptr;
 	char	**scene;
+	char	**rgb_c;
+	char	**rgb_f;
+	char	*path_no;
+	char	*path_so;
+	char	*path_we;
+	char	*path_ea;
 	int		start_map;
-	int		end_map;
+	int		end_map;		
 	int		x;
 	int		y;
 	int		size_x;
@@ -71,13 +77,19 @@ t_cub	*cub(void);
 
 /* tools */
 void	err_case(char *msg);
-void	free_scene(char **scene);
+void	free_arr(char **arr);
+int		array_len(char **arr);
+
 
 /* checks */
 int		check_type(char *str);
 int		check_scene(void);
 int		map_location(void);
 int		check_first_element(void);
+int		iselement_wall(char *str);
+int		iselement_cf(char *str);
+int		white_space(char *str);
+int		check_wall_texture(void);
 
 /* data */
 char	**get_scene(char *file);

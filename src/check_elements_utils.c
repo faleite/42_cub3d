@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_scene_utils.c                                :+:      :+:    :+:   */
+/*   check_elements_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 20:34:09 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/14 21:59:57 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/03/15 19:18:26 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,36 @@ int	check_type(char *str)
 		err_case("Error\nThe argument must be a valid format: file.cub 2\n");
 	if (ft_strncmp(type, ".cub", 5))
 		err_case("Error\nThe argument must be a valid format: file.cub 3\n");
+	return (0);
+}
+
+int	iselement_wall(char *str)
+{
+	if (!ft_strncmp(str, "NO ", 3) || !ft_strncmp(str, "SO ", 3) || \
+		!ft_strncmp(str, "WE ", 3) || !ft_strncmp(str, "EA ", 3))
+		return (0);
+	return (1);
+}
+
+int	iselement_cf(char *str)
+{
+	if (!ft_strncmp(str, "F ", 2) || !ft_strncmp(str, "C ", 2))
+		return (0);
+	return (1);
+}
+
+int	white_space(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
+			i++;
+		else
+			return (1);
+	}
 	return (0);
 }
 

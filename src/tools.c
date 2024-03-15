@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:11:42 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/14 21:46:05 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/03/15 21:08:01 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,37 +33,32 @@ t_cub	*cub(void)
 // 	return (&i);
 // }
 
-void	free_scene(char **scene)
+int	array_len(char **arr)
 {
 	int	i;
 
 	i = 0;
-	while (scene[i] != NULL)
-	{
-		free(scene[i++]);
-	}
-	free(scene);
+	while (arr[i] != NULL)
+		i++;
+	return (i);
 }
 
-void	print_scene(char **file, int nl)
+void	free_arr(char **arr)
 {
 	int	i;
 
 	i = 0;
-	while (file[i] != NULL)
+	while (arr[i] != NULL)
 	{
-		if (nl)
-			printf("%s\n", file[i++]);
-		else if (!nl)
-			printf("%s", file[i++]);
+		free(arr[i++]);
 	}
-	printf("\n");
+	free(arr);
 }
 
 void	err_case(char *msg)
 {
 	ft_putstr_fd(msg, 2);
 	if (cub()->scene)
-		free_scene(cub()->scene);
+		free_arr(cub()->scene);
 	exit(EXIT_FAILURE);
 }
