@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 16:59:47 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/15 21:33:48 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/03/17 18:01:24 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ void	validate_elements(void)
 	if (map_location() < 6)
 		err_case("Error\nThe file does not have a valid scene\n");
 	check_first_element();
+	checking_duplicates();
 	check_wall_texture();
+	path_exists();
+	check_rgb();
 }
 
 void	validate_map(int argc, char *arg)
@@ -28,14 +31,12 @@ void	validate_map(int argc, char *arg)
 	check_type(arg);
 	cub()->scene = get_scene(arg);
 	validate_elements();
-	// printf("Start MAP: %d\n", cub()->start_map);
-	// printf("End MAP: %d\n", cub()->end_map);
+	print_data();
 	// print_scene(cub()->scene, 0);
 	// check_scene();
 	// if (playable_map())
 	// 	err_case("Error\nThe map is not valid\n");
-	free_arr(cub()->scene);
-	// map()->matrix = copy_map(argv);
+	free_cub();
 }
 
 int	main(int argc, char *argv[])

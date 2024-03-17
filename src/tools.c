@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:11:42 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/15 21:08:01 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/03/17 16:15:30 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,22 @@ void	free_arr(char **arr)
 	int	i;
 
 	i = 0;
-	while (arr[i] != NULL)
+	while (arr && arr[i] != NULL)
 	{
 		free(arr[i++]);
 	}
 	free(arr);
+}
+
+void	free_cub(void)
+{
+	free_arr(cub()->scene);
+	free_arr(cub()->rgb_c);
+	free_arr(cub()->rgb_f);
+	free(cub()->path_no);
+	free(cub()->path_so);
+	free(cub()->path_we);
+	free(cub()->path_ea);
 }
 
 void	err_case(char *msg)

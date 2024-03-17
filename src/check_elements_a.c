@@ -1,27 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_elements.c                                   :+:      :+:    :+:   */
+/*   check_elements_a.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:56:48 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/15 21:38:34 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/03/17 18:53:15 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-/* CHECKS
- ELEM:
- - Elementos repetidos
- - Numero de argumentos de cada elemento
- - path
- - RGB de 0 a 255 
- 
- MAP:
- - Linha vazia no meio do mapa
-*/
 
 int	map_location(void)
 {
@@ -65,11 +54,11 @@ int	check_first_element(void)
 			!iselement_cf(cub()->scene[i]))
 			elemts++;
 		else if (white_space(cub()->scene[i]))
-			err_case("Error\nOne of the elements is not valid\n");
+			err_case("Error\nThe elements are not valid\n");
 		i++;
 	}
 	if (elemts != 6)
-		err_case("Error\nThe number of elements is invalid\n");
+		err_case("Error\nThe number of elements is not valid\n");
 	i = cub()->end_map;
 	while (cub()->scene && cub()->scene[++i])
 	{
@@ -79,6 +68,10 @@ int	check_first_element(void)
 	return (0);
 }
 
+/* Utils 
+ print_scene(elements, 1);
+ printf("NO: %s\n", cub()->path_no);
+*/
 int	texture_path(char **elements)
 {
 	int	len;
@@ -86,31 +79,50 @@ int	texture_path(char **elements)
 	len = array_len(elements);
 	if (len != 2)
 	{
-		print_scene(elements, 1);
 		free_arr(elements);
-		err_case("Error\nInvalid texture element\n");
+		err_case("Error\nInvalid texture element number\n");
 	}
 	else if (!strncmp(elements[0], NO, 3))
-	{
-		cub()->path_no = elements[1];
-		printf("NO: %s\n", cub()->path_no);
-	}
+		cub()->path_no = ft_strdup(elements[1]);
 	else if (!strncmp(elements[0], SO, 3))
-	{
-		cub()->path_so = elements[1];
-		printf("SO: %s\n", cub()->path_so);
-	}
+		cub()->path_so = ft_strdup(elements[1]);
 	else if (!strncmp(elements[0], WE, 3))
-	{
-		cub()->path_we = elements[1];
-		printf("WE: %s\n", cub()->path_we);
-	}
+		cub()->path_we = ft_strdup(elements[1]);
 	else if (!strncmp(elements[0], EA, 3))
+		cub()->path_ea = ft_strdup(elements[1]);
+	free_arr(elements);
+	return (0);
+}
+
+/* Utils
+ printf("Num elem: %d\n", len);
+ printf("Num elem: %s\n", str);
+ print_scene(cub()->rgb_f, 1);
+*/
+int	rgb_path(char *str)
+{
+	char	**elements;
+	int		len;
+
+	elements = ft_split(str, ' ');
+	len = array_len(elements);
+	if (len == 2)
 	{
-		cub()->path_ea = elements[1];
-		printf("EA: %s\n", cub()->path_ea);
+		if (!strncmp(elements[0], F, 2))
+			cub()->rgb_f = ft_split(elements[1], ',');
+		else if (!strncmp(elements[0], C, 2))
+			cub()->rgb_c = ft_split(elements[1], ',');
+	}
+	else if (len == 4)
+	{
+		if (!strncmp(elements[0], F, 2))
+			cub()->rgb_f = ft_rgbdup(elements);
+		else if (!strncmp(elements[0], C, 2))
+			cub()->rgb_c = ft_rgbdup(elements);
 	}
 	free_arr(elements);
+	if (len > 4 || len < 2)
+		err_case("Error\nInvalid rgb color element number\n");
 	return (0);
 }
 
@@ -129,9 +141,35 @@ int	check_wall_texture(void)
 			elements = ft_split(cub()->scene[i++], ' ');
 			texture_path(elements);
 		}
-		else
+		else if (!iselement_cf(cub()->scene[i]))
+		{
+			rgb_path(cub()->scene[i]);
 			i++;
+		}
 	}
+	return (0);
+}
+
+int	check_rgb_utils(char **rgb)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	while (rgb && rgb[i] && i < 2)
+	{
+		len = ft_strlen(rgb[i]) - 1;
+		if (rgb[i][len] == ',')
+			rgb[i][len] = '\0';
+		i++;
+	}
+	return (0);
+}
+
+int	check_rgb(void)
+{
+	check_rgb_utils(cub()->rgb_f);
+	check_rgb_utils(cub()->rgb_c);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/15 21:05:29 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/03/17 18:00:48 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,18 +78,25 @@ t_cub	*cub(void);
 /* tools */
 void	err_case(char *msg);
 void	free_arr(char **arr);
+void	free_cub(void);
 int		array_len(char **arr);
 
 
-/* checks */
+/* check elements */
+char	**ft_rgbdup(char **src);
 int		check_type(char *str);
-int		check_scene(void);
-int		map_location(void);
 int		check_first_element(void);
 int		iselement_wall(char *str);
 int		iselement_cf(char *str);
 int		white_space(char *str);
 int		check_wall_texture(void);
+int		checking_duplicates(void);
+int		path_exists(void);
+int		check_rgb(void);
+int		check_scene(void);
+
+/* check map */
+int		map_location(void);
 
 /* data */
 char	**get_scene(char *file);
@@ -98,5 +105,7 @@ int		clean_nl(void);
 
 /* debugs */
 void	print_scene(char **file, int nl);
+void	print_map(char **file, int nl);
+void	print_data(void);
 
 #endif /* CUB3D_H */
