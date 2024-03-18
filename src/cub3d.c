@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 16:59:47 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/17 18:01:24 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/03/18 21:09:57 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,16 @@ void	validate_elements(void)
 	checking_duplicates();
 	check_wall_texture();
 	path_exists();
-	check_rgb();
+	clean_comma();
 }
 
+/* CHECKS
+ ELEM:
+ - RGB de 0 a 255 
+ 
+ MAP:
+ - Linha vazia no meio do mapa
+*/
 void	validate_map(int argc, char *arg)
 {
 	if (argc != 2)

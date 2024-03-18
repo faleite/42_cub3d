@@ -6,19 +6,12 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:56:48 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/17 17:46:02 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/03/18 21:09:46 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-/* CHECKS
- ELEM:
- - RGB de 0 a 255 
- 
- MAP:
- - Linha vazia no meio do mapa
-*/
 static int	is_duplicates(char *str, int len)
 {
 	int		i;
