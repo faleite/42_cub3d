@@ -113,8 +113,30 @@ Description  | You must create a “realistic” 3D graphical representation of 
 <details>
   <summary>Expand here</summary>
 
+### Check map
+- [ ] Mapa tem que estar cercado por paredes (1)
+  - [ ] Cada liha do mapa tem que iniciar e fechar com 1
+  - [ ] Primeira e ultima linha tem que ser 1 e ' '
+- [ ] Checar se tem mais de uma posicao inicial
+- [ ] Caracteres validos: 0, 1, N, S, E, W
+  - [ ] Checar cerco de caracteres validos
+    - [ ] ' ' tem que estar cercado por 1 e ' '
+    - [ ] 0 tem que estar cercado por 1, 0, N, S, E e W
+    - [ ] N, S, E e W tem que estar cercado por 1 e 0
+- [ ] Checar quando ha linhas maiores ou menores no inicio e fim da linha
+  - [ ] Se a linha anterior for menor que a atual, a parte maior da linha\
+    atual so pode conter 1 e ' '
+  - [ ] Se a linha anterior for maior que a atual, a parte maior da linha\
+    anterior so pode conter 1 e ' '
+
+## Elementos da cena
+
+1. Encontar primeira e ultima linha (parede) do map
+2. Checar linhas **NO**, **SO**, **WE**, **EA**
+3. Checar linhas **F** e **C**
+
 ## Docker
-- [Dockerfile](./Dockerfile)
+- [Dockerfile](./dcs/Dockerfile)
  - `docker build -t cub3d-env .`
  - `docker run -it --rm -v $(pwd):/home/dev -w /home/dev cub3d-env`
 - XQuartz config:
@@ -122,14 +144,6 @@ Description  | You must create a “realistic” 3D graphical representation of 
   - Open XQuartz
   - Exec on mac terminal `/opt/X11/bin/xhost +127.0.0.1`
 
-## Parser
-
-1. Encontar primeira e ultima linha (parede) do map
-2. Checar linhas **NO**, **SO**, **WE**, **EA**
-3. Checar linhas **F** e **C**
-4. Checar linhas do mapa
-  - Checar se tem caracteres invalidos
-  - Flud fill nao e preciso para checar se o mapa é valido
 
 ## Minimap
 ```
