@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 21:24:35 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/14 16:51:32 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:49:22 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	clean_nl(void)
 	i = 0;
 	while (cub()->scene && cub()->scene[i])
 	{
-		len = ft_strlen(cub()->scene[i])  - 1;
+		len = ft_strlen(cub()->scene[i]) - 1;
 		if (cub()->scene[i][len] == '\n')
 			cub()->scene[i][len] = '\0';
 		i++;

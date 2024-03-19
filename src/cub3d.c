@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 16:59:47 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/18 21:09:57 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:32:57 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,15 @@ void	validate_elements(void)
 	check_wall_texture();
 	path_exists();
 	clean_comma();
+	check_rgb_number(cub()->rgb_f);
+	check_rgb_number(cub()->rgb_c);
 }
 
 /* CHECKS
- ELEM:
- - RGB de 0 a 255 
- 
  MAP:
  - Linha vazia no meio do mapa
 */
-void	validate_map(int argc, char *arg)
+void	validate_scene(int argc, char *arg)
 {
 	if (argc != 2)
 		err_case("Error\nUse: ./prog file.cub\n");
@@ -48,7 +47,7 @@ void	validate_map(int argc, char *arg)
 
 int	main(int argc, char *argv[])
 {
-	validate_map(argc, argv[1]);
+	validate_scene(argc, argv[1]);
 	// build_window();
 	return (0);
 }

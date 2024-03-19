@@ -1,13 +1,10 @@
-
-NO            ./textures/walls/w3d_n.xpm
+NO  ./textures/walls/w3d_n.xpm
 SO ./textures/walls/w3d_s.xpm
-
 WE ./textures/walls/w3d_w.xpm
-C     225, 30,0
-
 EA ./textures/walls/w3d_e.xpm
 
-F ola220,   100,    0
+C 255,255,0
+F 255,0,0
 
 1111111111111111111111111
 1000000000110000000000001

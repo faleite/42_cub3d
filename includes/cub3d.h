@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/18 19:02:17 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:42:34 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,8 @@ int		checking_duplicates(void);
 int		path_exists(void);
 int		clean_comma(void);
 int		check_rgb(char *rgb);
-int		check_scene(void);
+int		check_rgb_number(char **rgb);
+// int		check_scene(void);
 
 /* check map */
 int		map_location(void);

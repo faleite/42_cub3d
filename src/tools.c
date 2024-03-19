@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:11:42 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/17 16:15:30 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:41:42 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,19 @@ void	free_cub(void)
 	free_arr(cub()->scene);
 	free_arr(cub()->rgb_c);
 	free_arr(cub()->rgb_f);
-	free(cub()->path_no);
-	free(cub()->path_so);
-	free(cub()->path_we);
-	free(cub()->path_ea);
+	if (cub()->path_no != NULL)
+		free(cub()->path_no);
+	if (cub()->path_so != NULL)
+		free(cub()->path_so);
+	if (cub()->path_we != NULL)
+		free(cub()->path_we);
+	if (cub()->path_ea != NULL)
+		free(cub()->path_ea);
 }
 
 void	err_case(char *msg)
 {
 	ft_putstr_fd(msg, 2);
-	if (cub()->scene)
-		free_arr(cub()->scene);
+	free_cub();
 	exit(EXIT_FAILURE);
 }

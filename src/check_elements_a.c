@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:56:48 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/18 21:08:43 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:48:57 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ int	texture_path(char **elements)
 	free_arr(elements);
 	return (0);
 }
-
-
 
 int	check_wall_texture(void)
 {

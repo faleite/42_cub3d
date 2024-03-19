@@ -6,11 +6,48 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 18:53:08 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/18 21:03:55 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:44:44 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+static char	*put_space(char *rgb);
+static int	rgb_path(char *str);
+static int	handle_comma(char *rgb);
+
+int	check_rgb(char *str)
+{
+	char	*rgb;
+
+	if (handle_comma(str) != 2)
+		err_case("Error\nInvalid comma in rgb color element\n");
+	rgb = put_space(str);
+	rgb_path(rgb);
+	return (0);
+}
+
+int	check_rgb_number(char **rgb)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (rgb && rgb[i])
+	{
+		j = 0;
+		while (rgb[i][j])
+		{
+			if (!ft_isdigit(rgb[i][j]))
+				err_case("Error\nInvalid rgb number\n");
+			j++;
+		}
+		if (!(ft_atoi(rgb[i]) >= 0 && ft_atoi(rgb[i]) <= 255))
+			err_case("Error\nRGB number outside the range 0 to 255\n");
+		i++;
+	}
+	return (0);
+}
 
 /* Utils
  printf("Num elem: %d\n", len);
@@ -35,10 +72,8 @@ static int	rgb_path(char *str)
 	}
 	else
 	{
-		ft_putstr_fd("Error\nInvalid rgb color element number\n", 2);
 		free_arr(elements);
-		free_cub();
-		exit(EXIT_FAILURE);
+		err_case("Error\nInvalid rgb color element number\n");
 	}
 	return (0);
 }
@@ -84,15 +119,4 @@ static char	*put_space(char *rgb)
 	}
 	new_rgb[j] = '\0';
 	return (new_rgb);
-}
-
-int	check_rgb(char *str)
-{
-	char	*rgb;
-
-	if (handle_comma(str) != 2)
-		err_case("Error\nInvalid comma in rgb color element\n");
-	rgb = put_space(str);
-	rgb_path(rgb);
-	return (0);
 }
