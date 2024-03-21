@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:11:42 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/19 18:41:42 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/03/21 20:45:49 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	free_cub(void)
 
 void	err_case(char *msg)
 {
+	ft_putstr_fd("Error\n", 2);
 	ft_putstr_fd(msg, 2);
 	free_cub();
 	exit(EXIT_FAILURE);

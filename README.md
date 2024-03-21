@@ -116,9 +116,9 @@ Description  | You must create a “realistic” 3D graphical representation of 
 ### Check map
 - [ ] Mapa tem que estar cercado por paredes (1)
   - [ ] Cada liha do mapa tem que iniciar e fechar com 1
-  - [ ] Primeira e ultima linha tem que ser 1 e ' '
-- [ ] Checar se tem mais de uma posicao inicial
-- [ ] Caracteres validos: 0, 1, N, S, E, W
+  - [ ] Primeira e ultima linha so pode haver 1 e ' '
+- [X] Checar se tem mais de uma posicao inicial
+- [X] Caracteres validos: 0, 1, N, S, E, W e ' '
   - [ ] Checar cerco de caracteres validos
     - [ ] ' ' tem que estar cercado por 1 e ' '
     - [ ] 0 tem que estar cercado por 1, 0, N, S, E e W

@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:56:48 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/18 21:09:46 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/03/21 20:49:59 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	is_duplicates(char *str, int len)
 		{
 			flag++;
 			if (flag > 1)
-				err_case("Error\nDuplicate element\n");
+				err_case("Duplicate element\n");
 		}
 		i++;
 	}

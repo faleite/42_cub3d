@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 18:53:08 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/19 18:44:44 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/03/21 20:54:00 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	check_rgb(char *str)
 	char	*rgb;
 
 	if (handle_comma(str) != 2)
-		err_case("Error\nInvalid comma in rgb color element\n");
+		err_case("Invalid comma in rgb color element\n");
 	rgb = put_space(str);
 	rgb_path(rgb);
 	return (0);
@@ -39,11 +39,11 @@ int	check_rgb_number(char **rgb)
 		while (rgb[i][j])
 		{
 			if (!ft_isdigit(rgb[i][j]))
-				err_case("Error\nInvalid rgb number\n");
+				err_case("Invalid rgb number\n");
 			j++;
 		}
 		if (!(ft_atoi(rgb[i]) >= 0 && ft_atoi(rgb[i]) <= 255))
-			err_case("Error\nRGB number outside the range 0 to 255\n");
+			err_case("RGB number outside the range 0 to 255\n");
 		i++;
 	}
 	return (0);
@@ -73,7 +73,7 @@ static int	rgb_path(char *str)
 	else
 	{
 		free_arr(elements);
-		err_case("Error\nInvalid rgb color element number\n");
+		err_case("Invalid rgb color element number\n");
 	}
 	return (0);
 }

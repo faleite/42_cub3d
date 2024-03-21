@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/19 18:42:34 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/03/21 21:52:59 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,11 @@ typedef struct s_cub
 	char	*path_so;
 	char	*path_we;
 	char	*path_ea;
+	char	orientation;		
 	int		start_map;
-	int		end_map;		
-	int		x;
-	int		y;
+	int		end_map;
+	int		pos_x;
+	int		pos_y;
 	int		size_x;
 	int		size_y;
 }	t_cub;
@@ -99,6 +100,7 @@ int		check_rgb_number(char **rgb);
 
 /* check map */
 int		map_location(void);
+void	check_field(void);
 
 /* data */
 char	**get_scene(char *file);

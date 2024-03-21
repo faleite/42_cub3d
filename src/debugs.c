@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 19:27:52 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/19 18:29:36 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/03/21 21:56:10 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	print_data(void)
 	printf("CEILING:\n");
 	print_scene(cub()->rgb_c, 1);
 	printf("/* MAP */\n");
-	printf("START MAP: line %d ", cub()->start_map + 1);
-	printf("END MAP: line %d\n", cub()->end_map + 1);
+	printf("\nSTART MAP: line %d ", cub()->start_map + 1);
+	printf("END MAP: line %d\n\n", cub()->end_map + 1);
 	print_map(cub()->scene, 1);
 }

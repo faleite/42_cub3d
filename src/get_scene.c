@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 21:24:35 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/19 18:49:22 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/03/21 20:55:11 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	**get_scene(char *file)
 	scene = malloc(sizeof(char *) * (count_line(file) + 1));
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		err_case("Error\nFile Descriptor (File not exist)\n");
+		err_case("File Descriptor (File not exist)\n");
 	i = 0;
 	while (1)
 	{
@@ -47,7 +47,7 @@ int	count_line(char *file)
 	line_count = 1;
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		err_case("Error\nFile Descriptor (File not exist)\n");
+		err_case("File Descriptor (File not exist)\n");
 	read_file = read(fd, buffer, BUFFER_CUB);
 	while (read_file > 0)
 	{
@@ -59,7 +59,7 @@ int	count_line(char *file)
 		}
 		read_file = read(fd, buffer, BUFFER_CUB);
 		if (read_file < 0)
-			err_case("Error\nNot read (Empty file)\n");
+			err_case("Not read (Empty file)\n");
 	}
 	close(fd);
 	return (line_count);
