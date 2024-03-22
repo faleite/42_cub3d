@@ -114,9 +114,9 @@ Description  | You must create a “realistic” 3D graphical representation of 
   <summary>Expand here</summary>
 
 ### Check map
-- [ ] Mapa tem que estar cercado por paredes (1)
-  - [ ] Cada liha do mapa tem que iniciar e fechar com 1
-  - [ ] Primeira e ultima linha so pode haver 1 e ' '
+- [X] Mapa tem que estar cercado por paredes (1)
+  - [X] Cada liha do mapa tem que iniciar e fechar com 1
+  - [X] Primeira e ultima linha so pode haver 1 e ' '
 - [X] Checar se tem mais de uma posicao inicial
 - [X] Caracteres validos: 0, 1, N, S, E, W e ' '
   - [ ] Checar cerco de caracteres validos

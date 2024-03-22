@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 20:34:09 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/21 20:51:00 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/03/22 19:24:45 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,14 @@ int	check_type(char *str)
 
 	len = ft_strlen(str);
 	if (len <= 4)
-		err_case("The argument must be a valid format: file.cub 1\n");
+		err_case("The argument must be a valid format: file.cub\n");
+	if (str[0] == '.')
+		str += 1; 
 	type = ft_strchr(str, '.');
 	if (!type)
-		err_case("The argument must be a valid format: file.cub 2\n");
+		err_case("The argument must be a valid format: file.cub\n");
 	if (ft_strncmp(type, ".cub", 5))
-		err_case("The argument must be a valid format: file.cub 3\n");
+		err_case("The argument must be a valid format: file.cub\n");
 	return (0);
 }
 

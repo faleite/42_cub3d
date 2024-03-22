@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 16:59:47 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/21 21:54:38 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/03/22 21:19:57 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	validate_elements(void)
 void	validate_map(void)
 {
 	check_field();
+	start_end_wall();
+	closed_by_walls();
 }
 
 /* CHECKS

@@ -1,7 +1,7 @@
-NO ./textures/w3d_n.xpm
-SO ./textures/w3d_s.xpm
-WE ./textures/w3d_w.xpm
-EA ./textures/w3d_e.xpm
+NO ./textures/walls/w3d_n.xpm
+SO ./textures/walls/w3d_s.xpm
+WE ./textures/walls/w3d_w.xpm
+EA ./textures/walls/w3d_e.xpm
 
 C 63,63,127
 F 63,63,63
