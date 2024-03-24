@@ -21,9 +21,10 @@
 <!-- * ### [Overview](./dcs/readme/bash_brief.md) -->
 <!-- * ### [Overview](#overview-1) -->
 <!-- * ### [Usage]() -->
+* ### [Workflow](#workflow-1)
+* ### [Use Docker on macos](#docker-with-graphical-interface-on-macos)
 * ### [Study resources](#study-resources-1)
 <!-- * ### [Tools]() -->
-* ### [Workflow](#workflow-1)
 
 ## Mandatory part
 <!-- *Subject Comentado** -->
@@ -135,16 +136,6 @@ Description  | You must create a “realistic” 3D graphical representation of 
 2. Checar linhas **NO**, **SO**, **WE**, **EA**
 3. Checar linhas **F** e **C**
 
-## Docker
-- [Dockerfile](./dcs/Dockerfile)
- - `docker build -t cub3d-env .`
- - `docker run -it --rm -v $(pwd):/home/dev -w /home/dev cub3d-env`
-- XQuartz config:
-  - Put in file ~/.zshrc: `export DISPLAY=:0`
-  - Open XQuartz
-  - Exec on mac terminal `/opt/X11/bin/xhost +127.0.0.1`
-
-
 ## Minimap
 ```
 NO ./img/blocks/block.xpm
@@ -169,6 +160,25 @@ C 135, 245, 251
 1111111111111111111111111111111111
 ```
 </details>
+
+[↑ Index ↑](#mandatory-part)
+
+## Docker with graphical interface on macos
+
+### Docker config
+1. Save the [Dockerfile](./dcs/Dockerfile) on your project folder
+2. Execute the command `docker build -t cub3d-env .` for build the image
+
+### XQuartz config:
+1. Install XQuartz on macos with the command `brew install --cask xquartz`
+2. Put in your bashrc ou zshrc file: `export DISPLAY=:0`
+  1. Execute the command `source ~/.zshrc` or `source ~/.bashrc`
+  2. Restart your terminal or execute the command `source ~/.zshrc` or `source ~/.bashrc` 
+3. Oppen XQuartz and go to Preferences > Security and check the option "Allow connections from network clients"
+4. Execute on mac terminal the command `/opt/X11/bin/xhost +127.0.0.1`
+
+## Run container
+1. Execute the command `docker run -it --rm -v $(pwd):/home/dev -w /home/dev cub3d-env` for run the container
 
 ## Study resources
 - [MLX42](https://github.com/codam-coding-college/MLX42)
