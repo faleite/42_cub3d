@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:56:48 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/21 20:48:49 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/03/25 18:44:47 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,16 @@ int	check_first_element(void)
 			!iselement_cf(cub()->scene[i]))
 			elemts++;
 		else if (white_space(cub()->scene[i]))
-			err_case("The elements are not valid\n");
+			err_case("The elements are not valid `1'\n");
 		i++;
 	}
 	if (elemts != 6)
-		err_case("The number of elements is not valid\n");
+		err_case("The number of elements is not valid `2'\n");
 	i = cub()->end_map;
 	while (cub()->scene && cub()->scene[++i])
 	{
 		if (white_space(cub()->scene[i]))
-			err_case("Elements after the map are not allowed\n");
+			err_case("Elements after the map are not allowed `3'\n");
 	}
 	return (0);
 }
@@ -51,7 +51,7 @@ int	texture_path(char **elements)
 	if (len != 2)
 	{
 		free_arr(elements);
-		err_case("Invalid texture element number\n");
+		err_case("Invalid texture element number `4'\n");
 	}
 	else if (!strncmp(elements[0], NO, 3))
 		cub()->path_no = ft_strdup(elements[1]);

@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 16:59:47 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/22 21:19:57 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/03/25 19:02:29 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	validate_elements(void)
 {
 	clean_nl();
 	if (map_location() < 6)
-		err_case("The file does not have a valid scene\n");
+		err_case("The file does not have a valid scene `18'\n");
 	check_first_element();
 	checking_duplicates();
 	check_wall_texture();
@@ -31,6 +31,7 @@ void	validate_map(void)
 	check_field();
 	start_end_wall();
 	closed_by_walls();
+	closed_by_validfield(cub()->scene);
 }
 
 /* CHECKS
@@ -40,7 +41,7 @@ void	validate_map(void)
 void	validate_scene(int argc, char *arg)
 {
 	if (argc != 2)
-		err_case("Use: ./prog file.cub\n");
+		err_case("Use: ./prog file.cub `19'\n");
 	check_type(arg);
 	cub()->scene = get_scene(arg);
 	validate_elements();

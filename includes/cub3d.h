@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/22 18:35:19 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/03/25 20:13:25 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ void	check_field(void);
 int		map_location(void);
 int		start_end_wall(void);
 int		closed_by_walls(void);
+int		closed_by_validfield(char **map);
+int		is_player(char c);
 
 /* data */
 char	**get_scene(char *file);

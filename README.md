@@ -120,10 +120,10 @@ Description  | You must create a “realistic” 3D graphical representation of 
   - [X] Primeira e ultima linha so pode haver 1 e ' '
 - [X] Checar se tem mais de uma posicao inicial
 - [X] Caracteres validos: 0, 1, N, S, E, W e ' '
-  - [ ] Checar cerco de caracteres validos
-    - [ ] ' ' tem que estar cercado por 1 e ' '
-    - [ ] 0 tem que estar cercado por 1, 0, N, S, E e W
-    - [ ] N, S, E e W tem que estar cercado por 1 e 0
+  - [X] Checar cerco de caracteres validos
+    - [X] ' ' tem que estar cercado por 1 e ' '
+    - [X] 0 tem que estar cercado por 1, 0, N, S, E e W
+    - [X] N, S, E e W tem que estar cercado por 1 e 0
 - [ ] Checar quando ha linhas maiores ou menores no inicio e fim da linha
   - [ ] Se a linha anterior for menor que a atual, a parte maior da linha\
     atual so pode conter 1 e ' '

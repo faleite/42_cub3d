@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 20:34:09 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/22 19:24:45 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/03/25 18:46:59 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ int	check_type(char *str)
 
 	len = ft_strlen(str);
 	if (len <= 4)
-		err_case("The argument must be a valid format: file.cub\n");
+		err_case("The argument must be a valid format: file.cub `7'\n");
 	if (str[0] == '.')
 		str += 1; 
 	type = ft_strchr(str, '.');
 	if (!type)
-		err_case("The argument must be a valid format: file.cub\n");
+		err_case("The argument must be a valid format: file.cub `8'\n");
 	if (ft_strncmp(type, ".cub", 5))
-		err_case("The argument must be a valid format: file.cub\n");
+		err_case("The argument must be a valid format: file.cub `9'\n");
 	return (0);
 }
 
@@ -77,57 +77,3 @@ char	**ft_rgbdup(char **src)
 	}
 	return (dst);
 }
-
-// int	check_side_wall(char *line)
-// {
-// 	int	len;
-
-// 	len = ft_strlen(line);
-// 	len -= (line[len - 1] == '\n');
-// 	if (len >= 60)
-// 		err_case("Error\nThe map is not the ideal size for the screen\n");
-// 	if (map()->size_x == 0)
-// 		map()->size_x = len;
-// 	if (line[0] == '1' && line[len - 1] == '1')
-// 		return (0);
-// 	return (1);
-// }
-
-// int	check_wall(char *line)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (i < map()->size_x)
-// 	{
-// 		if (line[i] == '1')
-// 			i++;
-// 		else
-// 			return (1);
-// 	}
-// 	return (0);
-// }
-
-// void	heigth_map(void)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (map()->matrix && map()->matrix[i])
-// 		i++;
-// 	if (i > 32)
-// 		err_case("Error\nThe map is not the ideal size for the screen\n");
-// 	if (map()->size_y == 0)
-// 		map()->size_y = i;
-// }
-
-// int	check_len(char *line)
-// {
-// 	int	len;
-
-// 	len = ft_strlen(line);
-// 	len -= (line[len - 1] == '\n');
-// 	if (len != map()->size_x)
-// 		return (1);
-// 	return (0);
-// }
