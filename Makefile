@@ -11,7 +11,7 @@ GET			= ./get_next_line/
 FILES 		= $(GET)get_next_line.c $(GET)get_next_line_utils.c\
 			  $(SRC)cub3d.c $(SRC)tools.c $(SRC)check_elements_a.c\
 			  $(SRC)check_elements_b.c  $(SRC)check_elements_c.c\
-			  $(SRC)check_elements_utils.c $(SRC)get_scene.c $(SRC)debugs.c\
+			  $(SRC)check_elements_d.c $(SRC)get_scene.c $(SRC)debugs.c\
 			  $(SRC)check_rgb.c $(SRC)check_map_a.c $(SRC)check_map_b.c
 OBJS		= $(FILES:.c=.o)
 MLX_L		= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz

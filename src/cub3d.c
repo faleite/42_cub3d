@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 16:59:47 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/25 19:02:29 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/03/26 20:18:11 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,6 @@ void	validate_map(void)
 	closed_by_validfield(cub()->scene);
 }
 
-/* CHECKS
- MAP:
- - Linha vazia no meio do mapa
-*/
 void	validate_scene(int argc, char *arg)
 {
 	if (argc != 2)
@@ -47,10 +43,6 @@ void	validate_scene(int argc, char *arg)
 	validate_elements();
 	validate_map();
 	print_data();
-	// print_scene(cub()->scene, 0);
-	// check_scene();
-	// if (playable_map())
-	// 	err_case("The map is not valid\n");
 	free_cub();
 }
 
