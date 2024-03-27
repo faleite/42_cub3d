@@ -6,11 +6,11 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 19:27:52 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/21 21:56:10 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/03/27 20:41:06 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 void	print_scene(char **file, int nl)
 {

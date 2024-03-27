@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_elements_utils.c                             :+:      :+:    :+:   */
+/*   check_elements_d.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 20:34:09 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/25 18:46:59 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/03/27 21:11:53 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 int	check_type(char *str)
 {
@@ -21,7 +21,7 @@ int	check_type(char *str)
 	if (len <= 4)
 		err_case("The argument must be a valid format: file.cub `7'\n");
 	if (str[0] == '.')
-		str += 1; 
+		str += 1;
 	type = ft_strchr(str, '.');
 	if (!type)
 		err_case("The argument must be a valid format: file.cub `8'\n");

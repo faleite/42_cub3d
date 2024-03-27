@@ -6,18 +6,11 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:11:42 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/21 20:45:49 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/03/27 20:41:25 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
-
-t_cub	*cub(void)
-{
-	static t_cub	d;
-
-	return (&d);
-}
+#include "../../includes/cub3d.h"
 
 // t_field	*field(void)
 // {
@@ -32,6 +25,13 @@ t_cub	*cub(void)
 
 // 	return (&i);
 // }
+
+t_cub	*cub(void)
+{
+	static t_cub	d;
+
+	return (&d);
+}
 
 int	array_len(char **arr)
 {

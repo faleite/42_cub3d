@@ -6,11 +6,11 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 18:53:08 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/25 18:48:48 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/03/27 20:40:54 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 static char	*put_space(char *rgb);
 static int	rgb_path(char *str);
