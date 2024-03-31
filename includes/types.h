@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/27 20:26:55 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/03/30 20:31:49 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ typedef struct s_cub
 	int		end_map;
 	int		pos_x;
 	int		pos_y;
-	// void	*mlx_ptr;
-	// void	*win_ptr;
+	void	*mlx_ptr;
+	void	*win_ptr;
 	// int		size_x;
 	// int		size_y;
 }	t_cub;

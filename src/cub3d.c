@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 16:59:47 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/27 21:05:45 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/03/31 21:20:20 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int	main(int argc, char *argv[])
 {
 	validate_scene(argc, argv[1]);
-	print_data(); // DEBUG
+	// print_data(); // DEBUG
+	build_window();
 	free_cub(); // LOOK
-	// build_window();
 	return (0);
 }
