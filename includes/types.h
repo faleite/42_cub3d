@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/30 20:31:49 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/01 20:42:21 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@
 # define BUFFER_CUB 1024
 
 /* images */
+
+/* window */
+# define W_WIDTH 1440
+# define W_HEIGHT 830
 
 /* elements */
 # define F "F"
