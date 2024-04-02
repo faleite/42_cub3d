@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/01 20:42:21 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/02 22:24:02 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 /* images */
 
 /* window */
-# define W_WIDTH 1440
-# define W_HEIGHT 830
+# define W_WIDTH 1350
+# define W_HEIGHT 680
 
 /* elements */
 # define F "F"
