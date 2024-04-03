@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 20:29:40 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/02 20:23:25 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/03 19:53:04 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@ int	encode_rgb(uint8_t red, uint8_t green, uint8_t blue)
 	return (red << 16 | green << 8 | blue);
 }
 
-int	render_background(int color)
+int	render_background(void)
 {
 	int	i;
 	int	j;
+	int	color;
 
+	color = encode_rgb(190, 190, 255);
 	if (!cub()->mlx_ptr)
 		return (1);
 	i = 0;
@@ -66,7 +68,6 @@ void	moves(int keycode)
 int	build_window(void)
 {
 	void	*window;
-	int		color;
 
 	cub()->mlx_ptr = mlx_init();
 	if (!cub()->mlx_ptr)
@@ -81,9 +82,7 @@ int	build_window(void)
 	}
 	// get_image();
 	// put_image();
-	color = encode_rgb(190, 190, 255);
-	render_background(color);
-	// mlx_loop_hook(cub()->mlx_ptr, render_background(color), cub());
+	mlx_loop_hook(cub()->mlx_ptr, &render_background, cub());
 	mlx_hook(cub()->win_ptr, 2, 1L, (void *) moves, cub());
 	mlx_hook(cub()->win_ptr, 17, 0L, \
 			(int (*)(void))destroy_window, cub());
