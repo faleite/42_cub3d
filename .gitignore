@@ -1,12 +1,15 @@
 # Created by https://www.toptal.com/developers/gitignore/
 # vim,c,python,virtualenv,macos,linux, obsidian, VScode
 
+### Compiled source ###
+cub3D
+
 ### Obsidian ###
 # config dir
 .obsidian/
 .bashrc
 .bash_history
-# dcs/Dockerfile
+/dcs/jota
 so_long/
 # ./mlx_linux/.github
 

@@ -6,11 +6,22 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 16:59:47 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/30 19:40:57 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/04 22:02:58 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+#include <stdint.h>
+
+static int	encode_rgb(uint8_t red, uint8_t green, uint8_t blue)
+{
+	return (red << 16 | green << 8 | blue);
+}
+
+static int	set_color_ceil_floor(char **rgb)
+{
+	return (encode_rgb(ft_atoi(rgb[0]), ft_atoi(rgb[1]), ft_atoi(rgb[2])));
+}
 
 static void	validate_elements(void)
 {
@@ -24,6 +35,8 @@ static void	validate_elements(void)
 	clean_comma();
 	check_rgb_number(cub()->rgb_f);
 	check_rgb_number(cub()->rgb_c);
+	cub()->color_f = set_color_ceil_floor(cub()->rgb_f);
+	cub()->color_c = set_color_ceil_floor(cub()->rgb_c);
 }
 
 static void	validate_map(void)

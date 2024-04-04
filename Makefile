@@ -2,7 +2,6 @@
 #                                 VARIABLES                                   #
 ###############################################################################
 
-# .SILENT:
 NAME		= cub3D
 CC			= cc
 CFLAGS		= -Wall -Wextra -Werror -g #-fsanitize=address
@@ -47,7 +46,6 @@ PURPLE 		= \033[0;35m
 all: $(NAME)
 
 $(NAME): $(OBJS)
-
 #		@make -C mlx_linux
 #		@make -C libft
 #		clear
@@ -74,6 +72,11 @@ re: fclean all
 	@echo "$(RED)$(NAME) $(GREEN)has been recompiled.$(CLR_RESET)\n"
 	@echo "$(PURPLE)====================================$(CLR_RESET)"
 
+n1:
+	@norminette -R CheckForbiddenSourceHeader ./src/ ./includes/
+
+n2:
+	@norminette -R CheckForbiddenSourceHeader ./get_next_line/ ./libft/
 
 v:
 	make re && clear && valgrind --leak-check=full --show-leak-kinds=all ./cub3D maps/map.cub

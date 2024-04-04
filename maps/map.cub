@@ -2,8 +2,8 @@ NO ./textures/walls/w3d_n.xpm
 SO ./textures/walls/w3d_s.xpm
 WE ./textures/walls/w3d_w.xpm
 EA ./textures/walls/w3d_e.xpm
-C 255,255,255
-F 0,0,00000000
+C 190,190,255
+F 00130,0130,130
 
                   1111111111111111111111111
                   1000000000110000000000001

@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/02 22:24:02 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/04 21:45:06 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,11 @@
 
 /* images */
 
-/* window */
-# define W_WIDTH 1350
-# define W_HEIGHT 680
+/* window
+ vm: W_W 1350 W_H 680 
+*/
+# define W_WIDTH 1280
+# define W_HEIGHT 750
 
 /* elements */
 # define F "F"
@@ -43,6 +45,19 @@
 # define RIGHT 65363
 # define ESC 65307
 
+/**
+ * Represents a 2D pixel position.
+ *
+ * @param x coordinate of the pixel.
+ * @param y coordinate of the pixel.
+ */
+typedef struct s_pix_pos
+{
+	int		x;
+	int		y;
+}			t_pix_pos;
+
+
 typedef struct s_cub
 {
 	char	**scene;
@@ -57,6 +72,8 @@ typedef struct s_cub
 	int		end_map;
 	int		pos_x;
 	int		pos_y;
+	int		color_c;
+	int		color_f;
 	void	*mlx_ptr;
 	void	*win_ptr;
 	// int		size_x;

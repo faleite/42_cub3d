@@ -191,5 +191,6 @@ Resource | Source
 [Video Vetores](https://youtube.com/playlist?list=PLLFRf_pkM7b7UEvWsq6KuANoOYELMnd_y&si=e0ZaC3PnAJQeOEEc) | `Youtube`
 [Engine de Raycasting](https://youtube.com/playlist?list=PLLFRf_pkM7b6rBRoTOW64NKdltCLQNpW5&si=WxdLm-7wXSuAkzdU) | `Youtube`
 [MLX42](https://github.com/codam-coding-college/MLX42) | `Github`
+[Project jotavare](https://github.com/jotavare/cub3d) | `Github`
 
 [↑ Index ↑](#mandatory-part)

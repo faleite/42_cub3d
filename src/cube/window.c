@@ -6,34 +6,48 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 20:29:40 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/03 19:53:04 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/04 22:02:23 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-#include <stdint.h>
 
-int	encode_rgb(uint8_t red, uint8_t green, uint8_t blue)
-{
-	return (red << 16 | green << 8 | blue);
-}
+/**
+ * Sets the color of a single pixel on the frame at the specified position 'p'.
+ * It directly modifies the frame's memory to change the pixel color.
+ *
+ * @param frame - The frame where the pixel color is set.
+ * @param p - The position (x, y) of the pixel to be colored.
+ * @param color - The color value to be set for the pixel.
+ */
+// inline void	frame_draw_pixel(t_frame frame, t_pixel_pos p, int color)
+// {
+// 	*(int *)(frame.addr + 4 * (p.x + p.y * WIN_W)) = color;
+
+// 	mlx_get_data_addr()
+// }
 
 int	render_background(void)
 {
-	int	i;
-	int	j;
-	int	color;
+	t_pix_pos	pos;
 
-	color = encode_rgb(190, 190, 255);
+	pos.y = -1;
 	if (!cub()->mlx_ptr)
 		return (1);
-	i = 0;
-	while (i < W_HEIGHT)
+	while (++pos.y < W_HEIGHT / 2)
 	{
-		j = 0;
-		while (j < W_WIDTH)
-			mlx_pixel_put(cub()->mlx_ptr, cub()->win_ptr, j++, i, color);
-		++i;
+		pos.x = -1;
+		while (++pos.x < W_WIDTH)
+			mlx_pixel_put(cub()->mlx_ptr, cub()->win_ptr, \
+						pos.x, pos.y, cub()->color_c);
+	}
+	while (pos.y < W_HEIGHT)
+	{
+		pos.x = -1;
+		while (++pos.x < W_WIDTH)
+			mlx_pixel_put(cub()->mlx_ptr, cub()->win_ptr, \
+						pos.x, pos.y, cub()->color_f);
+		++pos.y;
 	}
 	return (0);
 }

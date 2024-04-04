@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:56:48 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/27 20:40:44 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/04 18:34:20 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ static int	one_zero(char c)
 
 static int	check_fence(char *s2, int j, int flag, char c)
 {
-	if (c == 32)
+	int	len;
+
+	len = ft_strlen(s2);
+	if (c == 32 && j < len)
 	{
 		if (!flag && (!one_space(s2[j - 1]) || !one_space(s2[j + 1])))
 			err_case("Invalid map (bad field around ' ') `25'\n");
@@ -32,7 +35,7 @@ static int	check_fence(char *s2, int j, int flag, char c)
 				|| !one_space(s2[j])))
 			err_case("Invalid map (bad field around ' ') `26'\n");
 	}
-	else if (c == 48)
+	else if (c == 48 && j < len)
 	{
 		if (!flag && ((!one_zero(s2[j - 1]) && !is_player(s2[j - 1])) || \
 			(!one_zero(s2[j + 1]) && !is_player(s2[j + 1]))))
