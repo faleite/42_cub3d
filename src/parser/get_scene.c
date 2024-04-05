@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 21:24:35 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/27 20:41:19 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/05 20:55:40 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,23 @@ int	clean_nl(void)
 		if (cub()->scene[i][len] == '\n')
 			cub()->scene[i][len] = '\0';
 		i++;
+	}
+	return (0);
+}
+/* Ainda nao usando */
+int	get_map_dimension(void)
+{
+	int	y;
+	int	len;
+
+	y = cub()->start_map;
+	while (cub()->scene[y] && y <= cub()->end_map)
+	{
+		len = ft_strlen(cub()->scene[y]);
+		if (len > cub()->map_width)
+			cub()->map_width = len;
+		cub()->map_height++;
+		y++;
 	}
 	return (0);
 }

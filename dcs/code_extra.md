@@ -1,5 +1,15 @@
 # Code extra
 
+# Encode RGB
+```c
+#include <stdint.h>
+
+static int	encode_rgb(uint8_t red, uint8_t green, uint8_t blue)
+{
+	return (red << 16 | green << 8 | blue);
+}
+```
+
 ## Handle big line in the end or beginning of the map
 ```c
 static int	check_big_line(char *line, int index)

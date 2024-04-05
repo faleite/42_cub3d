@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/04 21:45:06 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/05 21:35:31 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 */
 # define W_WIDTH 1280
 # define W_HEIGHT 750
+# define MINIMAP_SCALE 10
 
 /* elements */
 # define F "F"
@@ -70,6 +71,8 @@ typedef struct s_cub
 	char	orientation;		
 	int		start_map;
 	int		end_map;
+	int		map_height; //
+	int		map_width; //
 	int		pos_x;
 	int		pos_y;
 	int		color_c;

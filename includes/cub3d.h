@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/27 20:33:59 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/05 21:19:12 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,11 @@
 /* CUB3D */
 # include "types.h"
 # include "parser.h"
+
+/* cube */
+int		build_window(void);
+
+/* mini map */
+int		render_minimap(void);
 
 #endif /* CUB3D_H */

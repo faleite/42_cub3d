@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/31 21:24:05 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/05 20:33:32 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,12 @@ int		is_player(char c);
 /* data */
 char	**get_scene(char *file);
 int		count_line(char *file);
+int		get_map_dimension(void);
 int		clean_nl(void);
 
 /* debugs */
 void	print_scene(char **file, int nl);
 void	print_map(char **file, int nl);
 void	print_data(void);
-
-/* cube */
-int		build_window(void);
 
 #endif /* PARSER_H */

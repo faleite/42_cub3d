@@ -6,21 +6,16 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 16:59:47 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/04 22:02:58 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/05 20:24:54 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-#include <stdint.h>
-
-static int	encode_rgb(uint8_t red, uint8_t green, uint8_t blue)
-{
-	return (red << 16 | green << 8 | blue);
-}
 
 static int	set_color_ceil_floor(char **rgb)
 {
-	return (encode_rgb(ft_atoi(rgb[0]), ft_atoi(rgb[1]), ft_atoi(rgb[2])));
+	return (ft_atoi(rgb[0]) << 16 | \
+			ft_atoi(rgb[1]) << 8 | ft_atoi(rgb[2]));
 }
 
 static void	validate_elements(void)
@@ -45,6 +40,7 @@ static void	validate_map(void)
 	start_end_wall();
 	closed_by_walls();
 	closed_by_validfield(cub()->scene);
+	get_map_dimension();
 }
 
 int	validate_scene(int argc, char *arg)
