@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 20:32:19 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/05 21:48:28 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/06 21:48:18 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,19 @@ int	render_minimap(void)
 {
 	t_pix_pos	p;
 
-	p.y = cub()->start_map - 1;
-	while (++p.y <= cub()->end_map)
+	p.y = 0;
+	while (p.y <= parse()->map_height)
 	{
-		p.x = -1;
-		while (++p.x < (int)ft_strlen(cub()->scene[p.y]))
+		p.x = 0;
+		while (p.x < (int)ft_strlen(parse()->map[p.y]))
 		{
-			if (cub()->scene[p.y][p.x] == '1')
+			if (parse()->map[p.y][p.x] == '1')
 				draw_minimap(p.y, p.x, 4473924);
-			if (cub()->scene[p.y][p.x] == '0')
+			if (parse()->map[p.y][p.x] == '0')
 				draw_minimap(p.y, p.x, 9211020);
+			p.x++;
 		}
+		p.y++;
 	}
 	return (0);
 }
@@ -47,7 +49,7 @@ static int	draw_minimap(int p_y, int p_x, int color)
 		p.x = p_x * MINIMAP_SCALE;
 		while (p.x < x_end)
 		{
-			mlx_pixel_put(cub()->mlx_ptr, cub()->win_ptr, \
+			mlx_pixel_put(parse()->mlx_ptr, parse()->win_ptr, \
 						p.x, p.y, color);
 			p.x++;
 		}

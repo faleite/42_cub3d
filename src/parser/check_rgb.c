@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 18:53:08 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/04 21:41:08 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/06 20:14:34 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	check_rgb_number(char **rgb)
 /* Utils
  printf("Num elem: %d\n", len);
  printf("Num elem: %s\n", str);
- print_scene(cub()->rgb_f, 1);
+ print_scene(parse()->rgb_f, 1);
 */
 static int	rgb_path(char *str)
 {
@@ -65,9 +65,9 @@ static int	rgb_path(char *str)
 	if (len < 5)
 	{
 		if (!strncmp(elements[0], F, 2))
-			cub()->rgb_f = ft_rgbdup(elements);
+			parse()->rgb_f = ft_rgbdup(elements);
 		else if (!strncmp(elements[0], C, 2))
-			cub()->rgb_c = ft_rgbdup(elements);
+			parse()->rgb_c = ft_rgbdup(elements);
 		free_arr(elements);
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:56:48 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/04 18:34:20 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/06 20:14:34 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ int	closed_by_validfield(char **map)
 	int	i;
 	int	j;
 
-	i = cub()->start_map;
-	while (++i < cub()->end_map)
+	i = parse()->start_map;
+	while (++i < parse()->end_map)
 	{
 		j = 0;
 		while (map[i][++j])

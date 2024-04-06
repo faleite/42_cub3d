@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 16:59:47 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/04 19:16:22 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/06 21:09:14 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@ int	main(int argc, char *argv[])
 {
 	validate_scene(argc, argv[1]);
 	build_window();
+	free_arr(parse()->map);
 	return (0);
 }

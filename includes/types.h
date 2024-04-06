@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/05 21:35:31 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/06 21:50:21 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 */
 # define W_WIDTH 1280
 # define W_HEIGHT 750
-# define MINIMAP_SCALE 10
+# define MINIMAP_SCALE 15
 
 /* elements */
 # define F "F"
@@ -59,9 +59,10 @@ typedef struct s_pix_pos
 }			t_pix_pos;
 
 
-typedef struct s_cub
+typedef struct s_parse
 {
 	char	**scene;
+	char	**map;
 	char	**rgb_c;
 	char	**rgb_f;
 	char	*path_no;
@@ -71,16 +72,16 @@ typedef struct s_cub
 	char	orientation;		
 	int		start_map;
 	int		end_map;
-	int		map_height; //
-	int		map_width; //
 	int		pos_x;
 	int		pos_y;
 	int		color_c;
 	int		color_f;
+	int		map_height;
+	// int		map_width;
 	void	*mlx_ptr;
 	void	*win_ptr;
 	// int		size_x;
 	// int		size_y;
-}	t_cub;
+}	t_parse;
 
 #endif /* TYPES_H */

@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:56:48 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/27 20:40:00 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/06 20:14:34 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static int	is_duplicates(char *str, int len)
 
 	i = 0;
 	flag = 0;
-	while (cub()->scene && cub()->scene[i] && i < cub()->start_map)
+	while (parse()->scene && parse()->scene[i] && i < parse()->start_map)
 	{
-		if (!ft_strncmp(cub()->scene[i], str, len))
+		if (!ft_strncmp(parse()->scene[i], str, len))
 		{
 			flag++;
 			if (flag > 1)
@@ -60,19 +60,19 @@ static void	err_path(char *filename)
 	ft_putstr_fd("Error\nThe file ", 2);
 	ft_putstr_fd(filename, 2);
 	ft_putstr_fd(" does not exist `6'\n", 2);
-	free_cub();
+	free_parse();
 	exit(EXIT_FAILURE);
 }
 
 int	path_exists(void)
 {
-	if (!open_path(cub()->path_no))
-		err_path(cub()->path_no);
-	else if (!open_path(cub()->path_so))
-		err_path(cub()->path_so);
-	else if (!open_path(cub()->path_we))
-		err_path(cub()->path_we);
-	else if (!open_path(cub()->path_ea))
-		err_path(cub()->path_ea);
+	if (!open_path(parse()->path_no))
+		err_path(parse()->path_no);
+	else if (!open_path(parse()->path_so))
+		err_path(parse()->path_so);
+	else if (!open_path(parse()->path_we))
+		err_path(parse()->path_we);
+	else if (!open_path(parse()->path_ea))
+		err_path(parse()->path_ea);
 	return (0);
 }

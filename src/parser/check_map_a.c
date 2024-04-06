@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:56:48 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/03/27 20:40:28 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/06 20:14:34 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,21 @@ void	check_field(void)
 	int	j;
 	int	player;
 
-	i = cub()->start_map;
+	i = parse()->start_map;
 	player = 0;
-	while (cub()->scene[i] && i <= cub()->end_map)
+	while (parse()->scene[i] && i <= parse()->end_map)
 	{
 		j = -1;
-		while (cub()->scene[i][++j])
+		while (parse()->scene[i][++j])
 		{
-			if (!isvalid_field(cub()->scene[i][j]))
+			if (!isvalid_field(parse()->scene[i][j]))
 				err_case("The map contains invalid field `10'\n");
-			else if (is_player(cub()->scene[i][j]))
+			else if (is_player(parse()->scene[i][j]))
 			{
 				player++;
-				cub()->orientation = cub()->scene[i][j];
-				cub()->pos_x = i;
-				cub()->pos_y = j;
+				parse()->orientation = parse()->scene[i][j];
+				parse()->pos_x = i;
+				parse()->pos_y = j;
 			}
 		}
 		i++;
@@ -57,18 +57,18 @@ int	start_end_wall(void)
 	int	i;
 	int	j;
 
-	i = cub()->start_map;
+	i = parse()->start_map;
 	j = -1;
-	while (cub()->scene[i][++j])
+	while (parse()->scene[i][++j])
 	{
-		if (cub()->scene[i][j] != '1' && cub()->scene[i][j] != ' ')
+		if (parse()->scene[i][j] != '1' && parse()->scene[i][j] != ' ')
 			err_case("start or end wall is not valid `12'\n");
 	}
-	i = cub()->end_map;
+	i = parse()->end_map;
 	j = -1;
-	while (cub()->scene[i][++j])
+	while (parse()->scene[i][++j])
 	{
-		if (cub()->scene[i][j] != '1' && cub()->scene[i][j] != ' ')
+		if (parse()->scene[i][j] != '1' && parse()->scene[i][j] != ' ')
 			err_case("start or end wall is not valid `13'\n");
 	}
 	return (0);
@@ -80,18 +80,18 @@ int	closed_by_walls(void)
 	int	j;
 	int	last_char;
 
-	i = cub()->start_map;
-	while (cub()->scene[i] && i <= cub()->end_map)
+	i = parse()->start_map;
+	while (parse()->scene[i] && i <= parse()->end_map)
 	{
-		last_char = ft_strlen(cub()->scene[i]) - 1;
-		if ((cub()->scene[i][last_char] != '1'))
+		last_char = ft_strlen(parse()->scene[i]) - 1;
+		if ((parse()->scene[i][last_char] != '1'))
 			err_case("walls not closed properly `23'\n");
 		j = -1;
-		while (cub()->scene[i][++j])
+		while (parse()->scene[i][++j])
 		{
-			if ((cub()->scene[i][j]) == '1')
+			if ((parse()->scene[i][j]) == '1')
 				break ;
-			else if ((cub()->scene[i][j]) != ' ')
+			else if ((parse()->scene[i][j]) != ' ')
 				err_case("walls not closed properly `24'\n");
 		}
 		i++;

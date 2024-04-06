@@ -40,8 +40,8 @@ int	handle_big_line(char **map)
 	int	len_a;
 	int	len_b;
 
-	i = cub()->start_map;
-	while (map[i] && i <= cub()->end_map)
+	i = parse()->start_map;
+	while (map[i] && i <= parse()->end_map)
 	{
 		len_a = ft_strlen(map[i++]);
 		len_b = ft_strlen(map[i]);

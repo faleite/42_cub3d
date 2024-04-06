@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 21:24:35 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/05 20:55:40 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/06 21:48:37 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ char	**get_scene(char *file)
 	char	**scene;
 
 	scene = malloc(sizeof(char *) * (count_line(file) + 1));
+	if (!scene)
+		return (NULL);
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		err_case("File Descriptor (File not exist) `20'\n");
@@ -71,29 +73,49 @@ int	clean_nl(void)
 	int	len;
 
 	i = 0;
-	while (cub()->scene && cub()->scene[i])
+	while (parse()->scene && parse()->scene[i])
 	{
-		len = ft_strlen(cub()->scene[i]) - 1;
-		if (cub()->scene[i][len] == '\n')
-			cub()->scene[i][len] = '\0';
+		len = ft_strlen(parse()->scene[i]) - 1;
+		if (parse()->scene[i][len] == '\n')
+			parse()->scene[i][len] = '\0';
 		i++;
 	}
 	return (0);
 }
-/* Ainda nao usando */
-int	get_map_dimension(void)
-{
-	int	y;
-	int	len;
 
-	y = cub()->start_map;
-	while (cub()->scene[y] && y <= cub()->end_map)
-	{
-		len = ft_strlen(cub()->scene[y]);
-		if (len > cub()->map_width)
-			cub()->map_width = len;
-		cub()->map_height++;
-		y++;
-	}
-	return (0);
+char	**get_map(void)
+{
+	int		i;
+	int		j;
+	int		len;
+	char	**map;
+
+	i = parse()->start_map - 1;
+	j = 0;
+	len = parse()->map_height + 1;
+	map = malloc(sizeof(char *) * (len + 1));
+	if (!map)
+		return (NULL);
+	while (++i <= parse()->end_map)
+		map[j++] = parse()->scene[i];
+	map[j] = NULL;
+	return (map);
 }
+
+/* Ainda nao usando */
+// int	get_map_dimension(void)
+// {
+// 	int	y;
+// 	int	len;
+
+// 	y = parse()->start_map;
+// 	while (parse()->scene[y] && y <= parse()->end_map)
+// 	{
+// 		len = ft_strlen(parse()->scene[y]);
+// 		if (len > parse()->map_width)
+// 			parse()->map_width = len;
+// 		parse()->map_height++;
+// 		y++;
+// 	}
+// 	return (0);
+// }

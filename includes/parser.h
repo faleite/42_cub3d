@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/05 20:33:32 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/06 20:51:41 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define PARSER_H
 
 /* structs init */
-t_cub	*cub(void);
+t_parse	*parse(void);
 // t_img	*img(void);
 // t_field	*field(void);
 
@@ -24,7 +24,7 @@ int		validate_scene(int argc, char *arg);
 /* tools */
 void	err_case(char *msg);
 void	free_arr(char **arr);
-void	free_cub(void);
+void	free_parse(void);
 int		array_len(char **arr);
 
 /* check elements */
@@ -51,9 +51,10 @@ int		closed_by_validfield(char **map);
 int		is_player(char c);
 
 /* data */
+// int		get_map_dimension(void);
 char	**get_scene(char *file);
+char	**get_map(void);
 int		count_line(char *file);
-int		get_map_dimension(void);
 int		clean_nl(void);
 
 /* debugs */

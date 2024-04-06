@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:56:48 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/04 21:43:30 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/06 20:14:34 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,25 @@ int	map_location(void)
 
 	i = 0;
 	flag = 1;
-	while (cub()->scene && cub()->scene[i])
+	while (parse()->scene && parse()->scene[i])
 	{
-		last_char = ft_strlen(cub()->scene[i]) - 1;
-		if ((cub()->scene[i][0] == '1' || cub()->scene[i][0] == ' ') \
-			&& cub()->scene[i][last_char] == '1' && flag)
+		last_char = ft_strlen(parse()->scene[i]) - 1;
+		if ((parse()->scene[i][0] == '1' || parse()->scene[i][0] == ' ') \
+			&& parse()->scene[i][last_char] == '1' && flag)
 		{
-			cub()->start_map = i++;
+			parse()->start_map = i++;
 			flag = 0;
 		}
-		if ((cub()->scene[i][0] == '1' || cub()->scene[i][0] == ' ') \
-			&& cub()->scene[i][last_char] == '1')
+		if ((parse()->scene[i][0] == '1' || parse()->scene[i][0] == ' ') \
+			&& parse()->scene[i][last_char] == '1')
 		{
-			cub()->end_map = i;
+			parse()->end_map = i;
 			i++;
 		}
 		else
 			i++;
 	}
-	return (cub()->start_map);
+	return (parse()->start_map);
 }
 
 static int	clean_comma_utils(char **rgb)
@@ -59,7 +59,7 @@ static int	clean_comma_utils(char **rgb)
 
 int	clean_comma(void)
 {
-	clean_comma_utils(cub()->rgb_f);
-	clean_comma_utils(cub()->rgb_c);
+	clean_comma_utils(parse()->rgb_f);
+	clean_comma_utils(parse()->rgb_c);
 	return (0);
 }
