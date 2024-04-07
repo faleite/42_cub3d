@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/06 21:50:21 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/07 18:24:49 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,10 @@ typedef struct s_parse
 	char	*path_we;
 	char	*path_ea;
 	char	orientation;		
-	int		start_map;
-	int		end_map;
 	int		pos_x;
 	int		pos_y;
+	int		start_map;
+	int		end_map;
 	int		color_c;
 	int		color_f;
 	int		map_height;

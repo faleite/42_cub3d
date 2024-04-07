@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 20:32:19 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/06 21:48:18 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/07 18:37:59 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	render_minimap(void)
 				draw_minimap(p.y, p.x, 4473924);
 			if (parse()->map[p.y][p.x] == '0')
 				draw_minimap(p.y, p.x, 9211020);
+			if (is_player(parse()->map[p.y][p.x])) // Temp...
+				draw_minimap(p.y, p.x, 13395507);
 			p.x++;
 		}
 		p.y++;
