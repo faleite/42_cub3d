@@ -14,7 +14,7 @@ FILES 		= $(GET)get_next_line.c $(GET)get_next_line_utils.c\
 			  $(PAR)check_elements_b.c  $(PAR)check_elements_c.c\
 			  $(PAR)check_elements_d.c $(PAR)get_scene.c $(PAR)debugs.c\
 			  $(PAR)check_rgb.c $(PAR)check_map_a.c $(PAR)check_map_b.c\
-			  $(PAR)parser.c $(CUB)window.c $(CUB)minimap.c
+			  $(PAR)parser.c $(CUB)window.c $(CUB)minimap.c $(CUB)cub_tools.c
 OBJS		= $(FILES:.c=.o)
 MLX_L		= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm
 LIBFT		= ./libft/libft.a

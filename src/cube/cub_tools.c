@@ -6,18 +6,39 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:34:03 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/07 18:21:28 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/08 22:11:49 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-// t_img	*img(void)
-// {
-// 	static t_img	i;
+/**
+ * * Sets the color of a single pixel on the frame at the specified 
+ * position x and y. It directly modifies the frame's memory to change
+ * the pixel color.
+ *
+ * @param img   The image to draw the pixel on.
+ * @param x     The x-coordinate of the pixel.
+ * @param y     The y-coordinate of the pixel.
+ * @param color The color of the pixel.
+ */
+void	img_draw_pixel(t_img *img, int x, int y, int color)
+{
+	char	*pixel;
 
-// 	return (&i);
-// }
+	pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
+	*(int *)pixel = color;
+}
+
+int	destroy_window(t_data *data)
+{
+	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	mlx_destroy_image(data->mlx_ptr, data->img.mlx_img);
+	mlx_destroy_display(data->mlx_ptr);
+	free(data->mlx_ptr);
+	free_parse();
+	exit(0);
+}
 
 // void	clear_frame(t_img frame)
 // {
@@ -34,36 +55,4 @@
 // 		pixel += 4;
 // 		i++;
 // 	}
-// }
-
-// inline void	img_draw_pixel(t_img img, t_pix_pos p, int color)
-// {
-// 	*(int *)(img.addr + 4 * (p.x + p.y * W_WIDTH)) = color;
-// }
-
-// void	put_img_to_window(t_cub *cub)
-// {
-// 	mlx_put_image_to_window(data()->mlx_ptr, data()->win_ptr, \
-// 							cub->img.mlx_img, 0, 0);
-// }
-
-// t_cub	*cub(void)
-// {
-// 	static t_cub	c;
-
-// 	return (&c);
-// }
-
-// t_field	*field(void)
-// {
-// 	static t_field	f;
-
-// 	return (&f);
-// }
-
-// t_img	*img(void)
-// {
-// 	static t_img	i;
-
-// 	return (&i);
 // }

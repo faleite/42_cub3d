@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/05 21:19:12 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/08 22:23:39 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,15 @@
 
 /* cube */
 int		build_window(void);
+int		destroy_window(t_data *data);
+
+
+/* rendering */
+void	img_draw_pixel(t_img *img, int x, int y, int color);
 
 /* mini map */
-int		render_minimap(void);
+int		render_minimap(t_img *img);
+int		paint_ceiling_floor(t_img *img);
+
 
 #endif /* CUB3D_H */

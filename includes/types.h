@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/07 18:24:49 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/08 22:32:00 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,22 @@ typedef struct s_parse
 	int		color_f;
 	int		map_height;
 	// int		map_width;
-	void	*mlx_ptr;
-	void	*win_ptr;
-	// int		size_x;
-	// int		size_y;
 }	t_parse;
+
+typedef struct s_img
+{
+	void	*mlx_img;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}			t_img;
+
+typedef struct s_data
+{
+	void		*mlx_ptr;
+	void		*win_ptr;
+	t_img		img;
+}			t_data;
 
 #endif /* TYPES_H */
