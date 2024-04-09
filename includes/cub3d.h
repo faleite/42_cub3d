@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/08 22:23:39 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/09 20:13:45 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "../libft/libft.h"
 # include "../get_next_line/get_next_line.h"
 # include "../mlx_linux/mlx.h"
+# include "../mlx_linux/mlx_int.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
@@ -37,11 +38,10 @@ int		destroy_window(t_data *data);
 
 
 /* rendering */
-void	img_draw_pixel(t_img *img, int x, int y, int color);
+void	img_draw_pixel(t_image *img, int x, int y, int color);
 
 /* mini map */
-int		render_minimap(t_img *img);
-int		paint_ceiling_floor(t_img *img);
-
+int		render_minimap(t_image *img);
+int		paint_ceiling_floor(t_image *img);
 
 #endif /* CUB3D_H */

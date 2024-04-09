@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:11:42 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/06 21:15:40 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/09 19:37:29 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 // 	return (&f);
 // }
 
-// t_img	*img(void)
+// t_image	*img(void)
 // {
-// 	static t_img	i;
+// 	static t_image	i;
 
 // 	return (&i);
 // }

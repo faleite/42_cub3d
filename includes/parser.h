@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/06 20:51:41 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/09 19:37:43 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 /* structs init */
 t_parse	*parse(void);
-// t_img	*img(void);
+// t_image	*img(void);
 // t_field	*field(void);
 
 /* parser */

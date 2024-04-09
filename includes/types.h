@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/08 22:32:00 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/09 20:10:39 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 */
 # define W_WIDTH 1280
 # define W_HEIGHT 750
-# define MINIMAP_SCALE 15
+// # define MINIMAP_SCALE 12
 
 /* elements */
 # define F "F"
@@ -77,23 +77,23 @@ typedef struct s_parse
 	int		color_c;
 	int		color_f;
 	int		map_height;
-	// int		map_width;
+	int		map_width;
 }	t_parse;
 
-typedef struct s_img
+typedef struct s_image
 {
 	void	*mlx_img;
 	char	*addr;
 	int		bpp;
 	int		line_len;
 	int		endian;
-}			t_img;
+}			t_image;
 
 typedef struct s_data
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
-	t_img		img;
+	t_image		img;
 }			t_data;
 
 #endif /* TYPES_H */

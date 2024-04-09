@@ -1,13 +1,13 @@
 C 255,255,0
 
-NO ./textures/walls/North_wall_temp.xpm
+NO ./textures/walls/w3d_n.xpm
 
-SO ./textures/walls/South_wall_temp.xpm
+SO ./textures/walls/w3d_s.xpm
 
 
-WE ./textures/walls/West_wall_temp.xpm
+WE ./textures/walls/w3d_w.xpm
 
-EA        ./textures/walls/East_wall_temp.xpm
+EA        ./textures/walls/w3d_e.xpm
 
 
 

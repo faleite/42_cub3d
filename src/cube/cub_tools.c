@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:34:03 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/08 22:11:49 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/09 19:37:25 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,15 @@
  * @param y     The y-coordinate of the pixel.
  * @param color The color of the pixel.
  */
-void	img_draw_pixel(t_img *img, int x, int y, int color)
+void	img_draw_pixel(t_image *img, int x, int y, int color)
 {
 	char	*pixel;
 
-	pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
-	*(int *)pixel = color;
+	if (x >= 0 && x <= W_WIDTH && y >= 0 && y <= W_HEIGHT)
+	{
+		pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
+		*(int *)pixel = color;
+	}
 }
 
 int	destroy_window(t_data *data)
@@ -40,7 +43,7 @@ int	destroy_window(t_data *data)
 	exit(0);
 }
 
-// void	clear_frame(t_img frame)
+// void	clear_frame(t_image frame)
 // {
 // 	char	*pixel;
 // 	int		total;

@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:56:48 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/06 20:14:34 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/09 19:39:36 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,15 @@ int	closed_by_walls(void)
 {
 	int	i;
 	int	j;
-	int	last_char;
+	int	len_line;
 
 	i = parse()->start_map;
 	while (parse()->scene[i] && i <= parse()->end_map)
 	{
-		last_char = ft_strlen(parse()->scene[i]) - 1;
-		if ((parse()->scene[i][last_char] != '1'))
+		len_line = ft_strlen(parse()->scene[i]) - 1;
+		if (parse()->map_width < len_line)
+			parse()->map_width = len_line;
+		if ((parse()->scene[i][len_line] != '1'))
 			err_case("walls not closed properly `23'\n");
 		j = -1;
 		while (parse()->scene[i][++j])
