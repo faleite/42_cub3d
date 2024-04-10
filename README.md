@@ -24,7 +24,7 @@
 * ### [Workflow](#workflow-1)
 * ### [Use Docker on macos](#docker-with-graphical-interface-on-macos)
 * ### [Study resources](#study-resources-1)
-<!-- * ### [Tools]() -->
+* ### [Tools](#tools-1)
 
 ## Mandatory part
 <!-- *Subject Comentado** -->
@@ -183,14 +183,21 @@ C 135, 245, 251
 ## Study resources
 Resource | Source
 -------- | ------
-[**Wolfenstein**](http://users.atw.hu/wolf3d/) | `Game`
+[Getting started minilibx](https://aurelienbrabant.fr/blog?q=minilibx) | `Website`
 [Lode's Computer Graphics Tutorial](https://lodev.org/cgtutor/raycasting.html) | `Website`
+[Video Vetores](https://youtube.com/playlist?list=PLLFRf_pkM7b7UEvWsq6KuANoOYELMnd_y&si=e0ZaC3PnAJQeOEEc) | `Youtube`
+[Engine de Raycasting](https://youtube.com/playlist?list=PLLFRf_pkM7b6rBRoTOW64NKdltCLQNpW5&si=WxdLm-7wXSuAkzdU) | `Youtube`
 [Computer Graphics From Scratch](https://gabrielgambetta.com/computer-graphics-from-scratch/01-common-concepts.html) | `Website/Book`
 [Resources jotavare 42 Porto](https://github.com/jotavare/42-resources?tab=readme-ov-file#04-cub3d) | `Github`
 [Raycasting](https://permadi.com/1996/05/ray-casting-tutorial-table-of-contents/) | `Website`
-[Video Vetores](https://youtube.com/playlist?list=PLLFRf_pkM7b7UEvWsq6KuANoOYELMnd_y&si=e0ZaC3PnAJQeOEEc) | `Youtube`
-[Engine de Raycasting](https://youtube.com/playlist?list=PLLFRf_pkM7b6rBRoTOW64NKdltCLQNpW5&si=WxdLm-7wXSuAkzdU) | `Youtube`
 [MLX42](https://github.com/codam-coding-college/MLX42) | `Github`
 [Project jotavare](https://github.com/jotavare/cub3d) | `Github`
+[**Wolfenstein**](http://users.atw.hu/wolf3d/) | `Game`
+
+## Tools
+Resource | Source
+---------|--------
+[RGB color](https://www.rapidtables.com/web/color/RGB_Color.html) | `Website`
+[RGB int calculator](http://www.shodor.org/~efarrow/trunk/html/rgbint.html) | `Website`
 
 [↑ Index ↑](#mandatory-part)
