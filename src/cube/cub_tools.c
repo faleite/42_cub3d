@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:34:03 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/09 19:37:25 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/17 13:20:27 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,56 @@ int	destroy_window(t_data *data)
 	free(data->mlx_ptr);
 	free_parse();
 	exit(0);
+}
+
+// t_plyr	*plyer(void)
+// {
+// 	static t_plyr	p;
+
+// 	return (&p);
+// }
+
+/*
+	Brasenham's algorithme draws lines between two points
+*/
+void	brasenham(t_line line, t_image *img, int color)
+{
+	t_line	*tmp;
+
+	tmp = &line;
+	tmp->delta_x = (tmp->x1 - tmp->x0);
+	tmp->delta_y = (tmp->y1 - tmp->y0);
+	tmp->max = ft_max(ft_mod(tmp->delta_x), ft_mod(tmp->delta_y));
+	tmp->delta_x /= tmp->max;
+	tmp->delta_y /= tmp->max;
+	while ((int)(tmp->x0 - tmp->x1) || (int)(tmp->y0 - tmp->y1))
+	{
+		img_draw_pixel(img, tmp->x0, tmp->y0, color);
+		tmp->x0 += tmp->delta_x;
+		tmp->y0 += tmp->delta_y;
+	}
+}
+
+void	draw_circle(t_pix_pos center, int color, int radius, t_image *img)
+{
+	int	radius_squared;
+	int	x;
+	int	y;
+
+	radius_squared = pow(radius, 2);
+	x = center.x - radius;
+	y = center.y - radius;
+	while (y <= center.y + radius)
+	{
+		while (x <= center.x + radius)
+		{
+			if ((pow(x - center.x, 2) + pow(y - center.y, 2)) <= radius_squared)
+				img_draw_pixel(img, x, y, color);
+			x++;
+		}
+		y++;
+		x = center.x - radius;
+	}
 }
 
 // void	clear_frame(t_image frame)

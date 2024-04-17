@@ -6,14 +6,14 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 20:32:19 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/09 20:09:12 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/17 13:16:52 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void		render_player(t_image *img, float p_y, float p_x);
 static int	draw_minimap(t_image *img, int p_y, int p_x, int color);
+static void	render_player(t_image *img, float x, float y);
 
 int	render_minimap(t_image *img)
 {
@@ -30,12 +30,32 @@ int	render_minimap(t_image *img)
 			if (parse()->map[p.y][p.x] == '0' || \
 				is_player(parse()->map[p.y][p.x]))
 				draw_minimap(img, p.y, p.x, 8421504);
-			if (is_player(parse()->map[p.y][p.x])) // Temp...
-				render_player(img, (float)(p.y + 0.5), \
-									(float)(p.x + 0.5));
+			if (is_player(parse()->map[p.y][p.x]))
+				render_player(img, (p.x + 0.5), (p.y + 0.5));
 			p.x++;
 		}
 		p.y++;
+	}
+	return (0);
+}
+
+int	draw_ceil_floor(t_image *img)
+{
+	t_pix_pos	pos;
+
+	pos.y = -1;
+	while (++pos.y < W_HEIGHT / 2)
+	{
+		pos.x = -1;
+		while (++pos.x < W_WIDTH)
+			img_draw_pixel(img, pos.x, pos.y, parse()->color_c);
+	}
+	while (pos.y < W_HEIGHT)
+	{
+		pos.x = -1;
+		while (++pos.x < W_WIDTH)
+			img_draw_pixel(img, pos.x, pos.y, parse()->color_f);
+		++pos.y;
 	}
 	return (0);
 }
@@ -70,56 +90,48 @@ static int	draw_minimap(t_image *img, int p_y, int p_x, int color)
 	return (0);
 }
 
+static void	draw_line(float p_y, float p_x, float scale, t_image *img)
+{
+	t_line		line;
+
+	line.x0 = p_x * scale;
+	line.y0 = p_y * scale;
+	line.x1 = p_x + cos(player_direction()) * 2;
+	line.x1 *= scale;
+	line.y1 = p_y + sin(player_direction()) * 2;
+	line.y1 *= scale;
+	brasenham(line, img, 16519760);
+}
+
 /** WORKING***
  * Draws the player's position on the minimap.
  * The player's position is scaled and represented with a specific color.
  *
  * @param img - A pointer to the img structure.
- * @param p_y - Scaled Y-coordinate of the player's position.
- * @param p_x - Scaled X-coordinate of the player's position.
+ * @param y - Scaled Y-coordinate of the player's position.
+ * @param x - Scaled X-coordinate of the player's position.
  */
-void	render_player(t_image *img, float p_y, float p_x)
+static void	render_player(t_image *img, float x, float y)
 {
 	t_pix_pos	p;
-	int			x_end;
-	int			y_end;
+	t_pix_pos	end;
 	int			scale;
 
 	scale = 12;
 	if (parse()->map_height > 20 || parse()->map_width > 40)
 		scale /= 2;
-	x_end = p_x * scale + scale / 3;
-	y_end = p_y * scale + scale / 3;
-	p.y = p_y * scale - scale / 3;
-	while (p.y < y_end)
+	end.x = x * scale + scale / 5;
+	end.y = y * scale + scale / 5;
+	p.y = y * scale - scale / 5;
+	while (p.y < end.y)
 	{
-		p.x = p_x * scale - scale / 3;
-		while (p.x < x_end)
+		p.x = x * scale - scale / 5;
+		while (p.x < end.x)
 		{
-			img_draw_pixel(img, p.x, p.y, 16519760);
+			draw_circle(p, 16519760, 2, img);
+			draw_line(y, x, scale, img);
 			p.x++;
 		}
 		p.y++;
 	}
-}
-
-int	paint_ceiling_floor(t_image *img)
-{
-	t_pix_pos	pos;
-
-	pos.y = -1;
-	while (++pos.y < W_HEIGHT / 2)
-	{
-		pos.x = -1;
-		while (++pos.x < W_WIDTH)
-			img_draw_pixel(img, pos.x, pos.y, parse()->color_c);
-	}
-	while (pos.y < W_HEIGHT)
-	{
-		pos.x = -1;
-		while (++pos.x < W_WIDTH)
-			img_draw_pixel(img, pos.x, pos.y, parse()->color_f);
-		++pos.y;
-	}
-	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 20:29:40 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/09 20:15:37 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/17 13:13:07 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	render_cub3d(t_data *data)
 {
 	if (!data->mlx_ptr)
 		return (1);
-	paint_ceiling_floor(&data->img);
+	draw_ceil_floor(&data->img);
 	render_minimap(&data->img);
 
 	/* After render this function put image to window */

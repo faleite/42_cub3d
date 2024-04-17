@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/09 20:10:39 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/17 13:19:39 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 */
 # define W_WIDTH 1280
 # define W_HEIGHT 750
-// # define MINIMAP_SCALE 12
+# define MM_SCALE 12
 
 /* elements */
 # define F "F"
@@ -95,5 +95,26 @@ typedef struct s_data
 	void		*win_ptr;
 	t_image		img;
 }			t_data;
+
+typedef struct s_line
+{
+	int		height;
+	double	x0;
+	double	y0;
+	double	x1;
+	double	y1;
+	double	delta_x;
+	double	delta_y;
+	double	max;
+}				t_line;
+
+// typedef struct s_plyr
+// {
+// 	int			move_speed;
+// 	double		radius;
+// 	double		rotation_angle;
+// 	double		rotation_speed;
+// 	t_pix_pos	pos;
+// }				t_plyr;
 
 #endif /* TYPES_H */
