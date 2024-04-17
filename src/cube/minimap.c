@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 20:32:19 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/17 13:16:52 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/17 21:14:56 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,27 +35,6 @@ int	render_minimap(t_image *img)
 			p.x++;
 		}
 		p.y++;
-	}
-	return (0);
-}
-
-int	draw_ceil_floor(t_image *img)
-{
-	t_pix_pos	pos;
-
-	pos.y = -1;
-	while (++pos.y < W_HEIGHT / 2)
-	{
-		pos.x = -1;
-		while (++pos.x < W_WIDTH)
-			img_draw_pixel(img, pos.x, pos.y, parse()->color_c);
-	}
-	while (pos.y < W_HEIGHT)
-	{
-		pos.x = -1;
-		while (++pos.x < W_WIDTH)
-			img_draw_pixel(img, pos.x, pos.y, parse()->color_f);
-		++pos.y;
 	}
 	return (0);
 }
@@ -103,6 +82,32 @@ static void	draw_line(float p_y, float p_x, float scale, t_image *img)
 	brasenham(line, img, 16519760);
 }
 
+// static void	draw_rays(float p_y, float p_x, float scale, t_image *img)
+// {
+// 	int			i;
+// 	int			num_rays;
+// 	t_line		ray;
+// 	t_pix_pos	*rays;
+// 	// t_raycast	*rays;
+
+// 	num_rays = parse()->map_width / 2;
+// 	rays = malloc(num_rays * sizeof(t_pix_pos));
+// 	if (!rays)
+// 		exit(1);
+// 	i = 0;
+// 	while (i < num_rays)
+// 	{
+// 		rays[i].x = i;
+// 		rays[i].y = i;
+// 		ray.x0 = p_x * scale;
+// 		ray.y0 = p_y * scale;
+// 		ray.x1 = rays[i].x * scale;
+// 		ray.y1 = rays[i].y * scale;
+// 		brasenham(ray, img, 2293538);
+// 		i++;
+// 	}
+// }
+
 /** WORKING***
  * Draws the player's position on the minimap.
  * The player's position is scaled and represented with a specific color.
@@ -130,6 +135,7 @@ static void	render_player(t_image *img, float x, float y)
 		{
 			draw_circle(p, 16519760, 2, img);
 			draw_line(y, x, scale, img);
+			// draw_rays(y, x, scale, img);
 			p.x++;
 		}
 		p.y++;

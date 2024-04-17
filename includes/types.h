@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/17 13:19:39 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/17 20:47:35 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@
 # define EA "EA"
 
 /* keycode */
-# define W 119
-# define A 97
-# define S 115
-# define D 100
+# define K_W 119
+# define K_A 97
+# define K_S 115
+# define K_D 100
 # define UP 65362
 # define DOWN 65364
 # define LEFT 65361
@@ -58,6 +58,22 @@ typedef struct s_pix_pos
 	int		y;
 }			t_pix_pos;
 
+typedef enum e_side
+{
+	HORIZONTAL = 1,
+	VERTICAL
+}				t_side;
+
+typedef enum e_map
+{
+	FLOOR,
+	WALL,
+	N,
+	S,
+	W,
+	E,
+	SPACES,
+}				t_map;
 
 typedef struct s_parse
 {
@@ -108,13 +124,27 @@ typedef struct s_line
 	double	max;
 }				t_line;
 
-// typedef struct s_plyr
-// {
-// 	int			move_speed;
-// 	double		radius;
-// 	double		rotation_angle;
-// 	double		rotation_speed;
-// 	t_pix_pos	pos;
-// }				t_plyr;
+typedef struct s_plyr
+{
+	int			**map;
+	int			move_speed;
+	double		radius;
+	double		rotation_angle;
+	double		rotation_speed;
+	t_pix_pos	pos;
+}				t_plyr;
+
+typedef struct s_raycast
+{
+	// char or int			**cub_map;
+	t_plyr		player;
+	t_pix_pos	wall_hit;
+	t_pix_pos	step;
+	t_pix_pos	intercept;
+	t_pix_pos	next_touch;
+	t_side		hit_side;
+	double		distance;
+	double		ray_angle;
+}				t_raycast;
 
 #endif /* TYPES_H */

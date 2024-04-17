@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/17 13:20:10 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/17 18:52:39 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@
 # include "parser.h"
 
 /* struct */
-// t_plyr	*plyer(void);
+t_plyr	*plyer(void);
 
 /* cube */
+int		render_cub3d(t_data *data);
 int		build_window(void);
 int		destroy_window(t_data *data);
 double	player_direction(void);
@@ -54,5 +55,14 @@ int		draw_ceil_floor(t_image *img);
 /* math */
 float	ft_max(float a, float b);
 float	ft_mod(float a);
+
+/* moves */
+// void	move_up(t_data *data);
+
+/* tools */
+void	free_map(int **map);
+
+/* debugs */
+void	print_int_map(int **map);
 
 #endif /* CUB3D_H */
