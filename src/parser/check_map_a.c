@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:56:48 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/09 19:39:36 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/18 14:42:42 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,7 @@ void	check_field(void)
 			if (!isvalid_field(parse()->scene[i][j]))
 				err_case("The map contains invalid field `10'\n");
 			else if (is_player(parse()->scene[i][j]))
-			{
 				player++;
-				parse()->orientation = parse()->scene[i][j];
-				parse()->pos_x = i;
-				parse()->pos_y = j;
-			}
 		}
 		i++;
 	}

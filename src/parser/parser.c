@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 16:59:47 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/06 21:47:28 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/18 14:41:49 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static void	validate_map(void)
 	closed_by_walls();
 	closed_by_validfield(parse()->scene);
 	parse()->map = get_map();
+	get_player();
 	// get_map_dimension()
 }
 

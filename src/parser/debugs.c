@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 19:27:52 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/06 20:14:34 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/18 14:16:42 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,6 @@ void	print_data(void)
 	printf("/* MAP */\n");
 	printf("\nSTART MAP: line %d ", parse()->start_map + 1);
 	printf("END MAP: line %d\n\n", parse()->end_map + 1);
+	printf("PLAYER: y: %d, x: %d\n\n", parse()->pos_y, parse()->pos_x);
 	print_map(parse()->scene, 1);
 }

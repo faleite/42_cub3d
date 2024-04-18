@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 21:24:35 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/06 21:48:37 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/18 15:01:54 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,27 @@ char	**get_map(void)
 		map[j++] = parse()->scene[i];
 	map[j] = NULL;
 	return (map);
+}
+
+void	get_player(void)
+{
+	int	x;
+	int	y;
+
+	x = -1;
+	while (parse()->map[++x])
+	{
+		y = -1;
+		while (parse()->map[x][++y])
+		{
+			if (is_player(parse()->map[x][y]))
+			{
+				parse()->orientation = parse()->map[x][y];
+				parse()->pos_x = x;
+				parse()->pos_y = y;
+			}
+		}
+	}
 }
 
 /* Ainda nao usando */

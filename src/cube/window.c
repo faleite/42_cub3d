@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 20:29:40 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/18 12:38:25 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/18 16:12:16 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,33 +57,34 @@ int	render_cub3d(t_data *data)
 	return (0);
 }
 
-void	move_up(void)
-{
-	t_pix_pos	new_pos;
-	t_pix_pos	map;
-	t_pix_pos	next_step;
+// void	move_up(t_data *data)
+// {
+// 	t_pix_pos	map;
+// 	t_pix_pos	new_pos;
+// 	t_pix_pos	next_step;
 
-	// printf("y: %d, x: %d\n", plyer()->pos.y, plyer()->pos.x);
-	new_pos = plyer()->pos;
-	new_pos.x += cos(plyer()->rotation_angle) * plyer()->move_speed;
-	new_pos.y += sin(plyer()->rotation_angle) * plyer()->move_speed;
-	map.x = new_pos.x;
-	map.y = new_pos.y;
-	next_step.x = (new_pos.x + cos(plyer()->rotation_angle)
-			* plyer()->move_speed);
-	next_step.y = (new_pos.y + sin(plyer()->rotation_angle)
-			* plyer()->move_speed);
-	// printf("y: %d, x: %d\n", map.y, map.x);
-	// printf("fild: %d\n", (plyer()->map[(int)map.y][(int)map.x]));
-	if ((plyer()->map[(int)map.y][(int)map.x] != WALL) 
-		&& (plyer()->map[(int)next_step.y][(int)next_step.x] != WALL))
-	{
-		plyer()->pos = new_pos;
-		// parse()->pos_x = new_pos.x;
-		// parse()->pos_y = new_pos.y;
-		// render_cub3d(data);
-	}
-}
+// 	printf("Fisrt: y: %d, x: %d\n", plyer()->pos.y, plyer()->pos.x);
+// 	new_pos = plyer()->pos;
+// 	new_pos.x += cos(plyer()->rotation_angle) * plyer()->move_speed;
+// 	new_pos.y += sin(plyer()->rotation_angle) * plyer()->move_speed;
+// 	map.x = (new_pos.x / TILE_SIZE);
+// 	map.y = (new_pos.y / TILE_SIZE);
+// 	next_step.x = (new_pos.x + cos(plyer()->rotation_angle)
+// 			* plyer()->move_speed) / TILE_SIZE;
+// 	next_step.y = (new_pos.y + sin(plyer()->rotation_angle)
+// 			* plyer()->move_speed) / TILE_SIZE;
+// 	printf("Second: y: %d, x: %d\n", map.y, map.x);
+// 	printf("Third: y: %d, x: %d\n", next_step.y, next_step.x);
+// 	// printf("fild: %d\n", (plyer()->map[(int)map.y][(int)map.x]));
+// 	if ((plyer()->map[(int)map.y][(int)map.x] != WALL)
+// 		&& (plyer()->map[(int)next_step.y][(int)next_step.x] != WALL))
+// 	{
+// 		plyer()->pos = new_pos;
+// 		// parse()->pos_x = new_pos.x;
+// 		// parse()->pos_y = new_pos.y;
+// 		render_cub3d(data);
+// 	}
+// }
 
 void	keyboard(int keycode, t_data *data)
 {
@@ -93,7 +94,7 @@ void	keyboard(int keycode, t_data *data)
 	if (keycode == ESC)
 		destroy_window(data);
 	// else if (keycode == K_W || keycode == UP)
-	// 	move_up();
+	// 	move_up(data);
 	// else if (keycode == K_S || keycode == DOWN)
 	// 	move_down();
 	// else if (keycode == K_D || keycode == RIGHT)
