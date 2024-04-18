@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/17 20:47:35 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/18 12:36:33 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@
 # define SO "SO"
 # define WE "WE"
 # define EA "EA"
+
+/* fields */
+# define WALL '1'
+# define FLOOR '0'
 
 /* keycode */
 # define K_W 119
@@ -63,17 +67,6 @@ typedef enum e_side
 	HORIZONTAL = 1,
 	VERTICAL
 }				t_side;
-
-typedef enum e_map
-{
-	FLOOR,
-	WALL,
-	N,
-	S,
-	W,
-	E,
-	SPACES,
-}				t_map;
 
 typedef struct s_parse
 {
@@ -126,7 +119,7 @@ typedef struct s_line
 
 typedef struct s_plyr
 {
-	int			**map;
+	char		**map;
 	int			move_speed;
 	double		radius;
 	double		rotation_angle;
@@ -136,7 +129,7 @@ typedef struct s_plyr
 
 typedef struct s_raycast
 {
-	// char or int			**cub_map;
+	// char		**cub_map;
 	t_plyr		player;
 	t_pix_pos	wall_hit;
 	t_pix_pos	step;

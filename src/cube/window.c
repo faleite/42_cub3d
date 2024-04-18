@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 20:29:40 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/17 21:15:26 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/18 12:38:25 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,10 @@ int	render_cub3d(t_data *data)
 		return (1);
 	draw_ceil_floor(&data->img);
 	render_minimap(&data->img);
-
+	render_player(&data->img);
 	/* After render this function put image to window */
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, \
 							data->img.mlx_img, 0, 0);
-	// mlx_hook(data->win_ptr, 2, 1L, (void *)keyboard, &data);
-	// mlx_hook(data->win_ptr, 17, 0L, (void *)destroy_window, &data);
 	return (0);
 }
 

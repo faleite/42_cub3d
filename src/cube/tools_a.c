@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:34:03 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/17 19:49:37 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/18 12:34:04 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	destroy_window(t_data *data)
 	mlx_destroy_display(data->mlx_ptr);
 	free(data->mlx_ptr);
 	free_parse();
-	free_map(plyer()->map);
 	exit(0);
 }
 

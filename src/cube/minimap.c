@@ -6,14 +6,14 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 20:32:19 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/17 21:14:56 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/18 12:19:35 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
 static int	draw_minimap(t_image *img, int p_y, int p_x, int color);
-static void	render_player(t_image *img, float x, float y);
+static void	draw_player(t_image *img, float x, float y);
 
 int	render_minimap(t_image *img)
 {
@@ -30,8 +30,25 @@ int	render_minimap(t_image *img)
 			if (parse()->map[p.y][p.x] == '0' || \
 				is_player(parse()->map[p.y][p.x]))
 				draw_minimap(img, p.y, p.x, 8421504);
+			p.x++;
+		}
+		p.y++;
+	}
+	return (0);
+}
+
+int	render_player(t_image *img)
+{
+	t_pix_pos	p;
+
+	p.y = 0;
+	while (p.y <= parse()->map_height)
+	{
+		p.x = 0;
+		while (p.x < (int)ft_strlen(parse()->map[p.y]))
+		{
 			if (is_player(parse()->map[p.y][p.x]))
-				render_player(img, (p.x + 0.5), (p.y + 0.5));
+				draw_player(img, (p.x + 0.5), (p.y + 0.5));
 			p.x++;
 		}
 		p.y++;
@@ -116,7 +133,7 @@ static void	draw_line(float p_y, float p_x, float scale, t_image *img)
  * @param y - Scaled Y-coordinate of the player's position.
  * @param x - Scaled X-coordinate of the player's position.
  */
-static void	render_player(t_image *img, float x, float y)
+static void	draw_player(t_image *img, float x, float y)
 {
 	t_pix_pos	p;
 	t_pix_pos	end;
