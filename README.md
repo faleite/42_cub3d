@@ -162,6 +162,16 @@ C 135, 245, 251
 
 ### [Engine RayCasting Manual do Codigo](https://editor.p5js.org/ManualDoCodigo/sketches/)
 
+## Raycasting
+### DDA
+- À medida que nos movemos em uma grade quadrada, nos movemos em um raio a partir da posição do jogador em **passos de 1 pixel**, dependendo da vertical ou horizontal.
+- Para evitar perder nenhuma das células sobre as quais nosso raio passa, devemos avançar a cada passo ao longo do eixo que causa o **menor avanço no raio**.
+- A posição do nosso jogador não terá necessariamente coordenadas inteiras. É portanto necessário inicialmente **calcular a diferença entre a posição inicial e as coordenadas inteiras mais próximas**.
+- Se o mapa não estiver cercado por paredes, **o programa continuará seus cálculos infinitamente**. Portanto, prestar atenção a duas coisas:
+  - Impor uma **distância máxima** de busca de colisão
+  - Verifique se as coordenadas (em pixels) estão **dentro do escopo da tabela** (caso contrário, criando um erro de segmentação)
+- Usar uma distância máxima de visualização ajuda a tornar as habilidades visuais do jogador adaptáveis ​​a diferentes cenários. Também permite que você não dispare um raio ao infinito se não houver nenhum obstáculo em seu caminho.
+
 </details>
 
 [↑ Index ↑](#mandatory-part)

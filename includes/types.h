@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/18 15:13:51 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/22 20:20:59 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@
 /* window
  vm: W_W 1350 W_H 680 
 */
-# define W_WIDTH 1280
+# define W_WIDTH  1280
 # define W_HEIGHT 750
-# define MM_SCALE 12
-# define TILE_SIZE 30 //
+# define MM_SCALE 40 // 12
+// # define SQUARE 40 
 
 /* elements */
 # define F "F"
@@ -35,6 +35,11 @@
 # define SO "SO"
 # define WE "WE"
 # define EA "EA"
+
+/* Colors */
+# define DARK 1515552
+# define GRAY 8421504
+# define RED 16519760
 
 /* fields */
 # define WALL '1'
