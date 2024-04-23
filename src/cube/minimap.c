@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 20:32:19 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/22 20:19:25 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/23 17:48:10 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	draw_player(t_image *img, float x, float y);
 
 int	render_minimap(t_image *img)
 {
-	t_pix_pos	p;
+	t_vt_d	p;
 
 	p.y = 0;
 	while (p.y <= parse()->map_height)
@@ -39,7 +39,7 @@ int	render_minimap(t_image *img)
 
 int	render_player(t_image *img)
 {
-	t_pix_pos	p;
+	t_vt_d	p;
 
 	p.y = 0;
 	while (p.y <= parse()->map_height)
@@ -62,7 +62,7 @@ int	render_player(t_image *img)
 */
 static int	draw_minimap(t_image *img, int p_y, int p_x, int color)
 {
-	t_pix_pos	p;
+	t_vt_d	p;
 	int			x_end;
 	int			y_end;
 	int			scale;
@@ -92,9 +92,9 @@ static void	draw_line(float p_y, float p_x, float scale, t_image *img)
 
 	line.x0 = p_x * scale;
 	line.y0 = p_y * scale;
-	line.x1 = p_x + cos(player_direction()) * W_WIDTH;
+	line.x1 = p_x + cos(player_direction()) * 10;
 	line.x1 *= scale;
-	line.y1 = p_y + sin(player_direction()) * W_HEIGHT;
+	line.y1 = p_y + sin(player_direction()) * 10;
 	line.y1 *= scale;
 	brasenham(line, img, RED);
 }
@@ -109,8 +109,8 @@ static void	draw_line(float p_y, float p_x, float scale, t_image *img)
  */
 static void	draw_player(t_image *img, float x, float y)
 {
-	t_pix_pos	p;
-	t_pix_pos	end;
+	t_vt_d	p;
+	t_vt_d	end;
 	int			scale;
 
 	scale = MM_SCALE;

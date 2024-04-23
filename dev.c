@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 16:59:47 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/22 16:55:19 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/23 17:48:10 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@
 #define RIGHT 65363
 #define ESC 65307
 
-typedef struct s_pix_pos
+typedef struct s_vt_d
 {
 	int		x;
 	int		y;
-}			t_pix_pos;
+}			t_vt_d;
 
 typedef struct s_ply
 {
@@ -275,8 +275,8 @@ void	init_cube()
 
 void	draw_player(t_image *img, float x, float y, int color)
 {
-	t_pix_pos p1;
-	t_pix_pos p2;
+	t_vt_d p1;
+	t_vt_d p2;
 
 	p2.x = (x * M_SCALE + M_SCALE) / 5;
 	p2.y = (y * M_SCALE + M_SCALE) / 5;
@@ -296,8 +296,8 @@ void	draw_player(t_image *img, float x, float y, int color)
 
 void	draw_line(t_image *img, float x, float y, int color)
 {
-	t_pix_pos p1;
-	t_pix_pos p2;
+	t_vt_d p1;
+	t_vt_d p2;
 
 	p2.x =( x * M_SCALE + M_SCALE);
 	p2.y = (y * M_SCALE + M_SCALE);
@@ -316,7 +316,7 @@ void	draw_line(t_image *img, float x, float y, int color)
 
 void	draw_map2d(t_image *img)
 {
-	t_pix_pos	p;
+	t_vt_d	p;
 
 	p.y = 0;
 	while (p.y < cube()->y)
@@ -336,7 +336,7 @@ void	draw_map2d(t_image *img)
 
 int	draw_ceil_floor(t_image *img)
 {
-	t_pix_pos	pos;
+	t_vt_d	pos;
 
 	pos.y = -1;
 	while (++pos.y < W_HEIGHT / 2)

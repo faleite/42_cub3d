@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:34:03 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/22 20:18:28 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/23 18:28:51 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,18 @@ int	destroy_window(t_data *data)
 	exit(0);
 }
 
-t_plyr	*plyer(void)
-{
-	static t_plyr	p;
+// t_plyr	*plyer(void)
+// {
+// 	static t_plyr	p;
 
-	return (&p);
+// 	return (&p);
+// }
+
+t_map *map(void)
+{
+	static t_map	m;
+
+	return (&m);
 }
 
 /*
@@ -71,7 +78,7 @@ void	brasenham(t_line line, t_image *img, int color)
 	}
 }
 
-void	draw_circle(t_pix_pos center, int color, int radius, t_image *img)
+void	draw_circle(t_vt_d center, int color, int radius, t_image *img)
 {
 	int	radius_squared;
 	int	x;

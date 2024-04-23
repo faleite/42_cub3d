@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/22 20:20:59 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/23 20:34:08 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@
 # define W_WIDTH  1280
 # define W_HEIGHT 750
 # define MM_SCALE 40 // 12
-// # define SQUARE 40 
+# define FOV 60
+# define FOV_HALF 30
+# define RAY_VIEW 25
+# define TILE_SIZE 32 // 64
 
 /* elements */
 # define F "F"
@@ -62,17 +65,17 @@
  * @param x coordinate of the pixel.
  * @param y coordinate of the pixel.
  */
-typedef struct s_pix_pos
+typedef struct s_vt_d
 {
 	int		x;
 	int		y;
-}			t_pix_pos;
+}			t_vt_d;
 
-typedef enum e_side
+typedef struct s_vt_f
 {
-	HORIZONTAL = 1,
-	VERTICAL
-}				t_side;
+	int		x;
+	int		y;
+}			t_vt_f;
 
 typedef struct s_parse
 {
@@ -104,13 +107,6 @@ typedef struct s_image
 	int		endian;
 }			t_image;
 
-typedef struct s_data
-{
-	void		*mlx_ptr;
-	void		*win_ptr;
-	t_image		img;
-}			t_data;
-
 typedef struct s_line
 {
 	int		height;
@@ -123,27 +119,39 @@ typedef struct s_line
 	double	max;
 }				t_line;
 
+typedef struct s_map
+{
+	char	**map;
+	t_vt_d	ply_start;
+	int		map_height;
+	int		map_width;
+}			t_map;
+
 typedef struct s_plyr
 {
-	char		**map;
-	int			move_speed;
-	double		radius;
-	double		rotation_angle;
-	double		rotation_speed;
-	t_pix_pos	pos;
+	int			horizontal; // 0
+	int			vertical; // 0
+	int			move_speed; // 3 
+	double		rotation_speed; // move_sp * (PI / 180)
+	double		angle; // 90
+	t_vt_f		pos; // x = pos.x/y * TILE + (tile / 2) 
 }				t_plyr;
 
 typedef struct s_raycast
 {
-	// char		**cub_map;
-	t_plyr		player;
-	t_pix_pos	wall_hit;
-	t_pix_pos	step;
-	t_pix_pos	intercept;
-	t_pix_pos	next_touch;
-	t_side		hit_side;
-	double		distance;
-	double		ray_angle;
+	int		ww_half; // W_W / 2
+	int		bool; // 0
+	double	dist; // 0
+	double	angle; // 3 * PI / 2
 }				t_raycast;
+
+typedef struct s_data
+{
+	void		*mlx_ptr;
+	void		*win_ptr;
+	t_image		img;
+	t_plyr		*plyr;
+	t_raycast	*cast;
+}			t_data;
 
 #endif /* TYPES_H */

@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/22 20:08:12 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/23 21:03:07 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@
 # include "parser.h"
 
 /* struct */
-t_plyr	*plyer(void);
+// t_plyr	*plyer(void);
+t_map	*map(void);
+
 
 /* cube */
 int		render_cub3d(t_data *data);
@@ -44,13 +46,13 @@ double	player_direction(void);
 /* rendering */
 void	img_draw_pixel(t_image *img, int x, int y, int color);
 void	brasenham(t_line line, t_image *img, int color);
-void	draw_circle(t_pix_pos center, int color, int radius, t_image *img);
+void	draw_circle(t_vt_d center, int color, int radius, t_image *img);
 
 /* mini map */
 int		draw_ceil_floor(t_image *img);
 int		render_minimap(t_image *img);
 int		render_player(t_image *img);
-void	init_player(void);
+// void	init_player(void);
 
 /* math */
 float	ft_max(float a, float b);
@@ -60,7 +62,10 @@ float	ft_mod(float a);
 // void	move_up(t_data *data);
 
 /* tools */
+void	init_values(t_data *data);
+void	free_data(t_data *data);
 
 /* debugs */
+void	print_struct_map(void);
 
 #endif /* CUB3D_H */

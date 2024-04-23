@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 20:29:40 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/22 19:56:22 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/23 21:02:45 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	keyboard(int keycode, t_data *data)
 
 int	draw_ceil_floor(t_image *img)
 {
-	t_pix_pos	pos;
+	t_vt_d	pos;
 
 	pos.y = -1;
 	while (++pos.y < W_HEIGHT / 2)

@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 16:00:53 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/17 16:55:15 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/23 17:48:10 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 // void	move_up(t_data *data)
 // {
-// 	t_pix_pos	new_pos;
-// 	t_pix_pos	map;
-// 	t_pix_pos	next_step;
+// 	t_vt_d	new_pos;
+// 	t_vt_d	map;
+// 	t_vt_d	next_step;
 
 // 	new_pos = plyer()->pos;
 // 	new_pos.x += cos(plyer()->rotation_angle) * plyer()->move_speed;
