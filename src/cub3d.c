@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 16:59:47 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/23 21:02:29 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/24 18:09:20 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int argc, char *argv[])
 
 	validate_scene(argc, argv[1]);
 	init_values(&cube);
-	free_data(&cube);
-	build_window();
+ 	// print_struct_map();
+	build_window(cube);
 	return (0);
 }

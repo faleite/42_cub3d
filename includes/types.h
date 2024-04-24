@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/23 20:34:08 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/24 19:54:49 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 */
 # define W_WIDTH  1280
 # define W_HEIGHT 750
-# define MM_SCALE 40 // 12
+# define MM_SCALE 40
 # define FOV 60
 # define FOV_HALF 30
 # define RAY_VIEW 25
@@ -43,6 +43,7 @@
 # define DARK 1515552
 # define GRAY 8421504
 # define RED 16519760
+# define WHITE 16777215
 
 /* fields */
 # define WALL '1'
@@ -134,13 +135,14 @@ typedef struct s_plyr
 	int			move_speed; // 3 
 	double		rotation_speed; // move_sp * (PI / 180)
 	double		angle; // 90
-	t_vt_f		pos; // x = pos.x/y * TILE + (tile / 2) 
+	double		angle_s;
+	t_vt_d		pos; // x = pos.x/y * TILE + (tile / 2) 
 }				t_plyr;
 
 typedef struct s_raycast
 {
 	int		ww_half; // W_W / 2
-	int		bool; // 0
+	int		flag; // 0
 	double	dist; // 0
 	double	angle; // 3 * PI / 2
 }				t_raycast;

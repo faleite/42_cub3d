@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 20:29:40 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/23 21:02:45 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/24 20:12:33 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 void	keyboard(int keycode, t_data *data);
 
-int	build_window(void)
+int	build_window(t_data data)
 {
-	t_data	data;
-
 	data.mlx_ptr = mlx_init();
 	if (!data.mlx_ptr)
 		return (1);
@@ -49,8 +47,14 @@ int	render_cub3d(t_data *data)
 	if (!data->mlx_ptr)
 		return (1);
 	draw_ceil_floor(&data->img);
+
+	// (Use Key for activate the minimap)
 	render_minimap(&data->img);
-	render_player(&data->img);
+	// render_player(data);
+
+	draw_player_screen(data);
+	draw_line_screen(data->plyr->pos.y, data->plyr->pos.x,\
+					&data->img, data->plyr->angle);
 
 	/* After render this function put image to window */
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, \
@@ -65,10 +69,30 @@ void	keyboard(int keycode, t_data *data)
 	// display();
 	if (keycode == ESC)
 		destroy_window(data);
-	// else if (keycode == K_W || keycode == UP)
-	// 	move_up(data);
-	// else if (keycode == K_S || keycode == DOWN)
-	// 	move_down();
+	else if (keycode == K_W || keycode == UP)
+	{
+		data->plyr->horizontal = 0;
+		data->plyr->vertical = 1;
+		move_up(data);
+	}
+	else if (keycode == K_S || keycode == DOWN)
+	{
+		data->plyr->horizontal = 0;
+		data->plyr->vertical = -1;
+		move_up(data);
+	}
+	else if (keycode == K_D)
+	{
+		// data->plyr->vertical = 0;
+		data->plyr->horizontal = 1;
+		move_up(data);
+	}
+	else if (keycode == K_A)
+	{
+		// data->plyr->vertical = 0;
+		data->plyr->horizontal = -1;
+		move_up(data);
+	}
 	// else if (keycode == K_D || keycode == RIGHT)
 	// 	move_right();
 	// else if (keycode == K_A || keycode == LEFT)

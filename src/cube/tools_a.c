@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:34:03 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/23 18:28:51 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/24 18:42:06 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,9 @@ int	destroy_window(t_data *data)
 	mlx_destroy_image(data->mlx_ptr, data->img.mlx_img);
 	mlx_destroy_display(data->mlx_ptr);
 	free(data->mlx_ptr);
+	free_data(data);
 	free_parse();
 	exit(0);
-}
-
-// t_plyr	*plyer(void)
-// {
-// 	static t_plyr	p;
-
-// 	return (&p);
-// }
-
-t_map *map(void)
-{
-	static t_map	m;
-
-	return (&m);
 }
 
 /*
@@ -76,6 +63,23 @@ void	brasenham(t_line line, t_image *img, int color)
 		tmp->x0 += tmp->delta_x;
 		tmp->y0 += tmp->delta_y;
 	}
+}
+
+void	draw_line(float p_y, float p_x, t_image *img, double dir)
+{
+	float	scale;	
+	t_line	line;
+
+	scale = MM_SCALE;
+	if (parse()->map_height > 20 || parse()->map_width > 40)
+		scale /= 2;
+	line.x0 = p_x * scale;
+	line.y0 = p_y * scale;
+	line.x1 = p_x + cos(dir) * 10;
+	line.x1 *= scale;
+	line.y1 = p_y + sin(dir) * 10;
+	line.y1 *= scale;
+	brasenham(line, img, RED);
 }
 
 void	draw_circle(t_vt_d center, int color, int radius, t_image *img)

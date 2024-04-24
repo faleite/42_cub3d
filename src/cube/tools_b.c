@@ -6,11 +6,26 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:06:45 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/23 21:04:20 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/24 19:40:22 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+
+// t_plyr	*plyer(void)
+// {
+// 	static t_plyr	p;
+
+// 	return (&p);
+// }
+
+t_map	*map(void)
+{
+	static t_map	m;
+
+	return (&m);
+}
 
 /*
 Defines direction in function of unitary vectors
@@ -36,18 +51,23 @@ double	player_direction(void)
 
 void	init_values(t_data *data)
 {
-	data->plyr = malloc(sizeof(t_plyr));
-	data->cast = malloc(sizeof(t_raycast));
-	data->plyr->horizontal = 0;
-	data->plyr->vertical = 0;
-	data->plyr->move_speed = 3;
+	data->plyr = ft_calloc(1, sizeof(t_plyr));
+	if (!data->plyr)
+		exit(1);
+	data->cast = ft_calloc(1, sizeof(t_raycast));
+	if (!data->cast)
+		exit(1);
+	// data->plyr->horizontal = 0;
+	// data->plyr->vertical = 0;
+	data->plyr->move_speed = 8;
 	data->plyr->rotation_speed = data->plyr->move_speed * M_PI / 180;
-	data->plyr->angle = 90;
+	data->plyr->angle = player_direction();
+	data->plyr->angle_s = 90;
 	data->plyr->pos.x = map()->ply_start.x * TILE_SIZE + TILE_SIZE / 2;
 	data->plyr->pos.y = map()->ply_start.y * TILE_SIZE + TILE_SIZE / 2;
 	data->cast->ww_half = W_WIDTH / 2;
-	data->cast->bool = 0;
-	data->cast->dist = 0;
+	// data->cast->bool = 0;
+	// data->cast->dist = 0;
 	data->cast->angle = 3 * (M_PI / 2);
 }
 

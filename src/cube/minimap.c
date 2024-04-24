@@ -6,14 +6,14 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 20:32:19 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/23 17:48:10 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/24 18:23:39 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
 static int	draw_minimap(t_image *img, int p_y, int p_x, int color);
-static void	draw_player(t_image *img, float x, float y);
+static void	draw_player(t_data *data, float x, float y);
 
 int	render_minimap(t_image *img)
 {
@@ -37,7 +37,7 @@ int	render_minimap(t_image *img)
 	return (0);
 }
 
-int	render_player(t_image *img)
+int	render_player(t_data *data)
 {
 	t_vt_d	p;
 
@@ -48,7 +48,7 @@ int	render_player(t_image *img)
 		while (p.x < (int)ft_strlen(parse()->map[p.y]))
 		{
 			if (is_player(parse()->map[p.y][p.x]))
-				draw_player(img, (p.x + 0.5), (p.y + 0.5));
+				draw_player(data, (p.x + 0.5), (p.y + 0.5));
 			p.x++;
 		}
 		p.y++;
@@ -63,9 +63,9 @@ int	render_player(t_image *img)
 static int	draw_minimap(t_image *img, int p_y, int p_x, int color)
 {
 	t_vt_d	p;
-	int			x_end;
-	int			y_end;
-	int			scale;
+	int		x_end;
+	int		y_end;
+	int		scale;
 
 	scale = MM_SCALE;
 	if (parse()->map_height > 20 || parse()->map_width > 40)
@@ -86,19 +86,6 @@ static int	draw_minimap(t_image *img, int p_y, int p_x, int color)
 	return (0);
 }
 
-static void	draw_line(float p_y, float p_x, float scale, t_image *img)
-{
-	t_line		line;
-
-	line.x0 = p_x * scale;
-	line.y0 = p_y * scale;
-	line.x1 = p_x + cos(player_direction()) * 10;
-	line.x1 *= scale;
-	line.y1 = p_y + sin(player_direction()) * 10;
-	line.y1 *= scale;
-	brasenham(line, img, RED);
-}
-
 /** WORKING***
  * Draws the player's position on the minimap.
  * The player's position is scaled and represented with a specific color.
@@ -107,11 +94,11 @@ static void	draw_line(float p_y, float p_x, float scale, t_image *img)
  * @param y - Scaled Y-coordinate of the player's position.
  * @param x - Scaled X-coordinate of the player's position.
  */
-static void	draw_player(t_image *img, float x, float y)
+static void	draw_player(t_data *data, float x, float y)
 {
 	t_vt_d	p;
 	t_vt_d	end;
-	int			scale;
+	int		scale;
 
 	scale = MM_SCALE;
 	if (parse()->map_height > 20 || parse()->map_width > 40)
@@ -124,8 +111,8 @@ static void	draw_player(t_image *img, float x, float y)
 		p.x = x * scale - scale / 5;
 		while (p.x < end.x)
 		{
-			draw_circle(p, RED, 2, img);
-			draw_line(y, x, scale, img);
+			draw_circle(p, RED, 2, &data->img);
+			draw_line(y, x, &data->img, data->plyr->angle);
 			p.x++;
 		}
 		p.y++;
