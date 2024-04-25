@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/24 19:54:49 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/25 09:04:58 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,10 @@ typedef struct s_plyr
 	double		rotation_speed; // move_sp * (PI / 180)
 	double		angle; // 90
 	double		angle_s;
-	t_vt_d		pos; // x = pos.x/y * TILE + (tile / 2) 
+	t_vt_f		pos; // x = pos.x/y * TILE + (tile / 2)
+	
+	t_vt_f		dir;
+	t_vt_d		dst_pos; // para gerar raios
 }				t_plyr;
 
 typedef struct s_raycast
