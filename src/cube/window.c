@@ -6,13 +6,30 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 20:29:40 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/25 12:37:08 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/25 21:11:47 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
 void	keyboard(int keycode, t_data *data);
+
+void	clear_frame(t_image frame)
+{
+	char	*pixel;
+	int		total;
+	int		i;
+
+	pixel = frame.addr;
+	total = W_WIDTH * W_HEIGHT;
+	i = 0;
+	while (i < total)
+	{
+		*(int *)pixel = 0;
+		pixel += 4;
+		i++;
+	}
+}
 
 int	build_window(t_data data)
 {
@@ -38,6 +55,12 @@ int	build_window(t_data data)
 	return (0);
 }
 
+/* TAREFA */
+// plane	dir		plane
+
+
+// 		   plyer
+
 /*
  altura (h) do mapa = end - start + 1
  largura (w) do mapa = maior linha do mapa
@@ -46,10 +69,11 @@ int	render_cub3d(t_data *data)
 {
 	if (!data->mlx_ptr)
 		return (1);
+	clear_frame(data->img);
 	draw_ceil_floor(&data->img);
 
 	// (Use Key for activate the minimap)
-	render_minimap(&data->img);
+	// render_minimap(&data->img);
 	// render_player(data);
 
 	draw_line_screen(data->plyr->pos.y, data->plyr->pos.x,\
@@ -93,10 +117,10 @@ void	keyboard(int keycode, t_data *data)
 		// data->plyr->horizontal = -1;
 		move_left(data);
 	}
-	// else if (keycode == RIGHT)
-	// 	rotate_right(data);
-	// else if (keycode == LEFT)
-	// 	rotate_left();
+	else if (keycode == RIGHT)
+		rotate_right(data, 1);
+	else if (keycode == LEFT)
+		rotate_right(data, -1);
 }
 
 int	draw_ceil_floor(t_image *img)

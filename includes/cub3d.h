@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/25 12:28:25 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/25 17:28:35 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ void	move_up(t_data *data);
 void	move_down(t_data *data);
 void	move_left(t_data *data);
 void	move_right(t_data *data);
-void	rotate_left(t_data *data);
-void	rotate_right(t_data *data);
+void	rotate_left(t_data *data, int flag);
+void	rotate_right(t_data *data, int flag);
 
 /* Raycast */
 void	hit_wall(t_data *data, double new_x, double new_y);

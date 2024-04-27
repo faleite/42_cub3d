@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 16:00:53 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/25 12:33:45 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/25 21:02:24 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,25 @@ void	move_right(t_data *data)
 	// hit_wall(data, data->plyr->pos.x, data->plyr->pos.y);
 }
 
-void	rotate_right(t_data *data)
+void	rotate_right(t_data *data, int flag)
 {
-	float	old_dir_x;
+	// t_vt_f	new_dir;
+	double	old_dir_x = 0.0;
+	// double	old_plane_x;
+	data->plyr->rotation_speed *= flag;
+	printf("Angle: %.2f\n", data->plyr->angle);
 
-	old_dir_x = data->plyr->dir.x;
 	data->plyr->dir.x = data->plyr->dir.x * cos(data->plyr->rotation_speed) - data->plyr->dir.y * sin(data->plyr->rotation_speed);
 	data->plyr->dir.y = old_dir_x * sin(data->plyr->rotation_speed) + data->plyr->dir.y * cos(data->plyr->rotation_speed);
+	
+	// data->plyr->plane.x = data->plyr->plane.x * cos(data->plyr->rotation_speed) - data->plyr->plane.y * sin(data->plyr->rotation_speed);
+	// data->plyr->plane.y = data->plyr->plane.x * cos(data->plyr->rotation_speed) - data->plyr->plane.y * sin(data->plyr->rotation_speed);
+	// new_dir.x = data->plyr->dir.x * cos(data->plyr->angle) * data->plyr->rotation_speed;
+	// new_dir.y = data->plyr->dir.y * sin(data->plyr->angle) * data->plyr->rotation_speed;
+
+	// data->plyr->pos.x += new_dir.x;
+	// data->plyr->pos.y += new_dir.y;
+	// data->plyr->angle += (data->plyr->rotation_speed * flag);
+	
 	// hit_wall(data, data->plyr->pos.x, data->plyr->pos.y);
 }
