@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 20:29:40 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/25 21:11:47 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/28 01:04:53 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,10 @@ int	render_cub3d(t_data *data)
 	// render_minimap(&data->img);
 	// render_player(data);
 
-	draw_line_screen(data->plyr->pos.y, data->plyr->pos.x,\
-					&data->img, data->plyr->angle);
-	draw_player_screen(data);
+	// draw_line_screen(data->plyr->pos.y, data->plyr->pos.x,
+	// 				&data->img, data->plyr->angle);
+	// draw_player_screen(data);
+	raycasting(data, &data->img);
 
 	/* After render this function put image to window */
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, \

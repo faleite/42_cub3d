@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:06:45 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/25 20:35:26 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/28 01:36:20 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,10 @@ void	init_values(t_data *data)
 	data->plyr->move_speed = 8;
 	data->plyr->rotation_speed = data->plyr->move_speed * M_PI / 180;
 	data->plyr->angle = 90;
-	data->plyr->dir = set_dir(); // raio
-	data->plyr->pos.x = map()->ply_start.x * TILE_SIZE + TILE_SIZE / 2;
-	data->plyr->pos.y = map()->ply_start.y * TILE_SIZE + TILE_SIZE / 2;
-	data->plyr->plane.y = 0.66;
+	data->plyr->dir.x = -1; // set_dir(); // raio vetor inicial de direcao
+	data->plyr->pos.x = map()->ply_start.x; // * TILE_SIZE + TILE_SIZE / 2;
+	data->plyr->pos.y = map()->ply_start.y; // * TILE_SIZE + TILE_SIZE / 2;
+	data->plyr->plane.y = 0.66; // versão 2d raycaster do plano da câmera
 
 	data->plyr->angle_s = M_PI; // 90
 	data->cast->ww_half = W_WIDTH / 2;

@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/25 20:51:20 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/27 22:56:31 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ typedef struct s_vt_d
 
 typedef struct s_vt_f
 {
-	int		x;
-	int		y;
+	double		x;
+	double		y;
 }			t_vt_f;
 
 typedef struct s_parse
@@ -140,8 +140,9 @@ typedef struct s_plyr
 	t_vt_f		pos; // //posição inicial xey
 	t_vt_f		dir; // //vetor de direção inicial
 	t_vt_f		plane; // //a versão 2d raycaster do plano da câmera
-
 	double		camera_x;
+	double		time;
+	double		old_time;
 
 	t_vt_d		dst_pos; // para gerar raios
 }				t_plyr;
