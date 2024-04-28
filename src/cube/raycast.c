@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 18:24:05 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/28 01:53:11 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/28 17:59:24 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void	hit_wall(t_data *data, double new_x, double new_y)
 
 	p.x = floor(new_x / TILE_SIZE);
 	p.y = floor(new_y / TILE_SIZE);
+	p.x = floor(new_x);
+	p.y = floor(new_y);
 	if (map()->map[p.y][p.x] != '0')
 	{
 		printf("WALL\n");
@@ -158,9 +160,8 @@ void	raycasting(t_data *data, t_image *img)
 		if (draw_end >= W_HEIGHT)
 			draw_end = W_HEIGHT - 1;
 		color = RED;
-		// if (side == 1)
-		// 	color = RED / 2;
-		// draw_wall(draw_start, draw_end, img, color);
+		if (side == 1)
+			color = RED / 2;
 		draw_wall(i, draw_start, draw_end, img, color);
 	}
 }

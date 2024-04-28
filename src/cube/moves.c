@@ -6,26 +6,11 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 16:00:53 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/25 21:02:24 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/28 17:57:21 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-// void	move_up(t_data *data)
-// {
-// 	double	new_x;
-// 	double	new_y;
-
-// 	new_x = data->plyr->pos.x + cos(data->plyr->angle_s) * data->plyr->move_speed * data->plyr->vertical;
-// 	new_y = data->plyr->pos.y + sin(data->plyr->angle_s) * data->plyr->move_speed * data->plyr->vertical;
-
-// 	data->plyr->pos.x = new_x;
-// 	data->plyr->pos.y = new_y;
-
-// 	data->plyr->angle_s += data->plyr->horizontal * data->plyr->rotation_speed;
-// 	hit_wall(data, data->plyr->pos.x, data->plyr->pos.y);
-// }
 
 void	move_up(t_data *data)
 {
@@ -34,8 +19,12 @@ void	move_up(t_data *data)
 	new.x = data->plyr->dir.x * data->plyr->move_speed;
 	new.y = data->plyr->dir.y * data->plyr->move_speed;
 
-	data->plyr->pos.x += new.x;
-	data->plyr->pos.y += new.y;
+	if (map()->map[(int)(data->plyr->pos.x + new.x)]\
+					[(int)data->plyr->pos.y] != '1')
+		data->plyr->pos.x += new.x;
+	if (map()->map[(int)data->plyr->pos.x]\
+				[(int)(data->plyr->pos.y + new.y)] != '1')
+		data->plyr->pos.y += new.y;
 	// hit_wall(data, data->plyr->pos.x, data->plyr->pos.y);
 }
 
@@ -46,12 +35,15 @@ void	move_down(t_data *data)
 	new.x = data->plyr->dir.x * data->plyr->move_speed;
 	new.y = data->plyr->dir.y * data->plyr->move_speed;
 
-	data->plyr->pos.x -= new.x;
-	data->plyr->pos.y -= new.y;
-	// hit_wall(data, data->plyr->pos.x, data->plyr->pos.y);
+	if (map()->map[(int)(data->plyr->pos.x - new.x)]\
+				[(int)data->plyr->pos.y] != '1')
+		data->plyr->pos.x -= new.x;
+	if (map()->map[(int)data->plyr->pos.x]\
+				[(int)(data->plyr->pos.y - new.y)] != '1')
+		data->plyr->pos.y -= new.y;
 }
 
-void	move_left(t_data *data)
+void	move_right(t_data *data)
 {
 	t_vt_f	new_dir;
 	t_vt_f	new_pos;
@@ -63,13 +55,15 @@ void	move_left(t_data *data)
 
 	new_pos.x = new_dir.x * data->plyr->move_speed;
 	new_pos.y = new_dir.y * data->plyr->move_speed;
-
-	data->plyr->pos.x += new_pos.x;
-	data->plyr->pos.y += new_pos.y;
-	// hit_wall(data, data->plyr->pos.x, data->plyr->pos.y);
+	if (map()->map[(int)(data->plyr->pos.x + new_pos.x)]\
+				[(int)data->plyr->pos.y] != '1')
+		data->plyr->pos.x += new_pos.x;
+	if (map()->map[(int)data->plyr->pos.x]\
+				[(int)(data->plyr->pos.y + new_pos.y)] != '1')
+		data->plyr->pos.y += new_pos.y;
 }
 
-void	move_right(t_data *data)
+void	move_left(t_data *data)
 {
 	t_vt_f	new_dir;
 	t_vt_f	new_pos;
@@ -81,31 +75,28 @@ void	move_right(t_data *data)
 
 	new_pos.x = new_dir.x * data->plyr->move_speed;
 	new_pos.y = new_dir.y * data->plyr->move_speed;
-
-	data->plyr->pos.x += new_pos.x;
-	data->plyr->pos.y += new_pos.y;
-	// hit_wall(data, data->plyr->pos.x, data->plyr->pos.y);
+	if (map()->map[(int)(data->plyr->pos.x + new_pos.x)]\
+				[(int)data->plyr->pos.y] != '1')
+		data->plyr->pos.x += new_pos.x;
+	if (map()->map[(int)data->plyr->pos.x]\
+				[(int)(data->plyr->pos.y + new_pos.y)] != '1')
+		data->plyr->pos.y += new_pos.y;
 }
 
-void	rotate_right(t_data *data, int flag)
+void	move_rotate(t_data *data, int d)
 {
-	// t_vt_f	new_dir;
-	double	old_dir_x = 0.0;
-	// double	old_plane_x;
-	data->plyr->rotation_speed *= flag;
-	printf("Angle: %.2f\n", data->plyr->angle);
+	double	old_dir_x;
+	double	old_plane_x;
 
-	data->plyr->dir.x = data->plyr->dir.x * cos(data->plyr->rotation_speed) - data->plyr->dir.y * sin(data->plyr->rotation_speed);
-	data->plyr->dir.y = old_dir_x * sin(data->plyr->rotation_speed) + data->plyr->dir.y * cos(data->plyr->rotation_speed);
-	
-	// data->plyr->plane.x = data->plyr->plane.x * cos(data->plyr->rotation_speed) - data->plyr->plane.y * sin(data->plyr->rotation_speed);
-	// data->plyr->plane.y = data->plyr->plane.x * cos(data->plyr->rotation_speed) - data->plyr->plane.y * sin(data->plyr->rotation_speed);
-	// new_dir.x = data->plyr->dir.x * cos(data->plyr->angle) * data->plyr->rotation_speed;
-	// new_dir.y = data->plyr->dir.y * sin(data->plyr->angle) * data->plyr->rotation_speed;
-
-	// data->plyr->pos.x += new_dir.x;
-	// data->plyr->pos.y += new_dir.y;
-	// data->plyr->angle += (data->plyr->rotation_speed * flag);
-	
-	// hit_wall(data, data->plyr->pos.x, data->plyr->pos.y);
+	old_dir_x = data->plyr->dir.x;
+	data->plyr->dir.x = data->plyr->dir.x * cos(d * data->plyr->rotation_speed \
+					) - data->plyr->dir.y * sin(d * data->plyr->rotation_speed);
+	data->plyr->dir.y = old_dir_x * sin(d * data->plyr->rotation_speed) + \
+						data->plyr->dir.y * cos(d * data->plyr->rotation_speed);
+	old_plane_x = data->plyr->plane.x;
+	data->plyr->plane.x = data->plyr->plane.x * \
+					cos(d * data->plyr->rotation_speed) - data->plyr->plane.y \
+					* sin(d * data->plyr->rotation_speed);
+	data->plyr->plane.y = old_plane_x * sin(d * data->plyr->rotation_speed) + \
+					data->plyr->plane.y * cos(d * data->plyr->rotation_speed);
 }

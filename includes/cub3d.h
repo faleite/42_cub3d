@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/28 01:02:34 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/28 18:09:46 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,7 @@
 # include "parser.h"
 
 /* struct */
-// t_plyr	*plyer(void);
 t_map	*map(void);
-
 
 /* cube */
 int		render_cub3d(t_data *data);
@@ -45,6 +43,7 @@ double	player_direction(void);
 
 /* rendering */
 void	img_draw_pixel(t_image *img, int x, int y, int color);
+void	clear_img(t_image img);
 void	brasenham(t_line line, t_image *img, int color);
 void	draw_line(float p_y, float p_x, t_image *img, double dir);
 void	draw_circle(t_vt_d center, int color, int radius, t_image *img);
@@ -68,8 +67,7 @@ void	move_up(t_data *data);
 void	move_down(t_data *data);
 void	move_left(t_data *data);
 void	move_right(t_data *data);
-void	rotate_left(t_data *data, int flag);
-void	rotate_right(t_data *data, int flag);
+void	move_rotate(t_data *data, int flag);
 
 /* Raycast */
 void	hit_wall(t_data *data, double new_x, double new_y);

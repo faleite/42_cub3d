@@ -6,19 +6,11 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:06:45 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/28 01:36:20 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/28 17:58:34 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-
-// t_plyr	*plyer(void)
-// {
-// 	static t_plyr	p;
-
-// 	return (&p);
-// }
 
 t_map	*map(void)
 {
@@ -68,7 +60,7 @@ t_vt_f	set_dir(void)
 	else
 		set_vector_f(&dir, 1, 0);
 	// set positions player to 0;
-	// map()->map[map()->ply_start.x][map()->ply_start.y] = '0';
+	map()->map[map()->ply_start.x][map()->ply_start.y] = '0';
 	return (dir);
 }
 
@@ -80,11 +72,11 @@ void	init_values(t_data *data)
 	data->cast = ft_calloc(1, sizeof(t_raycast));
 	if (!data->cast)
 		exit(1);
-	// data->plyr->horizontal = 0;
-	// data->plyr->vertical = 0;
-	data->plyr->move_speed = 8;
-	data->plyr->rotation_speed = data->plyr->move_speed * M_PI / 180;
+
+	data->plyr->move_speed = 0.5; // 8;
+	data->plyr->rotation_speed = 0.3; //data->plyr->move_speed * M_PI / 180;
 	data->plyr->angle = 90;
+	// data->plyr->dir = set_dir(); // raio vetor inicial de direcao
 	data->plyr->dir.x = -1; // set_dir(); // raio vetor inicial de direcao
 	data->plyr->pos.x = map()->ply_start.x; // * TILE_SIZE + TILE_SIZE / 2;
 	data->plyr->pos.y = map()->ply_start.y; // * TILE_SIZE + TILE_SIZE / 2;
@@ -92,8 +84,6 @@ void	init_values(t_data *data)
 
 	data->plyr->angle_s = M_PI; // 90
 	data->cast->ww_half = W_WIDTH / 2;
-	// data->cast->bool = 0;
-	// data->cast->dist = 0;
 	data->cast->angle = 3 * (M_PI / 2);
 }
 

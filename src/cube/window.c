@@ -6,30 +6,13 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 20:29:40 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/28 01:04:53 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/28 18:14:08 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
 void	keyboard(int keycode, t_data *data);
-
-void	clear_frame(t_image frame)
-{
-	char	*pixel;
-	int		total;
-	int		i;
-
-	pixel = frame.addr;
-	total = W_WIDTH * W_HEIGHT;
-	i = 0;
-	while (i < total)
-	{
-		*(int *)pixel = 0;
-		pixel += 4;
-		i++;
-	}
-}
 
 int	build_window(t_data data)
 {
@@ -69,7 +52,7 @@ int	render_cub3d(t_data *data)
 {
 	if (!data->mlx_ptr)
 		return (1);
-	clear_frame(data->img);
+	clear_img(data->img);
 	draw_ceil_floor(&data->img);
 
 	// (Use Key for activate the minimap)
@@ -79,6 +62,7 @@ int	render_cub3d(t_data *data)
 	// draw_line_screen(data->plyr->pos.y, data->plyr->pos.x,
 	// 				&data->img, data->plyr->angle);
 	// draw_player_screen(data);
+
 	raycasting(data, &data->img);
 
 	/* After render this function put image to window */
@@ -89,39 +73,20 @@ int	render_cub3d(t_data *data)
 
 void	keyboard(int keycode, t_data *data)
 {
-	// if (field()->moves == 0)
-	// 	field()->moves = 1;
-	// display();
 	if (keycode == ESC)
 		destroy_window(data);
 	else if (keycode == K_W || keycode == UP)
-	{
-		// data->plyr->horizontal = 0;
-		// data->plyr->vertical = 1;
 		move_up(data);
-	}
 	else if (keycode == K_S || keycode == DOWN)
-	{
-		// data->plyr->horizontal = 0;
-		// data->plyr->vertical = -1;
 		move_down(data);
-	}
 	else if (keycode == K_D)
-	{
-		// data->plyr->vertical = 0;
-		// data->plyr->horizontal = 1;
 		move_right(data);
-	}
 	else if (keycode == K_A)
-	{
-		// data->plyr->vertical = 0;
-		// data->plyr->horizontal = -1;
 		move_left(data);
-	}
 	else if (keycode == RIGHT)
-		rotate_right(data, 1);
+		move_rotate(data, -1);
 	else if (keycode == LEFT)
-		rotate_right(data, -1);
+		move_rotate(data, 1);
 }
 
 int	draw_ceil_floor(t_image *img)

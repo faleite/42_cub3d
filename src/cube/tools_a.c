@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:34:03 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/24 18:42:06 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/28 18:04:45 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,22 @@ void	img_draw_pixel(t_image *img, int x, int y, int color)
 	{
 		pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
 		*(int *)pixel = color;
+	}
+}
+
+void	clear_img(t_image img)
+{
+	char	*pixel;
+	int		total;
+	int		i;
+
+	pixel = img.addr;
+	total = W_WIDTH * W_HEIGHT;
+	i = -1;
+	while (++i < total)
+	{
+		*(int *)pixel = 0;
+		pixel += 4;
 	}
 }
 
@@ -103,20 +119,3 @@ void	draw_circle(t_vt_d center, int color, int radius, t_image *img)
 		x = center.x - radius;
 	}
 }
-
-// void	clear_frame(t_image frame)
-// {
-// 	char	*pixel;
-// 	int		total;
-// 	int		i;
-
-// 	pixel = frame.addr;
-// 	total = W_WIDTH * W_HEIGHT;
-// 	i = 0;
-// 	while (i < total)
-// 	{
-// 		*(int *)pixel = 0;
-// 		pixel += 4;
-// 		i++;
-// 	}
-// }

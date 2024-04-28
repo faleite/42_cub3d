@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/27 22:56:31 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/28 18:11:10 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,13 +134,14 @@ typedef struct s_plyr
 	int			vertical; // 0
 	double		angle_s;
 
-	int			move_speed; // 3 
+	double		move_speed; // 3 
 	double		rotation_speed; // move_sp * (PI / 180)
 	double		angle; // 90
 	t_vt_f		pos; // //posição inicial xey
 	t_vt_f		dir; // //vetor de direção inicial
 	t_vt_f		plane; // //a versão 2d raycaster do plano da câmera
 	double		camera_x;
+
 	double		time;
 	double		old_time;
 
