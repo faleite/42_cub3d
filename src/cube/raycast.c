@@ -6,13 +6,31 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 18:24:05 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/28 17:59:24 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/29 21:27:38 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	draw_player_screen(t_data *data)
+// void	draw_player_screen(t_data *data)
+// {
+// 	t_vt_d	p;
+
+// 	p.y = 0;
+// 	while (p.y < TILE_SIZE / 2)
+// 	{
+// 		p.x = 0;
+// 		while (p.x < TILE_SIZE / 2)
+// 		{
+// 			img_draw_pixel(&data->img, data->plyr->pos.x + p.x,
+// 							data->plyr->pos.y + p.y, RED);
+// 			p.x++;
+// 		}
+// 		p.y++;
+// 	}
+// }
+
+void	draw_player_screen(t_image *img, int x, int y)
 {
 	t_vt_d	p;
 
@@ -22,22 +40,21 @@ void	draw_player_screen(t_data *data)
 		p.x = 0;
 		while (p.x < TILE_SIZE / 2)
 		{
-			img_draw_pixel(&data->img, data->plyr->pos.x + p.x,\
-							data->plyr->pos.y + p.y, RED);
+			img_draw_pixel(img, x + p.x, y + p.y, RED);
 			p.x++;
 		}
 		p.y++;
 	}
 }
 
-void	draw_line_screen(int p_y, int p_x, t_image *img, double dir)
+void	draw_line_screen(int x, int p_y, int p_x, t_image *img, double dir, double perp)
 {
 	t_line	line;
 
-	line.x0 = p_x + TILE_SIZE / 4;
-	line.y0 = p_y + TILE_SIZE / 4;
-	line.x1 = p_x + cos(dir) * 200;
-	line.y1 = p_y + sin(dir) * 200;
+	line.x0 = x;
+	line.y0 = p_y;
+	line.x1 = p_x + cos(dir) * perp;
+	line.y1 = p_y + sin(dir) * perp;
 	brasenham(line, img, WHITE);
 }
 
@@ -69,7 +86,7 @@ void	hit_wall(t_data *data, double new_x, double new_y)
 
 void	raycasting(t_data *data, t_image *img)
 {
-	int		i;
+	int		pos_x;
 	t_vt_f	ray_dir;
 	t_vt_f	side_dist;
 	t_vt_f	delta_dist;
@@ -78,21 +95,22 @@ void	raycasting(t_data *data, t_image *img)
 	t_vt_d	pos;
 	char	hit; // houve uma batida na parede?
 	int		side; //uma parede NS ou EW foi atingida?
-	int 	line_height;
+	int 	line_height; // 
 	int		draw_start;
 	int		draw_end;
-	int		color;
+	// int		color;
 	// t_plyr	*ply;
 
-	i = -1;
+	pos_x = -1;
 
 	// ply = data->plyr;
-	while (++i < W_WIDTH)
+	while (++pos_x < W_WIDTH)
 	{
 		// caucula a posicao e a direcao do raio
-		data->plyr->camera_x = 2 * i / (double)W_WIDTH - 1; // cordenada x no espaco da camera
+		data->plyr->camera_x = 2 * pos_x / (double)W_WIDTH - 1; // cordenada x no espaco da camera
 		ray_dir.x = data->plyr->dir.x + data->plyr->plane.x * data->plyr->camera_x;
 		ray_dir.y = data->plyr->dir.y + data->plyr->plane.y * data->plyr->camera_x;
+
 		pos.x = (int)data->plyr->pos.x;
 		pos.y = (int)data->plyr->pos.y;
 		if (ray_dir.x == 0)
@@ -159,9 +177,15 @@ void	raycasting(t_data *data, t_image *img)
 		draw_end = line_height / 2 + W_HEIGHT / 2;
 		if (draw_end >= W_HEIGHT)
 			draw_end = W_HEIGHT - 1;
-		color = RED;
-		if (side == 1)
-			color = RED / 2;
-		draw_wall(i, draw_start, draw_end, img, color);
+		// draw_player_screen(img, pos.x, pos.y);
+		// color = RED;
+		// if (side == 1)
+		// 	color = RED / 2;
+		// draw_wall(pos_x, draw_start, draw_end, img, color);
+		(void)img;
+		// int screen_center_x = W_WIDTH / 2;
+    	// int screen_center_y = W_HEIGHT / 2;
+    	// draw_player_screen(img, data->plyr->pos.x + screen_center_x, data->plyr->pos.y + screen_center_y);
+		// draw_line_screen(pos_x, data->plyr->pos.y, data->plyr->pos.x, img, ray_dir.y, perp_walldist);
 	}
 }

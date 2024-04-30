@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 20:29:40 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/28 18:14:08 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/29 21:14:18 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,13 @@ int	render_cub3d(t_data *data)
 	draw_ceil_floor(&data->img);
 
 	// (Use Key for activate the minimap)
-	// render_minimap(&data->img);
+	render_minimap(&data->img);
 	// render_player(data);
+	raycasting(data, &data->img);
 
 	// draw_line_screen(data->plyr->pos.y, data->plyr->pos.x,
-	// 				&data->img, data->plyr->angle);
-	// draw_player_screen(data);
-
-	raycasting(data, &data->img);
+	//  				&data->img, data->plyr->angle);
+	// draw_player_screen(&data->img, data->plyr->pos.x, data->plyr->pos.y);
 
 	/* After render this function put image to window */
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, \

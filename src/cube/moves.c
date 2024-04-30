@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 16:00:53 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/28 17:57:21 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/29 18:07:51 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,14 @@ void	move_right(t_data *data)
 
 	new_pos.x = new_dir.x * data->plyr->move_speed;
 	new_pos.y = new_dir.y * data->plyr->move_speed;
-	if (map()->map[(int)(data->plyr->pos.x + new_pos.x)]\
-				[(int)data->plyr->pos.y] != '1')
-		data->plyr->pos.x += new_pos.x;
-	if (map()->map[(int)data->plyr->pos.x]\
+	if (map()->map[(int)(data->plyr->pos.x + new_pos.x)] \
 				[(int)(data->plyr->pos.y + new_pos.y)] != '1')
+	{
+		data->plyr->pos.x += new_pos.x;
 		data->plyr->pos.y += new_pos.y;
+	}
+	// if (map()->map[(int)data->plyr->pos.x]
+				// [(int)(data->plyr->pos.y + new_pos.y)] != '1')
 }
 
 void	move_left(t_data *data)
@@ -75,13 +77,25 @@ void	move_left(t_data *data)
 
 	new_pos.x = new_dir.x * data->plyr->move_speed;
 	new_pos.y = new_dir.y * data->plyr->move_speed;
-	if (map()->map[(int)(data->plyr->pos.x + new_pos.x)]\
-				[(int)data->plyr->pos.y] != '1')
-		data->plyr->pos.x += new_pos.x;
-	if (map()->map[(int)data->plyr->pos.x]\
+	printf("NPos: x %f,y %f", new_pos.x, new_pos.y);
+	// int mapx;
+	// int mapy;
+
+	// mapx = floor(new_pos.x);
+	// mapy = floor(new_pos.y);
+	// if (map()->map[mapy] 
+	// 			[mapx] != '1')
+	if (map()->map[(int)(data->plyr->pos.x + new_pos.x)] \
 				[(int)(data->plyr->pos.y + new_pos.y)] != '1')
+	{
+		data->plyr->pos.x += new_pos.x;
 		data->plyr->pos.y += new_pos.y;
+	}
+	// if (map()->map[(int)data->plyr->pos.x]
+				// [(int)(data->plyr->pos.y + new_pos.y)] != '1')
+		// data->plyr->pos.y += new_pos.y;
 }
+
 
 void	move_rotate(t_data *data, int d)
 {

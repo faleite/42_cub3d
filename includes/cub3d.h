@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/28 18:09:46 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/29 21:11:46 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ float	ft_max(float a, float b);
 float	ft_mod(float a);
 
 /* screen */
-void	draw_player_screen(t_data *data);
-void	draw_line_screen(int p_y, int p_x, t_image *img, double dir);
+void	draw_player_screen(t_image *img, int x, int y);
+// void	draw_line_screen(int p_y, int p_x, t_image *img, double dir);
 
 /* moves */
 void	move_up(t_data *data);

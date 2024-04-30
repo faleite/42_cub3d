@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 20:32:19 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/24 18:23:39 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/29 20:21:27 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,25 @@ int	render_minimap(t_image *img)
 	return (0);
 }
 
+// int	render_player(t_data *data)
+// {
+// 	t_vt_d	p;
+
+// 	p.y = 0;
+// 	while (p.y <= parse()->map_height)
+// 	{
+// 		p.x = 0;
+// 		while (p.x < (int)ft_strlen(parse()->map[p.y]))
+// 		{
+// 			if (is_player(parse()->map[p.y][p.x]))
+// 				draw_player(data, (p.x + 0.5), (p.y + 0.5));
+// 			p.x++;
+// 		}
+// 		p.y++;
+// 	}
+// 	return (0);
+// }
+
 int	render_player(t_data *data)
 {
 	t_vt_d	p;
@@ -48,7 +67,7 @@ int	render_player(t_data *data)
 		while (p.x < (int)ft_strlen(parse()->map[p.y]))
 		{
 			if (is_player(parse()->map[p.y][p.x]))
-				draw_player(data, (p.x + 0.5), (p.y + 0.5));
+				draw_player(data, (data->plyr->pos.x), (data->plyr->pos.y));
 			p.x++;
 		}
 		p.y++;
@@ -94,6 +113,31 @@ static int	draw_minimap(t_image *img, int p_y, int p_x, int color)
  * @param y - Scaled Y-coordinate of the player's position.
  * @param x - Scaled X-coordinate of the player's position.
  */
+// static void	draw_player(t_data *data, float x, float y)
+// {
+// 	t_vt_d	p;
+// 	t_vt_d	end;
+// 	int		scale;
+
+// 	scale = MM_SCALE;
+// 	if (parse()->map_height > 20 || parse()->map_width > 40)
+// 		scale /= 2;
+// 	end.x = x * scale + scale / 5;
+// 	end.y = y * scale + scale / 5;
+// 	p.y = y * scale - scale / 5;
+// 	while (p.y < end.y)
+// 	{
+// 		p.x = x * scale - scale / 5;
+// 		while (p.x < end.x)
+// 		{
+// 			draw_circle(p, RED, 2, &data->img);
+// 			draw_line(y, x, &data->img, data->plyr->angle);
+// 			p.x++;
+// 		}
+// 		p.y++;
+// 	}
+// }
+
 static void	draw_player(t_data *data, float x, float y)
 {
 	t_vt_d	p;
@@ -112,7 +156,7 @@ static void	draw_player(t_data *data, float x, float y)
 		while (p.x < end.x)
 		{
 			draw_circle(p, RED, 2, &data->img);
-			draw_line(y, x, &data->img, data->plyr->angle);
+			draw_line(y, x, &data->img, data->plyr->plane.y);
 			p.x++;
 		}
 		p.y++;

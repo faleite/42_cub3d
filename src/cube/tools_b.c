@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:06:45 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/28 17:58:34 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/04/29 19:04:45 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ void	init_values(t_data *data)
 	if (!data->cast)
 		exit(1);
 
-	data->plyr->move_speed = 0.5; // 8;
-	data->plyr->rotation_speed = 0.3; //data->plyr->move_speed * M_PI / 180;
+	data->plyr->move_speed = 3; // 8;
+	data->plyr->rotation_speed = 0.3; // data->plyr->move_speed * M_PI / 180;
 	data->plyr->angle = 90;
 	// data->plyr->dir = set_dir(); // raio vetor inicial de direcao
 	data->plyr->dir.x = -1; // set_dir(); // raio vetor inicial de direcao
