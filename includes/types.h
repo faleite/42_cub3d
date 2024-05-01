@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/28 18:11:10 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/01 20:13:24 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@
 */
 # define W_WIDTH  1280
 # define W_HEIGHT 750
-# define MM_SCALE 40
+# define MM_SCALE 12 // 40
 # define FOV 60
 # define FOV_HALF 30
 # define RAY_VIEW 25
-# define TILE_SIZE 32 // 64
+# define TILE_SIZE 40 // 32 // 64
 
 /* elements */
 # define F "F"
@@ -40,10 +40,12 @@
 # define EA "EA"
 
 /* Colors */
-# define DARK 1515552
+# define BLACK 1515552
 # define GRAY 8421504
 # define RED 16519760
 # define WHITE 16777215
+# define GREEN 2263842
+# define PINK 16738740
 
 /* fields */
 # define WALL '1'
@@ -59,6 +61,14 @@
 # define LEFT 65361
 # define RIGHT 65363
 # define ESC 65307
+
+# define MOUSE_LEFT_BUTTON	1
+# define MOUSE_RIGHT_BUTTON	3
+# define MOUSE_THIRD_BUTTON	2
+# define MOUSE_SCROLL_UP	4
+# define MOUSE_SCROLL_DOWN	5
+# define MOUSE_SCROLL_LEFT	6
+# define MOUSE_SCROLL_RIGHT	7
 
 /**
  * Represents a 2D pixel position.
@@ -106,6 +116,7 @@ typedef struct s_image
 	int		bpp;
 	int		line_len;
 	int		endian;
+	int		mouse_button;
 }			t_image;
 
 typedef struct s_line
@@ -142,18 +153,15 @@ typedef struct s_plyr
 	t_vt_f		plane; // //a versão 2d raycaster do plano da câmera
 	double		camera_x;
 
-	double		time;
-	double		old_time;
-
-	t_vt_d		dst_pos; // para gerar raios
+	int			move;
 }				t_plyr;
 
 typedef struct s_raycast
 {
-	int		ww_half; // W_W / 2
-	int		flag; // 0
-	double	dist; // 0
-	double	angle; // 3 * PI / 2
+	int			ww_half; // W_W / 2
+	int			flag; // 0
+	double		dist; // 0
+	double		angle; // 3 * PI / 2
 }				t_raycast;
 
 typedef struct s_data

@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 20:32:19 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/29 20:21:27 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/01 20:29:23 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,22 @@
 
 static int	draw_minimap(t_image *img, int p_y, int p_x, int color);
 static void	draw_player(t_data *data, float x, float y);
+
+void  print_player_m(t_data *data, t_image *img)
+{
+  t_vt_f pos;
+
+  pos = data->plyr->pos;
+  
+
+  for (int y = -5; y <5; y++)
+  {
+    for (int x = -5; x < 5; x++)
+    {
+        img_draw_pixel(img, pos.x / TILE_SIZE + x, pos.y / TILE_SIZE + y, PINK);
+    }
+  }
+}
 
 int	render_minimap(t_image *img)
 {
@@ -26,10 +42,11 @@ int	render_minimap(t_image *img)
 		while (p.x < (int)ft_strlen(parse()->map[p.y]))
 		{
 			if (parse()->map[p.y][p.x] == '1')
-				draw_minimap(img, p.y, p.x, DARK);
+				draw_minimap(img, p.y, p.x, BLACK);
 			if (parse()->map[p.y][p.x] == '0' || \
 				is_player(parse()->map[p.y][p.x]))
 				draw_minimap(img, p.y, p.x, GRAY);
+			// if (is_player(parse()->map[p.y][p.x]))
 			p.x++;
 		}
 		p.y++;

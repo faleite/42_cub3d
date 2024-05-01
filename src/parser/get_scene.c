@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 21:24:35 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/23 19:02:01 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/01 18:17:06 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,19 +107,17 @@ void	get_player(void)
 	int	x;
 	int	y;
 
-	x = -1;
-	while (map()->map[++x])
+	y = -1;
+	while (map()->map[++y])
 	{
-		y = -1;
-		while (map()->map[x][++y])
+		x = -1;
+		while (map()->map[y][++x])
 		{
-			if (is_player(map()->map[x][y]))
+			if (is_player(map()->map[y][x]))
 			{
-				parse()->orientation = parse()->map[x][y];
-				// parse()->pos_x = x;
-				// parse()->pos_y = y;
-				map()->ply_start.x = x;
+				parse()->orientation = parse()->map[y][x];
 				map()->ply_start.y = y;
+				map()->ply_start.x = x;
 			}
 		}
 	}

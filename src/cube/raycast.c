@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 18:24:05 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/29 21:27:38 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/01 20:34:49 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,19 +69,17 @@ void	draw_wall(int i, int start, int end, t_image *img, int color)
 	brasenham(line, img, color);
 }
 
-void	hit_wall(t_data *data, double new_x, double new_y)
+int	hit_wall(double new_x, double new_y)
 {
 	t_vt_d	p;
+	int		hit;
 
-	p.x = floor(new_x / TILE_SIZE);
-	p.y = floor(new_y / TILE_SIZE);
-	p.x = floor(new_x);
-	p.y = floor(new_y);
-	if (map()->map[p.y][p.x] != '0')
-	{
-		printf("WALL\n");
-		data->cast->flag = 1;
-	}
+	hit = 0;
+	p.x = (int)(new_x) / TILE_SIZE;
+	p.y = (int)(new_y) / TILE_SIZE;
+	if (map()->map[p.y][p.x] == '1')
+		hit = 1;
+	return (hit);
 }
 
 void	raycasting(t_data *data, t_image *img)
@@ -116,11 +114,11 @@ void	raycasting(t_data *data, t_image *img)
 		if (ray_dir.x == 0)
 			delta_dist.x = 1e30;
 		else
-			delta_dist.x = fabs(2 / ray_dir.x); // 1
+			delta_dist.x = fabs(1 / ray_dir.x); // 1
 		if (ray_dir.y == 0)
 			delta_dist.y = 1e30;
 		else
-			delta_dist.y = fabs(2 / ray_dir.y); // 1
+			delta_dist.y = fabs(1 / ray_dir.y); // 1
 		hit = '0';
 		//calcula passo e sideDist inicial
 		if (ray_dir.x < 0)
@@ -160,10 +158,17 @@ void	raycasting(t_data *data, t_image *img)
 				side = 1;
 			}
 			//Verifica se o raio atingiu uma parede
-			if (map()->map[pos.x][pos.y] == '1')
+			if (hit_wall(pos.x, pos.y) == 1)
 				hit = '1';
+			// if (map()->map[pos.x][pos.y] == '1')
+			// 	hit = '1';
 		}
-		//Calcula a distância projetada na direção da câmera
+		t_vt_d player;
+
+		player.x = (int)data->plyr->pos.x;
+		player.y = (int)data->plyr->pos.y;
+		ft_bresenham(img, player, pos, WHITE);
+		// Calcula a distância projetada na direção da câmera
 		if (side == 0)
 			perp_walldist = (side_dist.x - delta_dist.x);
 		else
@@ -177,15 +182,9 @@ void	raycasting(t_data *data, t_image *img)
 		draw_end = line_height / 2 + W_HEIGHT / 2;
 		if (draw_end >= W_HEIGHT)
 			draw_end = W_HEIGHT - 1;
-		// draw_player_screen(img, pos.x, pos.y);
-		// color = RED;
-		// if (side == 1)
-		// 	color = RED / 2;
-		// draw_wall(pos_x, draw_start, draw_end, img, color);
-		(void)img;
-		// int screen_center_x = W_WIDTH / 2;
-    	// int screen_center_y = W_HEIGHT / 2;
-    	// draw_player_screen(img, data->plyr->pos.x + screen_center_x, data->plyr->pos.y + screen_center_y);
-		// draw_line_screen(pos_x, data->plyr->pos.y, data->plyr->pos.x, img, ray_dir.y, perp_walldist);
+	// 	color = RED;
+	// 	if (side == 1)
+	// 		color = RED / 2;
+	// 	draw_wall(pos_x, draw_start, draw_end, img, color);
 	}
 }
