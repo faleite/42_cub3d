@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 16:00:53 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/01 19:45:40 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/02 20:35:32 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	move_up(t_data *data, int move)
 	data->plyr->move = move;
 	new.x = data->plyr->pos.x;
 	new.y = data->plyr->pos.y;
+
 	new.x += data->plyr->dir.x * data->plyr->move_speed * data->plyr->move;
 	new.y += data->plyr->dir.y * data->plyr->move_speed * data->plyr->move;
 	if (hit_wall(new.x, new.y) == 0)
@@ -62,14 +63,14 @@ void	move_rotate(t_data *data, int rotate)
 	double	old_plane_x;
 
 	old_dir_x = data->plyr->dir.x;
-	data->plyr->dir.x = data->plyr->dir.x * cos(rotate * data->plyr->rotation_speed \
+	data->plyr->dir.x = data->plyr->dir.x * cos(rotate * data->plyr->rotation_speed
 					) - data->plyr->dir.y * sin(rotate * data->plyr->rotation_speed);
-	data->plyr->dir.y = old_dir_x * sin(rotate * data->plyr->rotation_speed) + \
+	data->plyr->dir.y = old_dir_x * sin(rotate * data->plyr->rotation_speed) +
 						data->plyr->dir.y * cos(rotate * data->plyr->rotation_speed);
 	old_plane_x = data->plyr->plane.x;
-	data->plyr->plane.x = data->plyr->plane.x * \
-					cos(rotate * data->plyr->rotation_speed) - data->plyr->plane.y \
+	data->plyr->plane.x = data->plyr->plane.x * 
+					cos(rotate * data->plyr->rotation_speed) - data->plyr->plane.y 
 					* sin(rotate * data->plyr->rotation_speed);
-	data->plyr->plane.y = old_plane_x * sin(rotate * data->plyr->rotation_speed) + \
+	data->plyr->plane.y = old_plane_x * sin(rotate * data->plyr->rotation_speed) + 
 					data->plyr->plane.y * cos(rotate * data->plyr->rotation_speed);
 }

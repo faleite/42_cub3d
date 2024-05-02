@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 20:29:40 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/01 20:36:41 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/02 20:35:42 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,33 +15,36 @@
 void	keyboard(int keycode, t_data *data);
 void	keyboard_release(int key, t_data *data);
 
-// void  set_grid_cell(t_image *img, int x, int y)
+// void	ft_angle_normal(double *angle)
 // {
-//   // Converting pixel coordinates into tab coordinates
-//   t_vt_d map_pos = {
-//     x / TILE_SIZE, // x
-//     y / TILE_SIZE // y
-//   };
+// 	double mod_angle = 2 * M_PI;
 
-//   // Checking out of range coordinates
-//   if (map_pos.x < 0 || x >= W_WIDTH || y < 0 || y >= W_HEIGHT)
-//     return;
+// 	*angle = fmod(*angle, mod_angle);
+// 	if (*angle < 0)
+// 	*angle += mod_angle;
+// }
+// int	mouse_click_motion(int x, int y, t_data *data)
+// {
+// 	printf("mouse X:%d:\n", x);
+// 	printf("mouse Y:%d:\n", y);
 
-//   // Changing cell value according to mouse button
-//   if (img->mouse_button == MOUSE_LEFT_BUTTON)
-//     map()->map[map_pos.y][map_pos.x] = '1';
-//   else if (img->mouse_button == MOUSE_RIGHT_BUTTON)
-//     map()->map[map_pos.y][map_pos.x] = '0';
+// 	t_vt_d mouse_pos;
+
+// 	mouse_pos.x = x - data->plyr->pos.x;
+// 	mouse_pos.y = y - data->plyr->pos.y;
+
+// 	printf("mouse X:%d:\n", x);
+// 	printf("mouse Y:%d:\n", y);
+
+// 	data->plyr->dir.y = atan2(mouse_pos.y, mouse_pos.x);
+// 	ft_angle_normal(&data->plyr->dir.y);
+// 	return (0);
 // }
 
 int	mouse_click(int button, int x, int y, t_image *img)
 {
-
-//   printf("x: %d, y: %d\n\n", map_pos.x, map_pos.y);
-	// printf("x: %d, y: %d\n\n", x, y);
     img->mouse_button = button;
     set_grid_cell(img, x, y);
-	// img_draw_pixel(&data->img, x, y, PINK);
 	return (1);
 }
 
@@ -63,12 +66,9 @@ int	build_window(t_data data)
 	mlx_hook(data.win_ptr, 2, 1L, (void *)keyboard, &data);
 	mlx_hook(data.win_ptr, 3, (1L << 1), (void *)keyboard_release, &data);
 	mlx_hook(data.win_ptr, 17, 0L, (void *)destroy_window, &data);
-	// mlx_mouse_hook(data.win_ptr, &mouse_click, 0);
-	// mlx_destroy_image(data.mlx_ptr, data.img.mlx_img);
-	// mlx_destroy_display(data.mlx_ptr);
 	mlx_hook(data.win_ptr, 4, (1L << 2), (void *)mouse_click, &data.img);
+	// mlx_hook(data.win_ptr, 6, (1L << 6), (void *)mouse_click_motion, &data.img);
 	mlx_loop(data.mlx_ptr);
-	// free(data.mlx_ptr);
 	return (0);
 }
 
@@ -90,14 +90,15 @@ int	render_cub3d(t_data *data)
 	draw_ceil_floor(&data->img);
 
 	// (Use Key for activate the minimap)
-	// render_minimap(&data->img);
+	render_minimap(&data->img);
+	raycasting(data, &data->img);
+	draw_player(data, (data->plyr->pos.x / 40.0), (data->plyr->pos.y / 40.0));
 	// render_player(data);
 
-	print_grid(&data->img);
+	// print_grid(&data->img);
 	// print_ray(data, &data->img);
 	// print_player_m(data, &data->img);
-	raycasting(data, &data->img);
-	print_player(data, &data->img);
+	// print_player(data, &data->img);
 
 
 

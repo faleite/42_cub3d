@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 18:24:05 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/01 20:34:49 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/02 19:08:17 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,12 +96,12 @@ void	raycasting(t_data *data, t_image *img)
 	int 	line_height; // 
 	int		draw_start;
 	int		draw_end;
-	// int		color;
+	int		color;
 	// t_plyr	*ply;
 
-	pos_x = -1;
 
 	// ply = data->plyr;
+	pos_x = -1;
 	while (++pos_x < W_WIDTH)
 	{
 		// caucula a posicao e a direcao do raio
@@ -114,11 +114,11 @@ void	raycasting(t_data *data, t_image *img)
 		if (ray_dir.x == 0)
 			delta_dist.x = 1e30;
 		else
-			delta_dist.x = fabs(1 / ray_dir.x); // 1
+			delta_dist.x = fabs(1 / (ray_dir.x)); // 1
 		if (ray_dir.y == 0)
 			delta_dist.y = 1e30;
 		else
-			delta_dist.y = fabs(1 / ray_dir.y); // 1
+			delta_dist.y = fabs(1 / (ray_dir.y)); // 1
 		hit = '0';
 		//calcula passo e sideDist inicial
 		if (ray_dir.x < 0)
@@ -175,6 +175,7 @@ void	raycasting(t_data *data, t_image *img)
 			perp_walldist = (side_dist.y - delta_dist.y);
 		//Calcula a altura da linha a ser desenhada na tela
 		line_height = (int)(W_HEIGHT / perp_walldist);
+		line_height *= 2;
 		//calcula o pixel mais baixo e mais alto para preencher a faixa atual
 		draw_start = -line_height / 2 + W_HEIGHT / 2;
 		if (draw_start < 0)
@@ -182,9 +183,9 @@ void	raycasting(t_data *data, t_image *img)
 		draw_end = line_height / 2 + W_HEIGHT / 2;
 		if (draw_end >= W_HEIGHT)
 			draw_end = W_HEIGHT - 1;
-	// 	color = RED;
-	// 	if (side == 1)
-	// 		color = RED / 2;
-	// 	draw_wall(pos_x, draw_start, draw_end, img, color);
+		color = RED;
+		if (side == 1)
+			color = RED / 2;
+		draw_wall(pos_x, draw_start, draw_end, img, color);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/01 20:29:34 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/02 20:36:26 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,9 @@ void	draw_circle(t_vt_d center, int color, int radius, t_image *img);
 
 /* mini map */
 int		draw_ceil_floor(t_image *img);
-// int		render_minimap(t_data *data, t_image *img);
 int		render_minimap(t_image *img);
 int		render_player(t_data *data);
-void  print_player_m(t_data *data, t_image *img);
+void	draw_player(t_data *data, float x, float y);
 // void	init_player(void);
 
 /* math */

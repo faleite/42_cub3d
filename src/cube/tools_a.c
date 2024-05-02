@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:34:03 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/01 18:26:49 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/02 20:26:14 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	draw_line(float p_y, float p_x, t_image *img, double dir)
 	float	scale;	
 	t_line	line;
 
-	scale = MM_SCALE;
+	scale = MAP_SCALE;
 	if (parse()->map_height > 20 || parse()->map_width > 40)
 		scale /= 2;
 	line.x0 = p_x * scale;

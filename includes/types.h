@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/01 20:13:24 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/02 20:27:21 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@
 */
 # define W_WIDTH  1280
 # define W_HEIGHT 750
-# define MM_SCALE 12 // 40
+# define SIZE 64
+# define MAP_SCALE 40
 # define FOV 60
 # define FOV_HALF 30
 # define RAY_VIEW 25
@@ -152,6 +153,8 @@ typedef struct s_plyr
 	t_vt_f		dir; // //vetor de direção inicial
 	t_vt_f		plane; // //a versão 2d raycaster do plano da câmera
 	double		camera_x;
+
+	t_vt_d		player_map;
 
 	int			move;
 }				t_plyr;

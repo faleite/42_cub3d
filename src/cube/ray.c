@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:38:23 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/01 19:48:31 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/02 18:00:40 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ void  print_grid(t_image *img)
     {
       // Calculating square coordinates
       t_vt_f top_left = {
-        x * TILE_SIZE, // x
-        y * TILE_SIZE // y
+        x * 12, // x
+        y * 12 // y
       };
       t_vt_f bottom_right = {
-        top_left.x + TILE_SIZE,
-        top_left.y + TILE_SIZE
+        top_left.x + 12,
+        top_left.y + 12
       };
 
       // t_vt_f top_left_p = {
@@ -99,17 +99,18 @@ void  set_grid_cell(t_image *img, int x, int y)
 
 void  print_player(t_data *data, t_image *img)
 {
-  t_vt_f pos;
-
-  pos = data->plyr->pos;
+  t_vt_d  pos;
   
-
-  for (int y = -5; y <5; y++)
+  // pos.x = data->plyr->player_map.x;
+  // pos.y = data->plyr->player_map.y;
+  pos.x = data->plyr->pos.x;
+  pos.y = data->plyr->pos.y;
+  for (int y = -2; y <2; y++)
   {
-    for (int x = -5; x < 5; x++)
+    for (int x = -2; x < 2; x++)
     {
-        img_draw_pixel(img, pos.x + x, pos.y + y, PINK);
-    }
+     img_draw_pixel(img, pos.x + x, pos.y + y, PINK);
+     }
   }
 }
 
