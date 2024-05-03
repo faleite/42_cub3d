@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 20:32:19 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/02 20:37:27 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/03 21:37:45 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static int	draw_minimap(t_image *img, int p_y, int p_x, int color)
  * @param y - Scaled Y-coordinate of the player's position.
  * @param x - Scaled X-coordinate of the player's position.
  */
-void	draw_player(t_data *data, float x, float y)
+void	draw_player(t_cube *cube, float x, float y)
 {
 	t_vt_d	p;
 	t_vt_d	end;
@@ -91,9 +91,9 @@ void	draw_player(t_data *data, float x, float y)
 		p.x = x * scale - scale / 5;
 		while (p.x < end.x)
 		{
-			img_draw_pixel(&data->img, p.x, p.y, PINK);
-			// draw_circle(p, RED, 2, &data->img);
-			// draw_line(y, x, &data->img, data->plyr->plane.y);
+			img_draw_pixel(&cube->img, p.x, p.y, PINK);
+			// draw_circle(p, RED, 2, &cube->img);
+			// draw_line(y, x, &cube->img, cube->p->plane.y);
 			p.x++;
 		}
 		p.y++;

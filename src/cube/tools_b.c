@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:06:45 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/02 20:26:14 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/03 21:21:58 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,26 +19,30 @@ t_map	*map(void)
 	return (&m);
 }
 
-/*
-Defines direction in function of unitary vectors
+/**
+ * Defines direction in function of unitary vectors
 			N 3pi / 2
             |
  pi EA______|_____WE 0
 		    |
 		    |
 	    	S pi/2
+ * Norte ('N'): 3π/2 radianos, ou 270 graus.
+ * Sul ('S'): π/2 radianos, ou 90 graus.
+ * Leste ('E'): π radianos, ou 180 graus.
+ * Oeste ('W'): 0 radianos, ou 0 graus.
 */
 double	player_direction(void)
 {
 	if (parse()->orientation == 'N')
-		return ((3 * M_PI) / 2);
+		return ((3.0 * M_PI) / 2.0);
 	if (parse()->orientation == 'S')
-		return (M_PI / 2);
-	if (parse()->orientation == 'W')
-		return (0);
+		return (M_PI / 2.0);
 	if (parse()->orientation == 'E')
 		return (M_PI);
-	return (0);
+	if (parse()->orientation == 'W')
+		return (0.0);
+	return (-1.0);
 }
 
 void	set_vector_f(t_vt_f *p, float x, float y)
@@ -64,36 +68,28 @@ t_vt_f	set_dir(void)
 	return (dir);
 }
 
-void	init_values(t_data *data)
+void	init_values(t_cube *cube)
 {
-	data->plyr = ft_calloc(1, sizeof(t_plyr));
-	if (!data->plyr)
+	cube->p = ft_calloc(1, sizeof(t_plyer));
+	if (!cube->p)
 		exit(1);
-	data->cast = ft_calloc(1, sizeof(t_raycast));
-	if (!data->cast)
+	cube->r = ft_calloc(1, sizeof(t_raycast));
+	if (!cube->r)
 		exit(1);
 
-	data->plyr->move_speed = 1.5;
-	data->plyr->rotation_speed = data->plyr->move_speed * (M_PI / 180) * 8;
-	data->plyr->angle = 90;
-	// data->plyr->dir = set_dir(); // raio vetor inicial de direcao
-	data->plyr->dir.x = -1; // set_dir(); // raio vetor inicial de direcao
-	// data->plyr->dir.y = 0; // set_dir(); // raio vetor inicial de direcao
-	data->plyr->pos.x = map()->ply_start.x * TILE_SIZE + TILE_SIZE / 2;
-	data->plyr->pos.y = map()->ply_start.y * TILE_SIZE + TILE_SIZE / 2;
-	data->plyr->plane.y = 0.66; // versão 2d raycaster do plano da câmera
-
-	data->plyr->player_map.x = map()->ply_start.x * MAP_SCALE + MAP_SCALE / 2;
-	data->plyr->player_map.y = map()->ply_start.y * MAP_SCALE + MAP_SCALE / 2;
-
-
-	data->plyr->angle_s = M_PI; // 90
-	data->cast->ww_half = W_WIDTH / 2;
-	data->cast->angle = 3 * (M_PI / 2);
+	cube->p->move_speed = 1.5;
+	cube->p->rotation_speed = cube->p->move_speed * (M_PI / 180) * 8;
+	cube->p->angle = player_direction();
+	// cube->p->dir = set_dir(); // raio vetor inicial de direcao
+	cube->p->dir.x = -1; // set_dir(); // raio vetor inicial de direcao
+	// cube->p->dir.y = 0; // set_dir(); // raio vetor inicial de direcao
+	cube->p->pos.x = map()->ply_start.x * TILE_SIZE + TILE_SIZE / 2;
+	cube->p->pos.y = map()->ply_start.y * TILE_SIZE + TILE_SIZE / 2;
+	cube->p->plane.y = 0.66; // versão 2d raster do plano da câmera
 }
 
-void	free_data(t_data *data)
+void	free_data(t_cube *cube)
 {
-	free(data->plyr);
-	free(data->cast);
+	free(cube->p);
+	free(cube->r);
 }

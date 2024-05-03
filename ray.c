@@ -8,7 +8,7 @@
 #define W_WIDTH 1280
 #define W_HEIGHT 750
 
-typedef struct s_data {
+typedef struct s_cube {
 	// MiniLibX
 	void	*mlx;
 	void	*mlx_win;
@@ -24,18 +24,18 @@ typedef struct s_data {
 	int  	**tab;
 	int  	tab_width;
 	int  	tab_height;
-}			t_data;
+}			t_cube;
 
-int render_next_frame(t_data *img)
+int render_next_frame(t_cube *img)
 {
 
 }
 
-void my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void my_mlx_pixel_put(t_cube *cube, int x, int y, int color)
 {
   char *dst;
 
-  dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+  dst = cube->addr + (y * cube->line_length + x * (cube->bits_per_pixel / 8));
   *(unsigned int*)dst = color;
 }
 
@@ -63,33 +63,33 @@ int  key_release(int keycode, t_struct *prg_struct)
   return (0);
 }
 
-int init_tab(t_data *data)
+int init_tab(t_cube *cube)
 {
   // Setting initial tab dimensions
-  data->tab_height = 15;
-  data->tab_width = 20;
+  cube->tab_height = 15;
+  cube->tab_width = 20;
 
   // Allocating tab
-  data->tab = malloc(sizeof(int *) * data->tab_height);
-  if (data->tab == NULL) // Checking allocation error
+  cube->tab = malloc(sizeof(int *) * cube->tab_height);
+  if (cube->tab == NULL) // Checking allocation error
     return (1);
 
-  for (int y = 0; y < data->tab_height; y++)
+  for (int y = 0; y < cube->tab_height; y++)
   {
-    data->tab[y] = malloc(sizeof(int) * data->tab_width);
-    if (data->tab[y] == NULL) // Checking allocation error
+    cube->tab[y] = malloc(sizeof(int) * cube->tab_width);
+    if (cube->tab[y] == NULL) // Checking allocation error
       return (1);
 
     // Putting values in tab
-    for (int x = 0; x < data->tab_width; x++)
+    for (int x = 0; x < cube->tab_width; x++)
     {
-      data->tab[y][x] = (y % 2 + x) % 2;
+      cube->tab[y][x] = (y % 2 + x) % 2;
     }
   }
   return (0);
 }
 
-void  print_grid(t_data *data)
+void  print_grid(t_cube *cube)
 {
   for (int y = 0; y < tab_height; y++)
   {
@@ -97,18 +97,18 @@ void  print_grid(t_data *data)
     {
       // Calculating square coordinates
       t_vector2_d top_left = {
-        x * data->cell_size, // x
-        y * data->cell_size // y
+        x * cube->cell_size, // x
+        y * cube->cell_size // y
       };
       t_vector2_d bottom_right = {
-        top_left.x + data->cell_size,
-        top_left.y + data->cell_size
+        top_left.x + cube->cell_size,
+        top_left.y + cube->cell_size
       };
 
       // Drawing square
-      if (data->tab[y][x] == 1) // If the cell is a wall
+      if (cube->tab[y][x] == 1) // If the cell is a wall
       {
-        draw_rect_color(data, top_left, bottom_right, PINK);
+        draw_rect_color(cube, top_left, bottom_right, PINK);
       }
     }
   }
@@ -118,13 +118,13 @@ int main(void)
 {
 	void *mlx;
 	void *mlx_win;
-	t_data img;
+	t_cube img;
 	mlx = mlx_init();
 	mlx_loop_hook(mlx, &render_next_frame, &img);
 	mlx_hook(mlx_win, 2, 0, key_press, &img);
 //   mlx_win = mlx_new_window(mlx, W_WIDTH, W_HEIGHT, "A simple window");
 //   img.img = mlx_new_image(mlx, W_WIDTH, W_HEIGHT);
-//   img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
+//   img.addr = mlx_get_cube_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
 //   my_mlx_pixel_put(&img, 100, 100, 0x00FF0000);
 //   mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
 	mlx_loop(mlx);

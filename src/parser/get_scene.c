@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 21:24:35 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/01 18:17:06 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/03 17:57:46 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ void	get_player(void)
 				parse()->orientation = parse()->map[y][x];
 				map()->ply_start.y = y;
 				map()->ply_start.x = x;
+				map()->map[y][x] = '0';
 			}
 		}
 	}

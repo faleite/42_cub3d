@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 16:59:47 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/01 13:49:56 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/03 17:27:24 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 */
 int	main(int argc, char *argv[])
 {
-	t_data	cube;
+	t_cube	cube;
 
 	validate_scene(argc, argv[1]);
 	init_values(&cube);

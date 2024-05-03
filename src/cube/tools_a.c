@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:34:03 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/02 20:26:14 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/03 17:30:12 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,13 @@ void	clear_img(t_image img)
 	}
 }
 
-int	destroy_window(t_data *data)
+int	destroy_window(t_cube *cube)
 {
-	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	mlx_destroy_image(data->mlx_ptr, data->img.mlx_img);
-	mlx_destroy_display(data->mlx_ptr);
-	free(data->mlx_ptr);
-	free_data(data);
+	mlx_destroy_window(cube->mlx_ptr, cube->win_ptr);
+	mlx_destroy_image(cube->mlx_ptr, cube->img.mlx_img);
+	mlx_destroy_display(cube->mlx_ptr);
+	free(cube->mlx_ptr);
+	free_data(cube);
 	free_parse();
 	exit(0);
 }

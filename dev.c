@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 16:59:47 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/23 17:48:10 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/03 17:30:12 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,12 @@ typedef struct s_image
 }			t_image;
 
 
-typedef struct s_data
+typedef struct s_cube
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
 	t_image		img;
-}			t_data;
+}			t_cube;
 
 typedef struct s_line
 {
@@ -355,37 +355,37 @@ int	draw_ceil_floor(t_image *img)
 	return (0);
 }
 
-int	destroy_window(t_data *data)
+int	destroy_window(t_cube *cube)
 {
-	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	mlx_destroy_image(data->mlx_ptr, data->img.mlx_img);
-	mlx_destroy_display(data->mlx_ptr);
-	free(data->mlx_ptr);
+	mlx_destroy_window(cube->mlx_ptr, cube->win_ptr);
+	mlx_destroy_image(cube->mlx_ptr, cube->img.mlx_img);
+	mlx_destroy_display(cube->mlx_ptr);
+	free(cube->mlx_ptr);
 	exit(0);
 }
 
-int	display(t_data *data)
+int	display(t_cube *cube)
 {
-	if (!data->mlx_ptr)
+	if (!cube->mlx_ptr)
 		return (1);
-	draw_ceil_floor(&data->img);
-	draw_map2d(&data->img);
-	draw_player(&data->img, ply()->x, ply()->y, 16519760);
-	draw_rays3d(&data->img);
+	draw_ceil_floor(&cube->img);
+	draw_map2d(&cube->img);
+	draw_player(&cube->img, ply()->x, ply()->y, 16519760);
+	draw_rays3d(&cube->img);
 
 	/* After render this function put image to window */
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, \
-							data->img.mlx_img, 0, 0);
+	mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, \
+							cube->img.mlx_img, 0, 0);
 	return (0);
 }
 
-void	keyboard(int keycode, t_data *data)
+void	keyboard(int keycode, t_cube *cube)
 {
 	// if (field()->moves == 0)
 	// 	field()->moves = 1;
 	// display();
 	if (keycode == ESC)
-		destroy_window(data);
+		destroy_window(cube);
 	else if (keycode == K_W || keycode == UP)
 	{
 		// ply()->y -= 1;
@@ -420,33 +420,33 @@ void	keyboard(int keycode, t_data *data)
 
 int	init(void)
 {
-	t_data	data;
+	t_cube	cube;
 
-	data.mlx_ptr = mlx_init();
+	cube.mlx_ptr = mlx_init();
 	init_cube();
 	ply()->x = 5;
 	ply()->y = 5;
 	// ply()->orientation = 'N';
 	ply()->dx = cos(ply()->a) * 0.5;
 	ply()->dy = sin(ply()->a) * 0.5;
-	if (!data.mlx_ptr)
+	if (!cube.mlx_ptr)
 		return (1);
-	data.win_ptr = mlx_new_window(data.mlx_ptr, W_WIDTH, W_HEIGHT, "3DSage");
-	if (!data.win_ptr)
+	cube.win_ptr = mlx_new_window(cube.mlx_ptr, W_WIDTH, W_HEIGHT, "3DSage");
+	if (!cube.win_ptr)
 	{
-		free(data.win_ptr);
+		free(cube.win_ptr);
 		return (1);
 	}
-	data.img.mlx_img = mlx_new_image(data.mlx_ptr, W_WIDTH, W_HEIGHT);
-	data.img.addr = mlx_get_data_addr(data.img.mlx_img, &data.img.bpp, \
-					&data.img.line_len, &data.img.endian);
-	mlx_loop_hook(data.mlx_ptr, &display, &data);
-	mlx_hook(data.win_ptr, 2, 1L, (void *)keyboard, &data);
-	mlx_hook(data.win_ptr, 17, 0L, (void *)destroy_window, &data);
-	mlx_loop(data.mlx_ptr);
-	mlx_destroy_image(data.mlx_ptr, data.img.mlx_img);
-	mlx_destroy_display(data.mlx_ptr);
-	free(data.mlx_ptr);
+	cube.img.mlx_img = mlx_new_image(cube.mlx_ptr, W_WIDTH, W_HEIGHT);
+	cube.img.addr = mlx_get_cube_addr(cube.img.mlx_img, &cube.img.bpp, \
+					&cube.img.line_len, &cube.img.endian);
+	mlx_loop_hook(cube.mlx_ptr, &display, &cube);
+	mlx_hook(cube.win_ptr, 2, 1L, (void *)keyboard, &cube);
+	mlx_hook(cube.win_ptr, 17, 0L, (void *)destroy_window, &cube);
+	mlx_loop(cube.mlx_ptr);
+	mlx_destroy_image(cube.mlx_ptr, cube.img.mlx_img);
+	mlx_destroy_display(cube.mlx_ptr);
+	free(cube.mlx_ptr);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/02 20:36:26 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/03 17:25:43 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@
 t_map	*map(void);
 
 /* cube */
-int		render_cub3d(t_data *data);
-int		build_window(t_data data);
-int		destroy_window(t_data *data);
+int		render_cub3d(t_cube *cube);
+int		build_window(t_cube cube);
+int		destroy_window(t_cube *cube);
 double	player_direction(void);
 
 /* rendering */
@@ -51,8 +51,8 @@ void	draw_circle(t_vt_d center, int color, int radius, t_image *img);
 /* mini map */
 int		draw_ceil_floor(t_image *img);
 int		render_minimap(t_image *img);
-int		render_player(t_data *data);
-void	draw_player(t_data *data, float x, float y);
+int		render_player(t_cube *cube);
+void	draw_player(t_cube *cube, float x, float y);
 // void	init_player(void);
 
 /* math */
@@ -64,23 +64,23 @@ void	draw_player_screen(t_image *img, int x, int y);
 // void	draw_line_screen(int p_y, int p_x, t_image *img, double dir);
 
 /* moves */
-void	move_up(t_data *data, int move);
-void	move_right(t_data *data, int move);
-void	move_rotate(t_data *data, int rotate);
+void	move_up(t_cube *cube, int move);
+void	move_right(t_cube *cube, int move);
+void	move_rotate(t_cube *cube, int rotate);
 
 /* Raycast */
 int		hit_wall(double new_x, double new_y);
-void	raycasting(t_data *data, t_image *img);
+void	raycasting(t_cube *cube, t_image *img);
 // Study
 void	print_grid(t_image *img);
 void	set_grid_cell(t_image *img, int x, int y);
-void	print_player(t_data *data, t_image *img);
+void	print_player(t_cube *cube, t_image *img);
 void	ft_bresenham(t_image *img, t_vt_d p1, t_vt_d p2, int color);
-void	print_ray(t_data *data, t_image *img);
+void	print_ray(t_cube *cube, t_image *img);
 
 /* tools */
-void	init_values(t_data *data);
-void	free_data(t_data *data);
+void	init_values(t_cube *cube);
+void	free_data(t_cube *cube);
 
 /* debugs */
 void	print_struct_map(void);

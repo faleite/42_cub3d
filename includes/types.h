@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/02 20:27:21 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/03 22:21:04 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,12 @@
  vm: W_W 1350 W_H 680 
 */
 # define W_WIDTH  1280
-# define W_HEIGHT 750
-# define SIZE 64
-# define MAP_SCALE 40
+# define W_HEIGHT 720
+# define MAP_SCALE 20.0
 # define FOV 60
 # define FOV_HALF 30
 # define RAY_VIEW 25
-# define TILE_SIZE 40 // 32 // 64
+# define TILE_SIZE 64.0 // 32 // 64
 
 /* elements */
 # define F "F"
@@ -136,11 +135,12 @@ typedef struct s_map
 {
 	char	**map;
 	t_vt_d	ply_start;
+	double	orientation;
 	int		map_height;
 	int		map_width;
 }			t_map;
 
-typedef struct s_plyr
+typedef struct s_plyer
 {
 	int			horizontal; // 0
 	int			vertical; // 0
@@ -152,28 +152,61 @@ typedef struct s_plyr
 	t_vt_f		pos; // //posição inicial xey
 	t_vt_f		dir; // //vetor de direção inicial
 	t_vt_f		plane; // //a versão 2d raycaster do plano da câmera
-	double		camera_x;
-
-	t_vt_d		player_map;
+	// double		camera_x;
 
 	int			move;
-}				t_plyr;
+}				t_plyer;
 
+/**
+ * Represents data related to a ray's properties and interactions in
+ * a 2D space.
+ *
+ * @param ra The ray's angle.
+ * @param rx The ray's horizontal component.
+ * @param ry The ray's vertical component.
+ * @param xo The starting X-coordinate of the ray.
+ * @param yo The starting Y-coordinate of the ray.
+ * @param mx The map grid X-coordinate where the ray intersects.
+ * @param my The map grid Y-coordinate where the ray intersects.
+ * @param mp The type of map element the ray intersects with.
+ * @param hit_horizontal Flag indicating if the ray hit a horizontal
+ * map boundary.
+ * @param texture Pointer to the texture associated with the ray.
+ */
 typedef struct s_raycast
 {
 	int			ww_half; // W_W / 2
 	int			flag; // 0
 	double		dist; // 0
 	double		angle; // 3 * PI / 2
-}				t_raycast;
 
-typedef struct s_data
+	// float		rx;
+	// float		ry;
+	t_vt_f		ray_dir;
+	t_vt_f		side_dist;
+	t_vt_f		delta_dist;
+	t_vt_d		step;
+	t_vt_d		pos;
+	int			hit;
+	int			side;
+
+	float		ra;
+	float		xo;
+	float		yo;
+	int			mx;
+	int			my;
+	int			mp;
+	int			hit_horizontal;
+	// t_texture	*texture;
+}					t_raycast;
+
+typedef struct s_cube
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
 	t_image		img;
-	t_plyr		*plyr;
-	t_raycast	*cast;
-}			t_data;
+	t_plyer		*p;
+	t_raycast	*r;
+}			t_cube;
 
 #endif /* TYPES_H */

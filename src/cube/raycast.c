@@ -1,34 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycast.c                                          :+:      :+:    :+:   */
+/*   rast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 18:24:05 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/02 19:08:17 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/03 21:18:06 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-// void	draw_player_screen(t_data *data)
-// {
-// 	t_vt_d	p;
-
-// 	p.y = 0;
-// 	while (p.y < TILE_SIZE / 2)
-// 	{
-// 		p.x = 0;
-// 		while (p.x < TILE_SIZE / 2)
-// 		{
-// 			img_draw_pixel(&data->img, data->plyr->pos.x + p.x,
-// 							data->plyr->pos.y + p.y, RED);
-// 			p.x++;
-// 		}
-// 		p.y++;
-// 	}
-// }
 
 void	draw_player_screen(t_image *img, int x, int y)
 {
@@ -72,120 +54,128 @@ void	draw_wall(int i, int start, int end, t_image *img, int color)
 int	hit_wall(double new_x, double new_y)
 {
 	t_vt_d	p;
-	int		hit;
 
-	hit = 0;
 	p.x = (int)(new_x) / TILE_SIZE;
 	p.y = (int)(new_y) / TILE_SIZE;
 	if (map()->map[p.y][p.x] == '1')
-		hit = 1;
-	return (hit);
+		return (1);
+	return (0);
 }
 
-void	raycasting(t_data *data, t_image *img)
+/**
+ * calculate the distance between
+ * two points.
+ */
+void	calc_delta_distance(t_cube *cube)
 {
-	int		pos_x;
-	t_vt_f	ray_dir;
-	t_vt_f	side_dist;
-	t_vt_f	delta_dist;
-	double	perp_walldist; //em que direção pisar na direção x ou y (+1 ou -1)
-	t_vt_d	step;
-	t_vt_d	pos;
-	char	hit; // houve uma batida na parede?
-	int		side; //uma parede NS ou EW foi atingida?
-	int 	line_height; // 
+	if (cube->r->ray_dir.x == 0)
+		cube->r->delta_dist.x = 1e30;
+	else
+		cube->r->delta_dist.x = fabs(1 / (cube->r->ray_dir.x));
+	if (cube->r->ray_dir.y == 0)
+		cube->r->delta_dist.y = 1e30;
+	else
+		cube->r->delta_dist.y = fabs(1 / (cube->r->ray_dir.y));
+}
+
+void	calc_side_distance(t_cube *cube)
+{
+	if (cube->r->ray_dir.x < 0)
+		cube->r->side_dist.x = (cube->p->pos.x - cube->r->pos.x) * cube->r->delta_dist.x;
+	else
+		cube->r->side_dist.x = (cube->r->pos.x + 1.0 - cube->p->pos.x) * cube->r->delta_dist.x;
+	if (cube->r->ray_dir.y < 0)
+		cube->r->side_dist.y = (cube->p->pos.y - cube->r->pos.y) * cube->r->delta_dist.y;
+	else
+		cube->r->side_dist.y = (cube->r->pos.y + 1.0 - cube->p->pos.y) * cube->r->delta_dist.y;
+}
+
+void	calc_step(t_cube *cube)
+{
+	if (cube->r->ray_dir.x < 0)
+		cube->r->step.x = -1;
+	else
+		cube->r->step.x = 1;
+	if (cube->r->ray_dir.y < 0)
+		cube->r->step.y = -1;
+	else
+		cube->r->step.y = 1;
+}
+
+void	dda_exc(t_cube *cube)
+{
+	cube->r->hit = hit_wall(cube->r->pos.x, cube->r->pos.y);
+	while (cube->r->hit == 0)
+	{
+		if (cube->r->side_dist.x < cube->r->side_dist.y)
+		{
+			cube->r->side_dist.x += cube->r->delta_dist.x;
+			cube->r->pos.x += cube->r->step.x;
+			cube->r->side = 0;
+		}
+		else
+		{
+			cube->r->side_dist.y += cube->r->delta_dist.y;
+			cube->r->pos.y += cube->r->step.y;
+			cube->r->side = 1;
+		}
+		cube->r->hit = hit_wall(cube->r->pos.x, cube->r->pos.y);
+	}
+}
+
+void	render_wall(t_cube *cube, t_image *img, int color, int index)
+{
+	int		line_height;
 	int		draw_start;
 	int		draw_end;
-	int		color;
-	// t_plyr	*ply;
+	double	perp_walldist;
 
+	// Calcula a distância projetada na direção da câmera
+	if (cube->r->side == 0)
+		perp_walldist = (cube->r->side_dist.x - cube->r->delta_dist.x);
+	else
+		perp_walldist = (cube->r->side_dist.y - cube->r->delta_dist.y);
+	//Calcula a altura da linha a ser desenhada na tela
+	line_height = (int)(W_HEIGHT / perp_walldist);
+	line_height *= 2;
+	//calcula o pixel mais baixo e mais alto para preencher a faixa atual
+	draw_start = -line_height / 2 + W_HEIGHT / 2;
+	if (draw_start < 0)
+		draw_start = 0;
+	draw_end = line_height / 2 + W_HEIGHT / 2;
+	if (draw_end >= W_HEIGHT)
+		draw_end = W_HEIGHT - 1;
+	if (cube->r->side == 1)
+		color = RED / 2;
+	draw_wall(index, draw_start, draw_end, img, color);
+}
 
-	// ply = data->plyr;
-	pos_x = -1;
-	while (++pos_x < W_WIDTH)
+void	raycasting(t_cube *cube, t_image *img)
+{
+	int		index;
+	double	camera_x;
+
+	index = -1;
+	while (++index < W_WIDTH)
 	{
 		// caucula a posicao e a direcao do raio
-		data->plyr->camera_x = 2 * pos_x / (double)W_WIDTH - 1; // cordenada x no espaco da camera
-		ray_dir.x = data->plyr->dir.x + data->plyr->plane.x * data->plyr->camera_x;
-		ray_dir.y = data->plyr->dir.y + data->plyr->plane.y * data->plyr->camera_x;
+		camera_x = 2 * index / (double)W_WIDTH - 1; // cordenada x no espaco da camera
+		cube->r->ray_dir.x = cube->p->dir.x + cube->p->plane.x * camera_x;
+		cube->r->ray_dir.y = cube->p->dir.y + cube->p->plane.y * camera_x;
 
-		pos.x = (int)data->plyr->pos.x;
-		pos.y = (int)data->plyr->pos.y;
-		if (ray_dir.x == 0)
-			delta_dist.x = 1e30;
-		else
-			delta_dist.x = fabs(1 / (ray_dir.x)); // 1
-		if (ray_dir.y == 0)
-			delta_dist.y = 1e30;
-		else
-			delta_dist.y = fabs(1 / (ray_dir.y)); // 1
-		hit = '0';
-		//calcula passo e sideDist inicial
-		if (ray_dir.x < 0)
-		{
-			step.x = -1;
-			side_dist.x = (data->plyr->pos.x - pos.x) * delta_dist.x;
-		}
-		else
-		{
-			step.x = 1;
-			side_dist.x = (pos.x + 1.0 - data->plyr->pos.x) * delta_dist.x;
-		}
-		if (ray_dir.y < 0)
-		{
-			step.y = -1;
-			side_dist.y = (data->plyr->pos.y - pos.y) * delta_dist.y;
-		}
-		else
-		{
-			step.y = 1;
-			side_dist.y = (pos.y + 1.0 - data->plyr->pos.y) * delta_dist.y;
-		}
-		// execucao do DDA
-		while (hit == '0')
-		{
-		//salta para o próximo quadrado do posa, na direção x ou na direção y
-			if (side_dist.x < side_dist.y)
-			{
-				side_dist.x += delta_dist.x;
-				pos.x += step.x;
-				side = 0;
-			}
-			else
-			{
-				side_dist.y += delta_dist.y;
-				pos.y += step.y;
-				side = 1;
-			}
-			//Verifica se o raio atingiu uma parede
-			if (hit_wall(pos.x, pos.y) == 1)
-				hit = '1';
-			// if (map()->map[pos.x][pos.y] == '1')
-			// 	hit = '1';
-		}
-		t_vt_d player;
-
-		player.x = (int)data->plyr->pos.x;
-		player.y = (int)data->plyr->pos.y;
-		ft_bresenham(img, player, pos, WHITE);
-		// Calcula a distância projetada na direção da câmera
-		if (side == 0)
-			perp_walldist = (side_dist.x - delta_dist.x);
-		else
-			perp_walldist = (side_dist.y - delta_dist.y);
-		//Calcula a altura da linha a ser desenhada na tela
-		line_height = (int)(W_HEIGHT / perp_walldist);
-		line_height *= 2;
-		//calcula o pixel mais baixo e mais alto para preencher a faixa atual
-		draw_start = -line_height / 2 + W_HEIGHT / 2;
-		if (draw_start < 0)
-			draw_start = 0;
-		draw_end = line_height / 2 + W_HEIGHT / 2;
-		if (draw_end >= W_HEIGHT)
-			draw_end = W_HEIGHT - 1;
-		color = RED;
-		if (side == 1)
-			color = RED / 2;
-		draw_wall(pos_x, draw_start, draw_end, img, color);
+		cube->r->pos.x = (int)cube->p->pos.x;
+		cube->r->pos.y = (int)cube->p->pos.y;
+		calc_delta_distance(cube);
+		calc_step(cube);
+		calc_side_distance(cube);
+		dda_exc(cube);
+		t_vt_d	player;
+        player.x = cube->p->pos.x / (TILE_SIZE / MAP_SCALE);
+        player.y = cube->p->pos.y / (TILE_SIZE / MAP_SCALE);
+        t_vt_d	ray_end;
+        ray_end.x = cube->r->pos.x / (TILE_SIZE / MAP_SCALE);
+        ray_end.y = cube->r->pos.y / (TILE_SIZE / MAP_SCALE);
+		ft_bresenham(img, player, ray_end, WHITE);
+		render_wall(cube, img, RED, index);
 	}
 }

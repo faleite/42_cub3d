@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:38:23 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/02 18:00:40 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/03 21:18:06 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,14 +97,14 @@ void  set_grid_cell(t_image *img, int x, int y)
     map()->map[map_pos.y][map_pos.x] = '0';
 }
 
-void  print_player(t_data *data, t_image *img)
+void  print_player(t_cube *cube, t_image *img)
 {
   t_vt_d  pos;
   
-  // pos.x = data->plyr->player_map.x;
-  // pos.y = data->plyr->player_map.y;
-  pos.x = data->plyr->pos.x;
-  pos.y = data->plyr->pos.y;
+  // pos.x = cube->p->player_map.x;
+  // pos.y = cube->p->player_map.y;
+  pos.x = cube->p->pos.x;
+  pos.y = cube->p->pos.y;
   for (int y = -2; y <2; y++)
   {
     for (int x = -2; x < 2; x++)
@@ -114,14 +114,14 @@ void  print_player(t_data *data, t_image *img)
   }
 }
 
-void	print_ray(t_data *data, t_image *img)
+void	print_ray(t_cube *cube, t_image *img)
 {
 	t_vt_d	p1;
 	t_vt_d	p2;
 
-	p1.x = (int)data->plyr->pos.x;
-	p1.y = (int)data->plyr->pos.y;
-	p2.x = p1.x + 100 * data->plyr->dir.x;
-	p2.y = p1.y + 100 * data->plyr->dir.y;
+	p1.x = (int)cube->p->pos.x;
+	p1.y = (int)cube->p->pos.y;
+	p2.x = p1.x + 100 * cube->p->dir.x;
+	p2.y = p1.y + 100 * cube->p->dir.y;
 	ft_bresenham(img, p1, p2, WHITE);
 }
