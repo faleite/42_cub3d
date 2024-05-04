@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/04 17:33:23 by marvin           ###   ########.fr       */
+/*   Updated: 2024/05/04 19:45:53 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@
  vm: W_W 1350 W_H 680 
 */
 # define W_WIDTH  1280
-# define W_HEIGHT 720
-# define MAP_SCALE 30
+# define W_HEIGHT 750
+# define MAP_SCALE 12.0
 # define FOV 60
-#define FOV_RAD 1.0472
+# define FOV_RAD 1.0472
 # define FOV_HALF 30
 # define RAY_VIEW 25
-# define TILE_SIZE 30 // 32 // 64
+# define TILE_SIZE 64.0 // 32 // 64
 
 /* elements */
 # define F "F"
@@ -47,6 +47,11 @@
 # define WHITE 16777215
 # define GREEN 2263842
 # define PINK 16738740
+# define YELLOW 15647028
+# define WOOD 7166474
+# define BROWN 3218945
+# define ORANGE 16744448
+
 
 /* fields */
 # define WALL '1'

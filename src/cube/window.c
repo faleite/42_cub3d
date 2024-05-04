@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 20:29:40 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/04 18:28:29 by marvin           ###   ########.fr       */
+/*   Updated: 2024/05/04 19:20:26 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int	render_cub3d(t_cube *cube)
 	// (Use Key for activate the minimap)
 	draw_ceil_floor(&cube->img);
 	render_minimap(cube);
+	draw_player(cube, (cube->p->pos.x / TILE_SIZE), (cube->p->pos.y / TILE_SIZE));
 	raycasting(cube);
 	ft_player_movement(cube);
 	// ft_bresenham(&cube->img, )

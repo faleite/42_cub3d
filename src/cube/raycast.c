@@ -237,6 +237,18 @@ void ft_draw_wall(t_cube *cube, int ray)
 	draw_wall_m(cube, ray, t_pix, b_pix);
 }
 
+void	draw_rays(t_cube *cube, t_image *img)
+{
+	t_vt_d	player;
+	t_vt_d	ray_end;
+
+	player.x = cube->p->pos.x / (TILE_SIZE / MAP_SCALE);
+	player.y = cube->p->pos.y / (TILE_SIZE / MAP_SCALE);
+	ray_end.x = cube->r->pos.x / (TILE_SIZE / MAP_SCALE);
+	ray_end.y = cube->r->pos.y / (TILE_SIZE / MAP_SCALE);
+	ft_bresenham(img, player, ray_end, WHITE);
+}
+
 void raycasting(t_cube *cube)
 {
     t_vector_2d_f intersection;
@@ -255,24 +267,24 @@ void raycasting(t_cube *cube)
         {
             ray->dist = intersection.y;
 			t_vt_d colide;
-			colide.x = ray->ver.x;
-			colide.y = ray->ver.y;
+			colide.x = ray->ver.x / (TILE_SIZE / MAP_SCALE);
+			colide.y = ray->ver.y / (TILE_SIZE / MAP_SCALE);
 			t_vt_d pos;
-			pos.x = cube->p->pos.x;
-			pos.y = cube->p->pos.y;
-			ft_bresenham(&cube->img, pos, colide, WHITE);
+			pos.x = cube->p->pos.x / (TILE_SIZE / MAP_SCALE);
+			pos.y = cube->p->pos.y / (TILE_SIZE / MAP_SCALE);
+			ft_bresenham(&cube->img, pos, colide, YELLOW);
         }
         else
         {
             ray->dist = intersection.x;
             ray->hit = 1;
 						t_vt_d colide;
-			colide.x = ray->hor.x;
-			colide.y = ray->hor.y;
+			colide.x = ray->hor.x / (TILE_SIZE / MAP_SCALE);
+			colide.y = ray->hor.y / (TILE_SIZE / MAP_SCALE);
 			t_vt_d pos;
-			pos.x = cube->p->pos.x;
-			pos.y = cube->p->pos.y;
-			ft_bresenham(&cube->img, pos, colide, WHITE);
+			pos.x = cube->p->pos.x / (TILE_SIZE / MAP_SCALE);
+			pos.y = cube->p->pos.y / (TILE_SIZE / MAP_SCALE);
+			ft_bresenham(&cube->img, pos, colide, YELLOW);
         }
         ft_draw_wall(cube, num_ray);
         ray->angle += 0.0002757;
