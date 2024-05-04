@@ -40,15 +40,27 @@ void	draw_line_screen(int x, int p_y, int p_x, t_image *img, double dir, double 
 	brasenham(line, img, WHITE);
 }
 
+// void	draw_wall(int i, int start, int end, t_image *img, int color)
+// {
+// 	t_line	line;
+
+// 	line.x0 = i;
+// 	line.y0 = start;
+// 	line.x1 = i;
+// 	line.y1 = end;
+// 	brasenham(line, img, color);
+// }
+
 void	draw_wall(int i, int start, int end, t_image *img, int color)
 {
-	t_line	line;
+	t_vt_d	p1;
+	t_vt_d	p2;
 
-	line.x0 = i;
-	line.y0 = start;
-	line.x1 = i;
-	line.y1 = end;
-	brasenham(line, img, color);
+	p1.x = i;
+	p1.y = end;
+	p2.x = p1.x + 1;
+	p2.y = start;
+	ft_bresenham(img, p1, p2, color);
 }
 
 int	hit_wall(double new_x, double new_y)
@@ -104,7 +116,7 @@ void	calc_step(t_cube *cube)
 
 void	dda_exc(t_cube *cube)
 {
-	cube->r->hit = hit_wall(cube->r->pos.x, cube->r->pos.y);
+	cube->r->hit = 0; // hit_wall(cube->r->pos.x, cube->r->pos.y);
 	while (cube->r->hit == 0)
 	{
 		if (cube->r->side_dist.x < cube->r->side_dist.y)
@@ -136,9 +148,9 @@ void	render_wall(t_cube *cube, t_image *img, int color, int index)
 	else
 		perp_walldist = (cube->r->side_dist.y - cube->r->delta_dist.y);
 	//Calcula a altura da linha a ser desenhada na tela
-	line_height = (int)(W_HEIGHT / perp_walldist);
-	line_height *= 2;
+	// line_height *= 2.0;
 	//calcula o pixel mais baixo e mais alto para preencher a faixa atual
+	line_height = (int)(TILE_SIZE * W_HEIGHT) / perp_walldist;
 	draw_start = -line_height / 2 + W_HEIGHT / 2;
 	if (draw_start < 0)
 		draw_start = 0;
@@ -150,32 +162,47 @@ void	render_wall(t_cube *cube, t_image *img, int color, int index)
 	draw_wall(index, draw_start, draw_end, img, color);
 }
 
+void	draw_rays(t_cube *cube, t_image *img)
+{
+	t_vt_d	player;
+	t_vt_d	ray_end;
+
+	player.x = cube->p->pos.x / (TILE_SIZE / MAP_SCALE);
+	player.y = cube->p->pos.y / (TILE_SIZE / MAP_SCALE);
+	ray_end.x = cube->r->pos.x / (TILE_SIZE / MAP_SCALE);
+	ray_end.y = cube->r->pos.y / (TILE_SIZE / MAP_SCALE);
+	ft_bresenham(img, player, ray_end, YELLOW);
+}
+
 void	raycasting(t_cube *cube, t_image *img)
 {
 	int		index;
 	double	camera_x;
 
 	index = -1;
-	while (++index < W_WIDTH)
+	while (++index < W_WIDTH * 2)
 	{
 		// caucula a posicao e a direcao do raio
-		camera_x = 2 * index / (double)W_WIDTH - 1; // cordenada x no espaco da camera
+		// cameraX = cordenada x no espaco da camera
+		camera_x = 2 * index / (double)W_WIDTH - 1;
+		// t_vt_f	angle;
+		// angle.x = cos(cube->p->angle);
+		// angle.y = sin(cube->p->angle);
+		// cube->r->ray_dir.x = angle.x + cube->p->plane.x * camera_x;
+		// cube->r->ray_dir.y = angle.y + cube->p->plane.y * camera_x;
+
+		// cube->p->dir.x = cos(cube->p->angle);
+		// cube->p->dir.y = sin(cube->p->angle);
+
 		cube->r->ray_dir.x = cube->p->dir.x + cube->p->plane.x * camera_x;
 		cube->r->ray_dir.y = cube->p->dir.y + cube->p->plane.y * camera_x;
-
 		cube->r->pos.x = (int)cube->p->pos.x;
 		cube->r->pos.y = (int)cube->p->pos.y;
 		calc_delta_distance(cube);
 		calc_step(cube);
 		calc_side_distance(cube);
 		dda_exc(cube);
-		t_vt_d	player;
-        player.x = cube->p->pos.x / (TILE_SIZE / MAP_SCALE);
-        player.y = cube->p->pos.y / (TILE_SIZE / MAP_SCALE);
-        t_vt_d	ray_end;
-        ray_end.x = cube->r->pos.x / (TILE_SIZE / MAP_SCALE);
-        ray_end.y = cube->r->pos.y / (TILE_SIZE / MAP_SCALE);
-		ft_bresenham(img, player, ray_end, WHITE);
+		draw_rays(cube, img);
 		render_wall(cube, img, RED, index);
 	}
 }

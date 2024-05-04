@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/03 22:21:04 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/04 14:20:44 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
  vm: W_W 1350 W_H 680 
 */
 # define W_WIDTH  1280
-# define W_HEIGHT 720
-# define MAP_SCALE 20.0
+# define W_HEIGHT 750
+# define MAP_SCALE 15.0
 # define FOV 60
 # define FOV_HALF 30
 # define RAY_VIEW 25
@@ -46,6 +46,10 @@
 # define WHITE 16777215
 # define GREEN 2263842
 # define PINK 16738740
+# define YELLOW 15647028
+# define WOOD 7166474
+# define BROWN 3218945
+# define ORANGE 16744448
 
 /* fields */
 # define WALL '1'

@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 20:32:19 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/03 21:37:45 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/04 14:23:05 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ int	render_minimap(t_image *img)
 		while (p.x < (int)ft_strlen(parse()->map[p.y]))
 		{
 			if (parse()->map[p.y][p.x] == '1')
-				draw_minimap(img, p.y, p.x, BLACK);
+				draw_minimap(img, p.y, p.x, BROWN);
 			if (parse()->map[p.y][p.x] == '0' || \
 				is_player(parse()->map[p.y][p.x]))
-				draw_minimap(img, p.y, p.x, GRAY);
+				draw_minimap(img, p.y, p.x, WOOD);
 			p.x++;
 		}
 		p.y++;
@@ -91,9 +91,7 @@ void	draw_player(t_cube *cube, float x, float y)
 		p.x = x * scale - scale / 5;
 		while (p.x < end.x)
 		{
-			img_draw_pixel(&cube->img, p.x, p.y, PINK);
-			// draw_circle(p, RED, 2, &cube->img);
-			// draw_line(y, x, &cube->img, cube->p->plane.y);
+			img_draw_pixel(&cube->img, p.x, p.y, ORANGE);
 			p.x++;
 		}
 		p.y++;

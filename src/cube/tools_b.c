@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:06:45 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/03 21:21:58 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/04 16:07:45 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	init_values(t_cube *cube)
 	cube->p->angle = player_direction();
 	// cube->p->dir = set_dir(); // raio vetor inicial de direcao
 	cube->p->dir.x = -1; // set_dir(); // raio vetor inicial de direcao
-	// cube->p->dir.y = 0; // set_dir(); // raio vetor inicial de direcao
+	// cube->p->dir.y = -1; // set_dir(); // raio vetor inicial de direcao
 	cube->p->pos.x = map()->ply_start.x * TILE_SIZE + TILE_SIZE / 2;
 	cube->p->pos.y = map()->ply_start.y * TILE_SIZE + TILE_SIZE / 2;
 	cube->p->plane.y = 0.66; // versão 2d raster do plano da câmera

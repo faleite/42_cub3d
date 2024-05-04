@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/03 17:25:43 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/04 17:52:11 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int		draw_ceil_floor(t_image *img);
 int		render_minimap(t_image *img);
 int		render_player(t_cube *cube);
 void	draw_player(t_cube *cube, float x, float y);
+void	draw_rays(t_cube *cube, t_image *img);
+
 // void	init_player(void);
 
 /* math */

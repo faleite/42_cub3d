@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 20:29:40 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/03 21:53:36 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/04 18:09:28 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,8 @@ int	render_cub3d(t_cube *cube)
 
 	// (Use Key for activate the minimap)
 	render_minimap(&cube->img);
+	draw_player(cube, cube->p->pos.x / TILE_SIZE, cube->p->pos.y / TILE_SIZE);
 	raycasting(cube, &cube->img);
-	draw_player(cube, (cube->p->pos.x / 64.0), (cube->p->pos.y / 64.0));
-	// ft_bresenham(&cube->img, )
 	// render_player(cube);
 
 	// print_grid(&cube->img);
