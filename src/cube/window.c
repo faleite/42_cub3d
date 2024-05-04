@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 20:29:40 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/03 21:53:36 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/04 18:28:29 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,34 +15,24 @@
 void	keyboard(int keycode, t_cube *cube);
 void	keyboard_release(int key, t_cube *cube);
 
-// void	ft_angle_normal(double *angle)
-// {
-// 	double mod_angle = 2 * M_PI;
+int ft_mouse_handlertrack(int x, int y, t_cube *param)
+{
+    t_vector_2d mouse_pos;
 
-// 	*angle = fmod(*angle, mod_angle);
-// 	if (*angle < 0)
-// 	*angle += mod_angle;
-// }
-// int	mouse_click_motion(int x, int y, t_cube *cube)
-// {
-// 	printf("mouse X:%d:\n", x);
-// 	printf("mouse Y:%d:\n", y);
+    mouse_pos.x = x - param->p->pos.x;
+    mouse_pos.y = y - param->p->pos.y;
 
-// 	t_vt_d mouse_pos;
+    printf("mouse X:%d:\n", x);
+    printf("mouse Y:%d:\n", y);
 
-// 	mouse_pos.x = x - cube->p->pos.x;
-// 	mouse_pos.y = y - cube->p->pos.y;
-
-// 	printf("mouse X:%d:\n", x);
-// 	printf("mouse Y:%d:\n", y);
-
-// 	cube->p->dir.y = atan2(mouse_pos.y, mouse_pos.x);
-// 	ft_angle_normal(&cube->p->dir.y);
-// 	return (0);
-// }
+    param->p->angle = atan2(mouse_pos.y, mouse_pos.x);
+    ft_angle_normal(&param->p->angle);
+	return (0);
+}
 
 int	mouse_click(int button, int x, int y, t_image *img)
 {
+	
     img->mouse_button = button;
     set_grid_cell(img, x, y);
 	return (1);
@@ -62,12 +52,12 @@ int	build_window(t_cube cube)
 	cube.img.mlx_img = mlx_new_image(cube.mlx_ptr, W_WIDTH, W_HEIGHT);
 	cube.img.addr = mlx_get_data_addr(cube.img.mlx_img, &cube.img.bpp, \
 					&cube.img.line_len, &cube.img.endian);
-	mlx_loop_hook(cube.mlx_ptr, &render_cub3d, &cube);
 	mlx_hook(cube.win_ptr, 2, 1L, (void *)keyboard, &cube);
 	mlx_hook(cube.win_ptr, 3, (1L << 1), (void *)keyboard_release, &cube);
 	mlx_hook(cube.win_ptr, 17, 0L, (void *)destroy_window, &cube);
 	mlx_hook(cube.win_ptr, 4, (1L << 2), (void *)mouse_click, &cube.img);
-	// mlx_hook(cube.win_ptr, 6, (1L << 6), (void *)mouse_click_motion, &cube.img);
+	mlx_hook(cube.win_ptr, 6, (1L << 6), ft_mouse_handlertrack, &cube);
+	mlx_loop_hook(cube.mlx_ptr, &render_cub3d, &cube);
 	mlx_loop(cube.mlx_ptr);
 	return (0);
 }
@@ -87,12 +77,12 @@ int	render_cub3d(t_cube *cube)
 	if (!cube->mlx_ptr)
 		return (1);
 	clear_img(cube->img);
-	draw_ceil_floor(&cube->img);
 
 	// (Use Key for activate the minimap)
-	render_minimap(&cube->img);
-	raycasting(cube, &cube->img);
-	draw_player(cube, (cube->p->pos.x / 64.0), (cube->p->pos.y / 64.0));
+	draw_ceil_floor(&cube->img);
+	render_minimap(cube);
+	raycasting(cube);
+	ft_player_movement(cube);
 	// ft_bresenham(&cube->img, )
 	// render_player(cube);
 
@@ -115,26 +105,40 @@ int	render_cub3d(t_cube *cube)
 
 void	keyboard(int keycode, t_cube *cube)
 {
+	keycode %= 200;
+	printf("key press %d\n", keycode);
+    if (keycode < 200)
+    {
+        cube->p->prev_key_bool[keycode] = cube->p->key_bool[keycode] ;
+        cube->p->key_bool[keycode] = 1;
+    }
 	if (keycode == ESC)
 		destroy_window(cube);
-	else if (keycode == K_W || keycode == UP)
-		move_up(cube, 1);
-	else if (keycode == K_S || keycode == DOWN)
-		move_up(cube, -1);
-	else if (keycode == K_D)
-		move_right(cube, 1);
-	else if (keycode == K_A)
-		move_right(cube, -1);
+	else if (keycode == K_W || keycode == K_D)
+		cube->p->move = 1;
+	else if (keycode == K_S || keycode == K_A)
+		cube->p->move = -1;
 	else if (keycode == RIGHT)
-		move_rotate(cube, 1);
+		cube->p->rotate = 1;
 	else if (keycode == LEFT)
-		move_rotate(cube, -1);
+		cube->p->rotate = -1;
 }
 
 void	keyboard_release(int key, t_cube *cube)
 {
-	if (key)
-		cube->p->move = 0;
+	t_plyer *player;
+
+	player = cube->p;
+	key %= 200;
+
+    if (key < 200)
+    {
+        player->prev_key_bool[key] = player->key_bool[key];
+        player->key_bool[key] = 0;
+        player->move = 0;
+        player->rotate = 0;
+
+    }
 }
 
 int	draw_ceil_floor(t_image *img)

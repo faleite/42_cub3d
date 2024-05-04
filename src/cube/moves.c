@@ -3,74 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 16:00:53 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/03 21:18:06 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/04 14:37:00 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	move_up(t_cube *cube, int move)
+//-------------------------------------------------------- movement updaate.
+
+void ft_player_movement_update(t_cube *cube, int move)
 {
-	t_vt_f	new;
+    t_plyer *player;
+    double new_x;
+    double new_y;
 
-	cube->p->move = move;
-	new.x = cube->p->pos.x;
-	new.y = cube->p->pos.y;
-
-	new.x += cube->p->dir.x * cube->p->move_speed * cube->p->move;
-	new.y += cube->p->dir.y * cube->p->move_speed * cube->p->move;
-	if (hit_wall(new.x, new.y) == 0)
-	{
-		cube->p->pos.x = new.x;
-		cube->p->pos.y = new.y;
-	}
+    player = cube->p;
+    new_x = player->pos.x;
+    new_y = player->pos.y;
+    if (move == 1)
+    {
+        new_x += (cos(player->angle) * player->move * player->move_speed);
+        new_y += (sin(player->angle) * player->move * player->move_speed);
+    }
+    else if (move == 2)
+    {
+        new_x += (cos(player->angle + (M_PI / 2)) * player->move * player->move_speed);
+        new_y += (sin(player->angle + (M_PI / 2)) * player->move * player->move_speed);
+    }
+    // if (hit_wall( new_x, new_y))
+    // {
+        player->pos.x = new_x;
+        player->pos.y = new_y;
+    // }
+    player->angle += player->rotate * player->rotation_speed;
+    ft_angle_normal(&cube->p->angle);
 }
 
-/**
- * printf("NewX: %d, NewY: %d\n", (int)new_pos.x / TILE_SIZE, (int)new_pos.y / TILE_SIZE);
-	if (map()->map[(int)new_pos.y / TILE_SIZE][(int)new_pos.x / TILE_SIZE] == '1')
-		printf("WALL");
-*/
-void	move_right(t_cube *cube, int move)
+void ft_player_movement(t_cube *cube)
 {
-	t_vt_f	new_dir;
-	t_vt_f	new_pos;
-
-	cube->p->move = move;
-	new_dir.x = cube->p->dir.x * cos(M_PI_2) * cube->p->move -\
-				cube->p->dir.y * sin(M_PI_2) * cube->p->move;
-	new_dir.y = cube->p->dir.x * sin(M_PI_2) * cube->p->move +\
-				cube->p->dir.y * cos(M_PI_2) * cube->p->move;
-
-	new_pos.x = cube->p->pos.x; 
-	new_pos.y = cube->p->pos.y;
-
-	new_pos.x += new_dir.x * cube->p->move_speed;
-	new_pos.y += new_dir.y * cube->p->move_speed;
-	if (hit_wall(new_pos.x, new_pos.y) == 0)
-	{
-		cube->p->pos.x = new_pos.x;
-		cube->p->pos.y = new_pos.y;
-	}
-}
-
-void	move_rotate(t_cube *cube, int rotate)
-{
-	double	old_dir_x;
-	double	old_plane_x;
-
-	old_dir_x = cube->p->dir.x;
-	cube->p->dir.x = cube->p->dir.x * cos(rotate * cube->p->rotation_speed
-					) - cube->p->dir.y * sin(rotate * cube->p->rotation_speed);
-	cube->p->dir.y = old_dir_x * sin(rotate * cube->p->rotation_speed) +
-						cube->p->dir.y * cos(rotate * cube->p->rotation_speed);
-	old_plane_x = cube->p->plane.x;
-	cube->p->plane.x = cube->p->plane.x * 
-					cos(rotate * cube->p->rotation_speed) - cube->p->plane.y 
-					* sin(rotate * cube->p->rotation_speed);
-	cube->p->plane.y = old_plane_x * sin(rotate * cube->p->rotation_speed) + 
-					cube->p->plane.y * cos(rotate * cube->p->rotation_speed);
+    if (cube->p->key_bool[K_W] || cube->p->key_bool[K_S]
+        || cube->p->key_bool[K_LEFT] || cube->p->key_bool[K_RIGHT])
+        ft_player_movement_update(cube, 1);
+    if (cube->p->key_bool[K_A] || cube->p->key_bool[K_D])
+        ft_player_movement_update(cube, 2);
 }

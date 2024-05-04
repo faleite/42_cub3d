@@ -4,7 +4,7 @@
 
 NAME		= cub3D
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -g #-fsanitize=address
+CFLAGS		= -g #-Wall -Wextra -Werror -g #-fsanitize=address
 SRC			= ./src/
 GET			= ./get_next_line/
 PAR			= ./src/parser/
@@ -16,7 +16,7 @@ FILES 		= $(GET)get_next_line.c $(GET)get_next_line_utils.c\
 			  $(PAR)check_rgb.c $(PAR)check_map_a.c $(PAR)check_map_b.c\
 			  $(PAR)parser.c $(CUB)window.c $(CUB)minimap.c $(CUB)tools_a.c\
 			  $(CUB)ft_max_mod.c $(CUB)moves.c $(CUB)tools_b.c $(CUB)raycast.c\
-			  $(CUB)ray.c $(CUB)draw_line.c
+			  $(CUB)ray.c $(CUB)draw_line.c $(CUB)maths.c
 OBJS		= $(FILES:.c=.o)
 MLX_L		= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm
 LIBFT		= ./libft/libft.a

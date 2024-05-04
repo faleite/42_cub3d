@@ -12,6 +12,11 @@
 
 #include "../../includes/cub3d.h"
 
+int	unit_circle(float angle, char c);
+int	calc_step(float angle, float *inter, float *step, int is_horizon);
+int	hit_wall_m(float x, float y);
+int ft_check_distance(t_vt_f p1, t_vector_2d_f p2);
+
 void	draw_player_screen(t_image *img, int x, int y)
 {
 	t_vt_d	p;
@@ -51,76 +56,52 @@ void	draw_wall(int i, int start, int end, t_image *img, int color)
 	brasenham(line, img, color);
 }
 
-int	hit_wall(double new_x, double new_y)
+int	hit_wall_m(float x, float y)
 {
-	t_vt_d	p;
+	int		x_m;
+	int		y_m;
 
-	p.x = (int)(new_x) / TILE_SIZE;
-	p.y = (int)(new_y) / TILE_SIZE;
-	if (map()->map[p.y][p.x] == '1')
-		return (1);
-	return (0);
+	if (x < 0 || y < 0)
+		return (0);
+	x_m = floor (x / TILE_SIZE);
+	y_m = floor (y / TILE_SIZE);
+	if ((y_m >= map()->map_height || x_m >= map()->map_width))
+		return (0);
+	if (map()->map[y_m] && x_m <= (int)strlen(map()->map[y_m]))
+		if (map()->map[y_m][x_m] == '1')
+			return (0);
+	return (1);
 }
 
 /**
  * calculate the distance between
  * two points.
  */
-void	calc_delta_distance(t_cube *cube)
-{
-	if (cube->r->ray_dir.x == 0)
-		cube->r->delta_dist.x = 1e30;
-	else
-		cube->r->delta_dist.x = fabs(1 / (cube->r->ray_dir.x));
-	if (cube->r->ray_dir.y == 0)
-		cube->r->delta_dist.y = 1e30;
-	else
-		cube->r->delta_dist.y = fabs(1 / (cube->r->ray_dir.y));
-}
 
-void	calc_side_distance(t_cube *cube)
-{
-	if (cube->r->ray_dir.x < 0)
-		cube->r->side_dist.x = (cube->p->pos.x - cube->r->pos.x) * cube->r->delta_dist.x;
-	else
-		cube->r->side_dist.x = (cube->r->pos.x + 1.0 - cube->p->pos.x) * cube->r->delta_dist.x;
-	if (cube->r->ray_dir.y < 0)
-		cube->r->side_dist.y = (cube->p->pos.y - cube->r->pos.y) * cube->r->delta_dist.y;
-	else
-		cube->r->side_dist.y = (cube->r->pos.y + 1.0 - cube->p->pos.y) * cube->r->delta_dist.y;
-}
 
-void	calc_step(t_cube *cube)
+float	calc_vertical_distance(t_cube *cube, float angl) // vertical intersection.
 {
-	if (cube->r->ray_dir.x < 0)
-		cube->r->step.x = -1;
-	else
-		cube->r->step.x = 1;
-	if (cube->r->ray_dir.y < 0)
-		cube->r->step.y = -1;
-	else
-		cube->r->step.y = 1;
-}
+    t_vector_2d_f collition;
+    t_vector_2d_f delta;
+	float	y_step;
+	int		pixel;
 
-void	dda_exc(t_cube *cube)
-{
-	cube->r->hit = hit_wall(cube->r->pos.x, cube->r->pos.y);
-	while (cube->r->hit == 0)
+	delta.x = TILE_SIZE;
+	delta.y = TILE_SIZE * tan(angl);
+	collition.x = floor(cube->p->pos.x / TILE_SIZE) * TILE_SIZE;
+	pixel = calc_step(angl, &collition.x, &delta.x, 0);
+	collition.y = cube->p->pos.y + (collition.x - cube->p->pos.x) * tan(angl);
+	if ((unit_circle(angl, 'x') && delta.y < 0) || \
+	(!unit_circle(angl, 'x') && delta.y > 0))
+		delta.y *= -1;
+	while (hit_wall_m(collition.x - pixel, collition.y))
 	{
-		if (cube->r->side_dist.x < cube->r->side_dist.y)
-		{
-			cube->r->side_dist.x += cube->r->delta_dist.x;
-			cube->r->pos.x += cube->r->step.x;
-			cube->r->side = 0;
-		}
-		else
-		{
-			cube->r->side_dist.y += cube->r->delta_dist.y;
-			cube->r->pos.y += cube->r->step.y;
-			cube->r->side = 1;
-		}
-		cube->r->hit = hit_wall(cube->r->pos.x, cube->r->pos.y);
+		collition.x += delta.x;
+		collition.y += delta.y;
 	}
+	cube->r->ver.x = collition.x;
+	cube->r->ver.y = collition.y;
+    return (ft_check_distance(cube->p->pos, collition));
 }
 
 void	render_wall(t_cube *cube, t_image *img, int color, int index)
@@ -150,32 +131,150 @@ void	render_wall(t_cube *cube, t_image *img, int color, int index)
 	draw_wall(index, draw_start, draw_end, img, color);
 }
 
-void	raycasting(t_cube *cube, t_image *img)
+int ft_check_distance(t_vt_f p1, t_vector_2d_f p2)
 {
-	int		index;
-	double	camera_x;
+    double dx;
+    double dy;
 
-	index = -1;
-	while (++index < W_WIDTH)
+    dx = (p2.x - p1.x);
+    dy = (p2.y - p1.y);
+    return sqrt(dx * dx + dy * dy);
+}
+
+int	calc_step(float angle, float *inter, float *step, int is_horizon)
+{
+	if (is_horizon)
 	{
-		// caucula a posicao e a direcao do raio
-		camera_x = 2 * index / (double)W_WIDTH - 1; // cordenada x no espaco da camera
-		cube->r->ray_dir.x = cube->p->dir.x + cube->p->plane.x * camera_x;
-		cube->r->ray_dir.y = cube->p->dir.y + cube->p->plane.y * camera_x;
-
-		cube->r->pos.x = (int)cube->p->pos.x;
-		cube->r->pos.y = (int)cube->p->pos.y;
-		calc_delta_distance(cube);
-		calc_step(cube);
-		calc_side_distance(cube);
-		dda_exc(cube);
-		t_vt_d	player;
-        player.x = cube->p->pos.x / (TILE_SIZE / MAP_SCALE);
-        player.y = cube->p->pos.y / (TILE_SIZE / MAP_SCALE);
-        t_vt_d	ray_end;
-        ray_end.x = cube->r->pos.x / (TILE_SIZE / MAP_SCALE);
-        ray_end.y = cube->r->pos.y / (TILE_SIZE / MAP_SCALE);
-		ft_bresenham(img, player, ray_end, WHITE);
-		render_wall(cube, img, RED, index);
+		if (angle > 0 && angle < M_PI)
+		{
+			*inter += TILE_SIZE;
+			return (-1);
+		}
+		*step *= -1;
 	}
+    else
+	{
+		if (!(angle > M_PI / 2 && angle < 3 * M_PI / 2))
+		{
+			*inter += TILE_SIZE;
+			return (-1);
+		}
+		*step *= -1;
+	}
+    return (1);
+}
+
+int	unit_circle(float angle, char c)
+{
+	if (c == 'x')
+	{
+		if (angle > 0 && angle < M_PI)
+			return (1);
+	}
+	else if (c == 'y')
+	{
+		if (angle > (M_PI / 2) && angle < (3 * M_PI) / 2)
+			return (1);
+	}
+	return (0);
+}
+
+float	calc_hor_distance(t_cube *cube, float angl) // horizontal distance.
+{
+   t_vector_2d_f collition;
+   t_vector_2d_f delta;
+	int		pixel;
+
+	delta.y = TILE_SIZE;
+	delta.x = TILE_SIZE / tan(angl);
+	collition.y = floor(cube->p->pos.y / TILE_SIZE) * TILE_SIZE;
+	pixel = calc_step(angl, &collition.y, &delta.y, 1);
+	collition.x = cube->p->pos.x + (collition.y - cube->p->pos.y) / tan(angl);
+	if ((unit_circle(angl, 'y') && delta.x > 0) || \
+		(!unit_circle(angl, 'y') && delta.x < 0))
+		delta.x *= -1;
+	while (hit_wall_m(collition.x, collition.y - pixel))
+	{
+		collition.x += delta.x;
+		collition.y += delta.y;
+	}
+	cube->r->hor.x = collition.x;
+	cube->r->hor.y = collition.y;
+    return (ft_check_distance(cube->p->pos, collition));
+}
+
+void	draw_wall_m(t_cube *cube, int ray, int t_pix, int b_pix)	// draw the wall
+{
+
+	while (t_pix < b_pix)
+	{
+		if (cube->r->hit)
+			img_draw_pixel(&cube->img, ray, t_pix++, RED / 2);
+		else
+			img_draw_pixel(&cube->img, ray, t_pix++, RED);
+	}
+}
+
+void ft_draw_wall(t_cube *cube, int ray)
+{
+    t_vector_2d_f intersection;
+	double wall_height;
+	double b_pix;
+	double t_pix;
+	float angle;
+
+	angle = cube->r->angle - cube->p->angle;
+	ft_angle_normal(&angle);
+	cube->r->dist *= cos(angle);
+	wall_height = (TILE_SIZE / cube->r->dist) * ( (W_WIDTH / 2) / tan(FOV_RAD / 2));
+	b_pix = (W_HEIGHT / 2) + (wall_height / 2);
+	t_pix = (W_HEIGHT / 2) - (wall_height / 2);
+	if (b_pix > W_HEIGHT)
+		b_pix = W_HEIGHT;
+	if (t_pix < 0)
+		t_pix = 0;
+	
+	draw_wall_m(cube, ray, t_pix, b_pix);
+}
+
+void raycasting(t_cube *cube)
+{
+    t_vector_2d_f intersection;
+    t_raycast *ray;
+    int num_ray;
+
+    ray = cube->r;
+    ray->angle = cube->p->angle - 0.523599;
+    num_ray = -1;
+    while (++num_ray < (W_WIDTH * 2) || ray->angle <= (cube->p->angle + 0.523599))
+    {
+        ray->hit = 0;
+        intersection.x = calc_hor_distance(cube, ray->angle);
+        intersection.y = calc_vertical_distance(cube, ray->angle);
+        if (intersection.y < intersection.x)
+        {
+            ray->dist = intersection.y;
+			t_vt_d colide;
+			colide.x = ray->ver.x;
+			colide.y = ray->ver.y;
+			t_vt_d pos;
+			pos.x = cube->p->pos.x;
+			pos.y = cube->p->pos.y;
+			ft_bresenham(&cube->img, pos, colide, WHITE);
+        }
+        else
+        {
+            ray->dist = intersection.x;
+            ray->hit = 1;
+						t_vt_d colide;
+			colide.x = ray->hor.x;
+			colide.y = ray->hor.y;
+			t_vt_d pos;
+			pos.x = cube->p->pos.x;
+			pos.y = cube->p->pos.y;
+			ft_bresenham(&cube->img, pos, colide, WHITE);
+        }
+        ft_draw_wall(cube, num_ray);
+        ray->angle += 0.0002757;
+    }
 }

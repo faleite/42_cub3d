@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 20:32:19 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/03 21:37:45 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/04 17:49:29 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 static int	draw_minimap(t_image *img, int p_y, int p_x, int color);
 
-int	render_minimap(t_image *img)
+int	render_minimap(t_cube *cube)
 {
 	t_vt_d	p;
+	t_image *img;
+
+	img = &cube->img;
 
 	p.y = 0;
 	while (p.y <= parse()->map_height)
@@ -33,11 +36,12 @@ int	render_minimap(t_image *img)
 		}
 		p.y++;
 	}
+	draw_player(cube, (cube->p->pos.x / 64.0), (cube->p->pos.y / 64.0));
 	return (0);
 }
 
 /*
- Modified: MINIMAP_SCALE for scale 
+ Modified: MINIMAP_SCALE for scale
  Look for this: mlx_int_anti_resize_win();
 */
 static int	draw_minimap(t_image *img, int p_y, int p_x, int color)
@@ -74,12 +78,23 @@ static int	draw_minimap(t_image *img, int p_y, int p_x, int color)
  * @param y - Scaled Y-coordinate of the player's position.
  * @param x - Scaled X-coordinate of the player's position.
  */
+
+
 void	draw_player(t_cube *cube, float x, float y)
 {
 	t_vt_d	p;
 	t_vt_d	end;
 	int		scale;
 
+	t_vt_d line_view;
+
+	t_vt_d pos;
+
+	pos.x = cube->p->pos.x;
+	pos.y = cube->p->pos.y;
+	
+    line_view.x = cube->p->pos.x +  (cos(cube->p->angle) * 80);
+    line_view.y = cube->p->pos.y  + (sin(cube->p->angle) * 80);
 	scale = MAP_SCALE;
 	if (parse()->map_height > 20 || parse()->map_width > 40)
 		scale /= 2;
@@ -91,11 +106,12 @@ void	draw_player(t_cube *cube, float x, float y)
 		p.x = x * scale - scale / 5;
 		while (p.x < end.x)
 		{
-			img_draw_pixel(&cube->img, p.x, p.y, PINK);
-			// draw_circle(p, RED, 2, &cube->img);
-			// draw_line(y, x, &cube->img, cube->p->plane.y);
+			img_draw_pixel(&cube->img, pos.x, pos.y, PINK);
 			p.x++;
 		}
 		p.y++;
 	}
+	
+    ft_bresenham(&cube->img, pos, line_view, RED);
+
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/03 17:25:43 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/04 17:45:46 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,16 @@
 # include "types.h"
 # include "parser.h"
 
+#define K_UP 162
+#define K_DOWN 164
+#define K_LEFT 161
+#define K_RIGHT 163
+#define K_A 97
+#define K_W 119
+#define K_D 100
+#define K_S 115
+// #define XK_Escape 107
+
 /* struct */
 t_map	*map(void);
 
@@ -50,7 +60,7 @@ void	draw_circle(t_vt_d center, int color, int radius, t_image *img);
 
 /* mini map */
 int		draw_ceil_floor(t_image *img);
-int		render_minimap(t_image *img);
+int		render_minimap(t_cube *cube);
 int		render_player(t_cube *cube);
 void	draw_player(t_cube *cube, float x, float y);
 // void	init_player(void);
@@ -67,10 +77,11 @@ void	draw_player_screen(t_image *img, int x, int y);
 void	move_up(t_cube *cube, int move);
 void	move_right(t_cube *cube, int move);
 void	move_rotate(t_cube *cube, int rotate);
-
+void ft_angle_normal(float *angle);
 /* Raycast */
-int		hit_wall(double new_x, double new_y);
-void	raycasting(t_cube *cube, t_image *img);
+int		hit_wall(float new_x, float new_y);
+int		hit_wall_m(float new_x, float new_y);
+void	raycasting(t_cube *cube);
 // Study
 void	print_grid(t_image *img);
 void	set_grid_cell(t_image *img, int x, int y);

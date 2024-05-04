@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_b.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:06:45 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/03 21:21:58 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/04 15:17:02 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ void	init_values(t_cube *cube)
 	if (!cube->r)
 		exit(1);
 
-	cube->p->move_speed = 1.5;
-	cube->p->rotation_speed = cube->p->move_speed * (M_PI / 180) * 8;
+	cube->p->move_speed = 4;
+	cube->p->rotation_speed = 0.045;
 	cube->p->angle = player_direction();
 	// cube->p->dir = set_dir(); // raio vetor inicial de direcao
 	cube->p->dir.x = -1; // set_dir(); // raio vetor inicial de direcao
@@ -86,6 +86,13 @@ void	init_values(t_cube *cube)
 	cube->p->pos.x = map()->ply_start.x * TILE_SIZE + TILE_SIZE / 2;
 	cube->p->pos.y = map()->ply_start.y * TILE_SIZE + TILE_SIZE / 2;
 	cube->p->plane.y = 0.66; // versão 2d raster do plano da câmera
+	int i =-1;
+	while (++i <200)
+	{
+		cube->p->prev_key_bool[i] = 0;
+		cube->p->key_bool[i] = 0;
+	}
+	
 }
 
 void	free_data(t_cube *cube)

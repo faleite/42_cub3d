@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/03 22:21:04 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/04 17:33:23 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@
 */
 # define W_WIDTH  1280
 # define W_HEIGHT 720
-# define MAP_SCALE 20.0
+# define MAP_SCALE 30
 # define FOV 60
+#define FOV_RAD 1.0472
 # define FOV_HALF 30
 # define RAY_VIEW 25
-# define TILE_SIZE 64.0 // 32 // 64
+# define TILE_SIZE 30 // 32 // 64
 
 /* elements */
 # define F "F"
@@ -58,9 +59,9 @@
 # define K_D 100
 # define UP 65362
 # define DOWN 65364
-# define LEFT 65361
-# define RIGHT 65363
-# define ESC 65307
+# define LEFT 161
+# define RIGHT 163
+# define ESC 107
 
 # define MOUSE_LEFT_BUTTON	1
 # define MOUSE_RIGHT_BUTTON	3
@@ -88,6 +89,18 @@ typedef struct s_vt_f
 	double		y;
 }			t_vt_f;
 
+typedef struct s_vector_2d {
+    int x;
+    int y;
+    double angle;
+}   t_vector_2d;
+
+typedef struct s_vector_2d_f {
+    float x;
+    float y;
+}   t_vector_2d_f;
+
+
 typedef struct s_parse
 {
 	char	**scene;
@@ -98,7 +111,7 @@ typedef struct s_parse
 	char	*path_so;
 	char	*path_we;
 	char	*path_ea;
-	char	orientation;		
+	char	orientation;
 	int		pos_x;
 	int		pos_y;
 	int		start_map;
@@ -146,16 +159,21 @@ typedef struct s_plyer
 	int			vertical; // 0
 	double		angle_s;
 
-	double		move_speed; // 3 
+	double		move_speed; // 3
 	double		rotation_speed; // move_sp * (PI / 180)
-	double		angle; // 90
+	float		angle; // 90
 	t_vt_f		pos; // //posição inicial xey
 	t_vt_f		dir; // //vetor de direção inicial
 	t_vt_f		plane; // //a versão 2d raycaster do plano da câmera
 	// double		camera_x;
 
 	int			move;
+	int			rotate;
+	// control keys.
+	int key_bool[200];
+    int prev_key_bool[200];
 }				t_plyer;
+
 
 /**
  * Represents data related to a ray's properties and interactions in
@@ -173,6 +191,16 @@ typedef struct s_plyer
  * map boundary.
  * @param texture Pointer to the texture associated with the ray.
  */
+
+typedef struct s_ray
+{
+    double angle;
+    double distance;
+    int hit_wall;
+    t_line position;
+} t_ray;
+
+
 typedef struct s_raycast
 {
 	int			ww_half; // W_W / 2
@@ -187,6 +215,8 @@ typedef struct s_raycast
 	t_vt_f		delta_dist;
 	t_vt_d		step;
 	t_vt_d		pos;
+	t_vt_d		hor;
+	t_vt_d		ver;
 	int			hit;
 	int			side;
 
@@ -208,5 +238,12 @@ typedef struct s_cube
 	t_plyer		*p;
 	t_raycast	*r;
 }			t_cube;
+
+
+
+// movement.
+
+void ft_player_movement(t_cube *cube);
+void ft_angle_normal(float *angle);
 
 #endif /* TYPES_H */
