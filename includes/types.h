@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/04 19:45:53 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/05 20:12:16 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@
 # define BROWN 3218945
 # define ORANGE 16744448
 
-
 /* fields */
 # define WALL '1'
 # define FLOOR '0'
@@ -67,6 +66,11 @@
 # define LEFT 161
 # define RIGHT 163
 # define ESC 107
+# define K_UP 162
+# define K_DOWN 164
+# define K_LEFT 161
+# define K_RIGHT 163
+// #define XK_Escape 107
 
 # define MOUSE_LEFT_BUTTON	1
 # define MOUSE_RIGHT_BUTTON	3
@@ -94,16 +98,18 @@ typedef struct s_vt_f
 	double		y;
 }			t_vt_f;
 
-typedef struct s_vector_2d {
-    int x;
-    int y;
-    double angle;
-}   t_vector_2d;
+typedef struct s_vector_2d
+{
+	int		x;
+	int		y;
+	double	angle;
+}		t_vector_2d;
 
-typedef struct s_vector_2d_f {
-    float x;
-    float y;
-}   t_vector_2d_f;
+typedef struct s_vector_2d_f
+{
+	float	x;
+	float	y;
+}			t_vector_2d_f;
 
 
 typedef struct s_parse
@@ -175,8 +181,8 @@ typedef struct s_plyer
 	int			move;
 	int			rotate;
 	// control keys.
-	int key_bool[200];
-    int prev_key_bool[200];
+	int			key_bool[200];
+	int			prev_key_bool[200];
 }				t_plyer;
 
 
@@ -199,11 +205,11 @@ typedef struct s_plyer
 
 typedef struct s_ray
 {
-    double angle;
-    double distance;
-    int hit_wall;
-    t_line position;
-} t_ray;
+	double	angle;
+	double	distance;
+	int		hit_wall;
+	t_line	position;
+}			t_ray;
 
 
 typedef struct s_raycast
@@ -243,12 +249,5 @@ typedef struct s_cube
 	t_plyer		*p;
 	t_raycast	*r;
 }			t_cube;
-
-
-
-// movement.
-
-void ft_player_movement(t_cube *cube);
-void ft_angle_normal(float *angle);
 
 #endif /* TYPES_H */

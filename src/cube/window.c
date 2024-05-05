@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 20:29:40 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/05 18:16:49 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/05 21:00:22 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,28 @@
 void	keyboard(int keycode, t_cube *cube);
 void	keyboard_release(int key, t_cube *cube);
 
-int ft_mouse_handlertrack(int x, int y, t_cube *param)
+int	ft_mouse_handlertrack(int x, int y, t_cube *param)
 {
-    t_vector_2d mouse_pos;
+	t_vector_2d	mouse_pos;
 
-    mouse_pos.x = x - param->p->pos.x;
-    mouse_pos.y = y - param->p->pos.y;
+	mouse_pos.x = x - param->p->pos.x;
+	mouse_pos.y = y - param->p->pos.y;
 
-    printf("mouse X:%d:\n", x);
-    printf("mouse Y:%d:\n", y);
+	printf("mouse X:%d:\n", x);
+	printf("mouse Y:%d:\n", y);
 
-    param->p->angle = atan2(mouse_pos.y, mouse_pos.x);
-    ft_angle_normal(&param->p->angle);
+	param->p->angle = atan2(mouse_pos.y, mouse_pos.x);
+	ft_angle_normal(&param->p->angle);
 	return (0);
 }
 
-int	mouse_click(int button, int x, int y, t_image *img)
-{
-	
-    img->mouse_button = button;
-    set_grid_cell(img, x, y);
-	return (1);
-}
+// int	mouse_click(int button, int x, int y, t_image *img)
+// {
+
+// 	img->mouse_button = button;
+// 	set_grid_cell(img, x, y);
+// 	return (1);
+// }
 
 int	build_window(t_cube cube)
 {
@@ -55,18 +55,12 @@ int	build_window(t_cube cube)
 	mlx_hook(cube.win_ptr, 2, 1L, (void *)keyboard, &cube);
 	mlx_hook(cube.win_ptr, 3, (1L << 1), (void *)keyboard_release, &cube);
 	mlx_hook(cube.win_ptr, 17, 0L, (void *)destroy_window, &cube);
-	mlx_hook(cube.win_ptr, 4, (1L << 2), (void *)mouse_click, &cube.img);
+	// mlx_hook(cube.win_ptr, 4, (1L << 2), (void *)mouse_click, &cube.img);
 	mlx_hook(cube.win_ptr, 6, (1L << 6), ft_mouse_handlertrack, &cube);
 	mlx_loop_hook(cube.mlx_ptr, &render_cub3d, &cube);
 	mlx_loop(cube.mlx_ptr);
 	return (0);
 }
-
-/* TAREFA */
-// plane	dir		plane
-
-
-// 		   plyer
 
 /*
  altura (h) do mapa = end - start + 1
@@ -78,17 +72,16 @@ int	render_cub3d(t_cube *cube)
 		return (1);
 	clear_img(cube->img);
 
-	// (Use Key for activate the minimap)
 	draw_ceil_floor(&cube->img);
+	raycasting(cube);
+
+	// (Use Key for activate the minimap)
 	render_minimap(cube);
 	draw_player(cube, (cube->p->pos.x / TILE_SIZE), \
 				(cube->p->pos.y / TILE_SIZE));
-	raycasting(cube);
-	ft_player_movement(cube);
+	render_rays(cube);
 
-	// draw_line_screen(cube->p->pos.y, cube->p->pos.x,
-	//  				&cube->img, cube->p->angle);
-	// draw_player_screen(&cube->img, cube->p->pos.x, cube->p->pos.y);
+	ft_player_movement(cube);
 
 	/* After render this function put image to window */
 	mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, \
@@ -100,11 +93,11 @@ void	keyboard(int keycode, t_cube *cube)
 {
 	keycode %= 200;
 	printf("key press %d\n", keycode);
-    if (keycode < 200)
-    {
-        cube->p->prev_key_bool[keycode] = cube->p->key_bool[keycode] ;
-        cube->p->key_bool[keycode] = 1;
-    }
+	if (keycode < 200)
+	{
+		cube->p->prev_key_bool[keycode] = cube->p->key_bool[keycode];
+		cube->p->key_bool[keycode] = 1;
+	}
 	if (keycode == ESC)
 		destroy_window(cube);
 	else if (keycode == K_W || keycode == K_D)
@@ -119,19 +112,18 @@ void	keyboard(int keycode, t_cube *cube)
 
 void	keyboard_release(int key, t_cube *cube)
 {
-	t_plyer *player;
+	t_plyer	*player;
 
 	player = cube->p;
 	key %= 200;
 
-    if (key < 200)
-    {
-        player->prev_key_bool[key] = player->key_bool[key];
-        player->key_bool[key] = 0;
-        player->move = 0;
-        player->rotate = 0;
-
-    }
+	if (key < 200)
+	{
+		player->prev_key_bool[key] = player->key_bool[key];
+		player->key_bool[key] = 0;
+		player->move = 0;
+		player->rotate = 0;
+	}
 }
 
 int	draw_ceil_floor(t_image *img)
