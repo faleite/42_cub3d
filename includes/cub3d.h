@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/04 17:45:46 by marvin           ###   ########.fr       */
+/*   Updated: 2024/05/05 16:19:44 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,8 @@ int		hit_wall(float new_x, float new_y);
 int		hit_wall_m(float new_x, float new_y);
 void	raycasting(t_cube *cube);
 // Study
-void	print_grid(t_image *img);
 void	set_grid_cell(t_image *img, int x, int y);
-void	print_player(t_cube *cube, t_image *img);
 void	ft_bresenham(t_image *img, t_vt_d p1, t_vt_d p2, int color);
-void	print_ray(t_cube *cube, t_image *img);
 
 /* tools */
 void	init_values(t_cube *cube);
