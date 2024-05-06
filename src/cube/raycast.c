@@ -86,6 +86,7 @@ float	calc_vertical_distance(t_cube *cube, float angl) // vertical intersection.
 	float	y_step;
 	int		pixel;
 
+	ft_angle_normal(&angl);
 	delta.x = TILE_SIZE;
 	delta.y = TILE_SIZE * tan(angl);
 	collition.x = floor(cube->p->pos.x / TILE_SIZE) * TILE_SIZE;
@@ -164,6 +165,23 @@ int	calc_step(float angle, float *inter, float *step, int is_horizon)
     return (1);
 }
 
+int ft_looking_angle_up(float angle)
+{
+	ft_angle_normal(&angle);
+	if (angle > 0 && angle < M_PI)
+		return (1);
+	if (angle > M_PI && angle < 2 * M_PI)
+		return (2);
+}
+
+int ft_looking_angle_down(float angle)
+{
+	ft_angle_normal(&angle);
+	if (angle > M_PI / 2 && angle < 3 * M_PI / 2)
+		return (1);
+	else if (angle > 3 * M_PI / 2 && angle < M_PI)
+		return (2);
+}
 int	unit_circle(float angle, char c)
 {
 	if (c == 'x')
@@ -186,6 +204,7 @@ float	calc_hor_distance(t_cube *cube, float angl) // horizontal distance.
 	int		pixel;
 
 	delta.y = TILE_SIZE;
+	ft_angle_normal(&angl);
 	delta.x = TILE_SIZE / tan(angl);
 	collition.y = floor(cube->p->pos.y / TILE_SIZE) * TILE_SIZE;
 	pixel = calc_step(angl, &collition.y, &delta.y, 1);
@@ -209,32 +228,41 @@ void	draw_wall_m(t_cube *cube, int ray, int t_pix, int b_pix)	// draw the wall
 	while (t_pix < b_pix)
 	{
 		if (cube->r->hit)
-			img_draw_pixel(&cube->img, ray, t_pix++, RED / 2);
+		{
+			if (cube->r->angle < M_PI && cube->r->angle > 0 )
+				img_draw_pixel(&cube->img, ray, t_pix++, ORANGE);
+			else
+				img_draw_pixel(&cube->img, ray, t_pix++, WHITE);
+		}
 		else
-			img_draw_pixel(&cube->img, ray, t_pix++, RED);
+		{
+			if (cube->r->angle > M_PI / 2 && cube->r->angle < 3 * M_PI / 2 )
+				img_draw_pixel(&cube->img, ray, t_pix++, GREEN);
+			else
+				img_draw_pixel(&cube->img, ray, t_pix++, BLACK);
+		}
 	}
 }
 
 void ft_draw_wall(t_cube *cube, int ray)
 {
     t_vector_2d_f intersection;
+	t_vector_2d_f pixels;
+
 	double wall_height;
-	double b_pix;
-	double t_pix;
 	float angle;
 
 	angle = cube->r->angle - cube->p->angle;
 	ft_angle_normal(&angle);
 	cube->r->dist *= cos(angle);
 	wall_height = (TILE_SIZE / cube->r->dist) * ( (W_WIDTH / 2) / tan(FOV_RAD / 2));
-	b_pix = (W_HEIGHT / 2) + (wall_height / 2);
-	t_pix = (W_HEIGHT / 2) - (wall_height / 2);
-	if (b_pix > W_HEIGHT)
-		b_pix = W_HEIGHT;
-	if (t_pix < 0)
-		t_pix = 0;
-	
-	draw_wall_m(cube, ray, t_pix, b_pix);
+	pixels.x = (W_HEIGHT / 2) + (wall_height / 2);
+	pixels.y = (W_HEIGHT / 2) - (wall_height / 2);
+	if (pixels.x > W_HEIGHT)
+		pixels.x = W_HEIGHT;
+	if (pixels.y < 0)
+		pixels.y = 0;
+	draw_wall_m(cube, ray, pixels.y, pixels.x);
 }
 
 void	draw_rays(t_cube *cube, t_image *img)
@@ -257,9 +285,11 @@ void raycasting(t_cube *cube)
 
     ray = cube->r;
     ray->angle = cube->p->angle - 0.523599;
+	ft_angle_normal((float *)&ray->angle);
     num_ray = -1;
     while (++num_ray < (W_WIDTH * 2) || ray->angle <= (cube->p->angle + 0.523599))
     {
+		ft_angle_normal((float *)&ray->angle);
         ray->hit = 0;
         intersection.x = calc_hor_distance(cube, ray->angle);
         intersection.y = calc_vertical_distance(cube, ray->angle);

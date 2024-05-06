@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/04 19:45:53 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/06 11:29:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define FOV_RAD 1.0472
 # define FOV_HALF 30
 # define RAY_VIEW 25
-# define TILE_SIZE 64.0 // 32 // 64
+# define TILE_SIZE 120.0 // 32 // 64
 
 /* elements */
 # define F "F"
@@ -134,8 +134,14 @@ typedef struct s_image
 	int		bpp;
 	int		line_len;
 	int		endian;
-	int		mouse_button;
 }			t_image;
+
+typedef struct s_texture
+{
+	t_image img;
+	int		width;
+	int		height;
+}			t_texture;
 
 typedef struct s_line
 {
@@ -233,6 +239,7 @@ typedef struct s_raycast
 	int			mp;
 	int			hit_horizontal;
 	// t_texture	*texture;
+	int texture;
 }					t_raycast;
 
 typedef struct s_cube
@@ -240,6 +247,10 @@ typedef struct s_cube
 	void		*mlx_ptr;
 	void		*win_ptr;
 	t_image		img;
+	t_texture	tex_no;
+	t_texture	tex_so;
+	t_texture	tex_we;
+	t_texture	tex_ea;
 	t_plyer		*p;
 	t_raycast	*r;
 }			t_cube;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:38:23 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/03 21:18:06 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/06 07:52:11 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,27 +75,27 @@ void  print_grid(t_image *img)
   }
 }
 
-void  set_grid_cell(t_image *img, int x, int y)
-{
+// void  set_grid_cell(t_image *img, int x, int y)
+// {
 
-  (void)img;
-  // Converting pixel coordinates into tab coordinates
-  t_vt_d map_pos = {
-    x / TILE_SIZE, // x
-    y / TILE_SIZE // y
-  };
-  printf("x: %d, y: %d\n\n", map_pos.x, map_pos.y);
+//   (void)img;
+//   // Converting pixel coordinates into tab coordinates
+//   t_vt_d map_pos = {
+//     x / TILE_SIZE, // x
+//     y / TILE_SIZE // y
+//   };
+  // printf("x: %d, y: %d\n\n", map_pos.x, map_pos.y);
   
   // // Checking out of range coordinates
   // if (map_pos.x < 0 || x >= W_WIDTH || y < 0 || y >= W_HEIGHT)
   //   return;
 
   // // Changing cell value according to mouse button
-  if (img->mouse_button == MOUSE_LEFT_BUTTON)
-    map()->map[map_pos.y][map_pos.x] = '1';
-  else if (img->mouse_button == MOUSE_RIGHT_BUTTON)
-    map()->map[map_pos.y][map_pos.x] = '0';
-}
+//   if (img->mouse_button == MOUSE_LEFT_BUTTON)
+//     map()->map[map_pos.y][map_pos.x] = '1';
+//   else if (img->mouse_button == MOUSE_RIGHT_BUTTON)
+//     map()->map[map_pos.y][map_pos.x] = '0';
+// }
 
 void  print_player(t_cube *cube, t_image *img)
 {

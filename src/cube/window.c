@@ -3,17 +3,65 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 20:29:40 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/04 19:20:26 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/06 07:53:26 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+// #include "../../textures/walls/w3d_n.xpm"
+// #include "../../textures/walls/w3d_s.xpm"
+// #include "../../textures/walls/w3d_w.xpm"
 void	keyboard(int keycode, t_cube *cube);
 void	keyboard_release(int key, t_cube *cube);
+
+// void ft_texture_manager(t_cube *cube, t_texture *texture, int num)
+// {
+// 	if (num == 0)
+// 	{
+// 		texture->mlx_img =  mlx_xpm_file_to_image(cube->mlx_ptr, parse()->path_no, &cube->texture->width, &cube->texture->height);
+// 		if (!texture->mlx_img)
+// 			printf("error\n");
+// 		texture->addr = mlx_get_data_addr(texture->mlx_img, &texture->bpp, &texture->line_len, &texture->endian);
+// 	}
+// 	if (num == 1)
+// 	{
+// 		texture->mlx_img =  mlx_xpm_file_to_image(cube->mlx_ptr, parse()->path_so, &cube->texture->width, &cube->texture->height);
+// 		texture->addr = mlx_get_data_addr(texture->mlx_img, &texture->bpp, &texture->line_len, &texture->endian);
+// 	}
+// 	if (num == 2)
+// 	{
+// 		texture->mlx_img =  mlx_xpm_file_to_image(cube->mlx_ptr, parse()->path_we, &cube->texture->width, &cube->texture->height);
+// 		texture->addr = mlx_get_data_addr(texture->mlx_img, &texture->bpp, &texture->line_len, &texture->endian);
+// 	}
+// 	if (num == 3)
+// 	{
+// 		texture->mlx_img =  mlx_xpm_file_to_image(cube->mlx_ptr, parse()->path_ea, &cube->texture->width, &cube->texture->height);
+// 		texture->addr = mlx_get_data_addr(texture->mlx_img, &texture->bpp, &texture->line_len, &texture->endian);
+// 	}
+// }
+
+
+// int int_textures(t_cube *cube)
+// {
+// 	int num_text;
+
+// 	num_text = -1;
+// 	cube->texture = ft_calloc(4, sizeof(t_texture ));
+// 	if (!cube->texture)
+// 		return (1);
+// 	cube->texture->width = 64;
+// 	cube->texture->height = 64;
+// 	while (++num_text < 4)
+// 	{
+// 		ft_texture_manager(cube, &cube->texture[num_text], num_text);
+// 	}
+// 	// cube->texture[0].addr = mlx_xpm_file_to_image(cube->mlx_ptr, parse()->path_no, &cube->texture->width, &cube->texture->height);
+	
+// }
 
 int ft_mouse_handlertrack(int x, int y, t_cube *param)
 {
@@ -30,12 +78,40 @@ int ft_mouse_handlertrack(int x, int y, t_cube *param)
 	return (0);
 }
 
-int	mouse_click(int button, int x, int y, t_image *img)
-{
+// int	mouse_click(int button, int x, int y, t_image *img)
+// {
 	
-    img->mouse_button = button;
-    set_grid_cell(img, x, y);
-	return (1);
+//     // img->mouse_button = button;
+//     set_grid_cell(img, x, y);
+// 	return (1);
+// }
+
+void	ft_load_texture(void *mlx, t_texture *texture, char *path)
+{
+	texture->img.mlx_img = mlx_xpm_file_to_image(mlx, path,
+			&texture->width, &texture->height);
+	// texture->img.addr = mlx_get_data_addr(texture->img.mlx_img,
+	// 		&texture->img.bpp,
+	// 		&texture->img.line_len,
+	// 		&texture->img.endian);
+}
+
+void ft_init_textures(t_cube *cube)
+{
+	char *path_no;
+	char *path_so;
+	char *path_we;
+	char *path_ea;
+
+	path_no = "../../textures/walls/w3d_e.xpm";
+	path_so = "../../textures/walls/w3d_n.xpm";
+	path_we = "../../textures/walls/w3d_s.xpm";
+	path_ea = "../../textures/walls/w3d_w.xpm";
+
+	ft_load_texture(cube->mlx_ptr, &cube->tex_no, path_no);
+	ft_load_texture(cube->mlx_ptr, &cube->tex_so, path_so);
+	ft_load_texture(cube->mlx_ptr, &cube->tex_we, path_we);
+	ft_load_texture(cube->mlx_ptr, &cube->tex_ea, path_ea);
 }
 
 int	build_window(t_cube cube)
@@ -49,13 +125,22 @@ int	build_window(t_cube cube)
 		free(cube.win_ptr);
 		return (1);
 	}
+	ft_init_textures(&cube);
+	// cube.texture = ft_calloc(4, sizeof(t_texture ));
 	cube.img.mlx_img = mlx_new_image(cube.mlx_ptr, W_WIDTH, W_HEIGHT);
 	cube.img.addr = mlx_get_data_addr(cube.img.mlx_img, &cube.img.bpp, \
 					&cube.img.line_len, &cube.img.endian);
+	
+	// if (!cube.texture.mlx_img)
+	// {
+	// 	printf("FAIL GET PATH IMAGE");
+	// 	exit(EXIT_FAILURE);
+	// }
+	// mlx_put_image_to_window(cube.mlx_ptr, cube.win_ptr, cube.texture.mlx_img, 0, 0);
 	mlx_hook(cube.win_ptr, 2, 1L, (void *)keyboard, &cube);
 	mlx_hook(cube.win_ptr, 3, (1L << 1), (void *)keyboard_release, &cube);
 	mlx_hook(cube.win_ptr, 17, 0L, (void *)destroy_window, &cube);
-	mlx_hook(cube.win_ptr, 4, (1L << 2), (void *)mouse_click, &cube.img);
+	// mlx_hook(cube.win_ptr, 4, (1L << 2), (void *)mouse_click, &cube.img);
 	mlx_hook(cube.win_ptr, 6, (1L << 6), ft_mouse_handlertrack, &cube);
 	mlx_loop_hook(cube.mlx_ptr, &render_cub3d, &cube);
 	mlx_loop(cube.mlx_ptr);
@@ -107,7 +192,6 @@ int	render_cub3d(t_cube *cube)
 void	keyboard(int keycode, t_cube *cube)
 {
 	keycode %= 200;
-	printf("key press %d\n", keycode);
     if (keycode < 200)
     {
         cube->p->prev_key_bool[keycode] = cube->p->key_bool[keycode] ;

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 19:48:29 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/04 14:19:54 by marvin           ###   ########.fr       */
+/*   Updated: 2024/05/05 10:26:23 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,8 +126,9 @@
 
 void ft_angle_normal(float *angle)
 {
-    double mod_angle = 2 * M_PI;
+    float mod_angle;
 
+    mod_angle = 2 * M_PI;
     *angle = fmod(*angle, mod_angle);
     if (*angle < 0)
         *angle += mod_angle;
