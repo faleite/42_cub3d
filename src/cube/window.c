@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 20:29:40 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/06 07:53:26 by marvin           ###   ########.fr       */
+/*   Updated: 2024/05/06 11:58:30 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,7 @@ int ft_mouse_handlertrack(int x, int y, t_cube *param)
     ft_angle_normal(&param->p->angle);
 	return (0);
 }
-
-// int	mouse_click(int button, int x, int y, t_image *img)
-// {
-	
-//     // img->mouse_button = button;
-//     set_grid_cell(img, x, y);
-// 	return (1);
-// }
+// Function to load the textures.
 
 void	ft_load_texture(void *mlx, t_texture *texture, char *path)
 {
@@ -130,33 +123,15 @@ int	build_window(t_cube cube)
 	cube.img.mlx_img = mlx_new_image(cube.mlx_ptr, W_WIDTH, W_HEIGHT);
 	cube.img.addr = mlx_get_data_addr(cube.img.mlx_img, &cube.img.bpp, \
 					&cube.img.line_len, &cube.img.endian);
-	
-	// if (!cube.texture.mlx_img)
-	// {
-	// 	printf("FAIL GET PATH IMAGE");
-	// 	exit(EXIT_FAILURE);
-	// }
-	// mlx_put_image_to_window(cube.mlx_ptr, cube.win_ptr, cube.texture.mlx_img, 0, 0);
 	mlx_hook(cube.win_ptr, 2, 1L, (void *)keyboard, &cube);
 	mlx_hook(cube.win_ptr, 3, (1L << 1), (void *)keyboard_release, &cube);
 	mlx_hook(cube.win_ptr, 17, 0L, (void *)destroy_window, &cube);
-	// mlx_hook(cube.win_ptr, 4, (1L << 2), (void *)mouse_click, &cube.img);
 	mlx_hook(cube.win_ptr, 6, (1L << 6), ft_mouse_handlertrack, &cube);
 	mlx_loop_hook(cube.mlx_ptr, &render_cub3d, &cube);
 	mlx_loop(cube.mlx_ptr);
 	return (0);
 }
 
-/* TAREFA */
-// plane	dir		plane
-
-
-// 		   plyer
-
-/*
- altura (h) do mapa = end - start + 1
- largura (w) do mapa = maior linha do mapa
-*/
 int	render_cub3d(t_cube *cube)
 {
 	if (!cube->mlx_ptr)
