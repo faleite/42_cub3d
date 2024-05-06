@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 16:00:53 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/04 14:37:00 by marvin           ###   ########.fr       */
+/*   Updated: 2024/05/06 12:22:14 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void ft_player_movement_update(t_cube *cube, int move)
     player = cube->p;
     new_x = player->pos.x;
     new_y = player->pos.y;
+    ft_angle_normal(&cube->p->angle);
     if (move == 1)
     {
         new_x += (cos(player->angle) * player->move * player->move_speed);

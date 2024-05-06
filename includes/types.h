@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/06 11:29:45 by marvin           ###   ########.fr       */
+/*   Updated: 2024/05/06 12:39:36 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define FOV_RAD 1.0472
 # define FOV_HALF 30
 # define RAY_VIEW 25
-# define TILE_SIZE 120.0 // 32 // 64
+# define TILE_SIZE 64.0 // 32 // 64
 
 /* elements */
 # define F "F"

@@ -232,7 +232,7 @@ void	draw_wall_m(t_cube *cube, int ray, int t_pix, int b_pix)	// draw the wall
 			if (cube->r->angle < M_PI && cube->r->angle > 0 )
 				img_draw_pixel(&cube->img, ray, t_pix++, ORANGE);
 			else
-				img_draw_pixel(&cube->img, ray, t_pix++, BLACK / 2);
+				img_draw_pixel(&cube->img, ray, t_pix++, RED);
 		}
 		else
 		{
@@ -287,7 +287,7 @@ void raycasting(t_cube *cube)
     ray->angle = cube->p->angle - 0.523599;
 	ft_angle_normal((float *)&ray->angle);
     num_ray = -1;
-    while (++num_ray < (W_WIDTH * 2) || ray->angle <= (cube->p->angle + 0.523599))
+    while (++num_ray < (W_WIDTH ) || ray->angle <= (cube->p->angle + 0.523599))
     {
 		ft_angle_normal((float *)&ray->angle);
         ray->hit = 0;
@@ -317,6 +317,6 @@ void raycasting(t_cube *cube)
 			ft_bresenham(&cube->img, pos, colide, YELLOW);
         }
         ft_draw_wall(cube, num_ray);
-        ray->angle += 0.0002757;
+        ray->angle += (FOV_RAD / W_WIDTH);
     }
 }
