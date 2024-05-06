@@ -14,10 +14,10 @@
 
 int	unit_circle(float angle, char c);
 int	calc_step(float angle, float *inter, float *step, int is_horizon);
-int	hit_wall_m(float x, float y);
+int	hit_wall(float x, float y);
 int	ft_check_distance(t_vt_f p1, t_vector_2d_f p2);
 
-int	hit_wall_m(float x, float y)
+int	hit_wall(float x, float y)
 {
 	int		x_m;
 	int		y_m;
@@ -56,7 +56,7 @@ float	calc_vertical_distance(t_cube *cube, float angl) // vertical intersection.
 	if ((unit_circle(angl, 'x') && delta.y < 0) || \
 	(!unit_circle(angl, 'x') && delta.y > 0))
 		delta.y *= -1;
-	while (hit_wall_m(collition.x - pixel, collition.y))
+	while (hit_wall(collition.x - pixel, collition.y))
 	{
 		collition.x += delta.x;
 		collition.y += delta.y;
@@ -148,7 +148,7 @@ float	calc_hor_distance(t_cube *cube, float angl) // horizontal distance.
 	if ((unit_circle(angl, 'y') && delta.x > 0) || \
 		(!unit_circle(angl, 'y') && delta.x < 0))
 		delta.x *= -1;
-	while (hit_wall_m(collition.x, collition.y - pixel))
+	while (hit_wall(collition.x, collition.y - pixel))
 	{
 		collition.x += delta.x;
 		collition.y += delta.y;

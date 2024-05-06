@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:34:03 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/03 17:30:12 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/06 19:42:46 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,44 +58,6 @@ int	destroy_window(t_cube *cube)
 	free_data(cube);
 	free_parse();
 	exit(0);
-}
-
-/*
-	Brasenham's algorithme draws lines between two points
-*/
-void	brasenham(t_line line, t_image *img, int color)
-{
-	t_line	*tmp;
-
-	tmp = &line;
-	tmp->delta_x = (tmp->x1 - tmp->x0);
-	tmp->delta_y = (tmp->y1 - tmp->y0);
-	tmp->max = ft_max(ft_mod(tmp->delta_x), ft_mod(tmp->delta_y));
-	tmp->delta_x /= tmp->max;
-	tmp->delta_y /= tmp->max;
-	while ((int)(tmp->x0 - tmp->x1) || (int)(tmp->y0 - tmp->y1))
-	{
-		img_draw_pixel(img, tmp->x0, tmp->y0, color);
-		tmp->x0 += tmp->delta_x;
-		tmp->y0 += tmp->delta_y;
-	}
-}
-
-void	draw_line(float p_y, float p_x, t_image *img, double dir)
-{
-	float	scale;	
-	t_line	line;
-
-	scale = MAP_SCALE;
-	if (parse()->map_height > 20 || parse()->map_width > 40)
-		scale /= 2;
-	line.x0 = p_x * scale;
-	line.y0 = p_y * scale;
-	line.x1 = p_x + cos(dir) * 10;
-	line.x1 *= scale;
-	line.y1 = p_y + sin(dir) * 10;
-	line.y1 *= scale;
-	brasenham(line, img, RED);
 }
 
 void	draw_circle(t_vt_d center, int color, int radius, t_image *img)

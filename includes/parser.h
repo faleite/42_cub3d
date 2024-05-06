@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/18 14:41:13 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/06 19:54:15 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 /* structs init */
 t_parse	*parse(void);
-// t_image	*img(void);
-// t_field	*field(void);
 
 /* parser */
 int		validate_scene(int argc, char *arg);
@@ -40,7 +38,6 @@ int		path_exists(void);
 int		clean_comma(void);
 int		check_rgb(char *rgb);
 int		check_rgb_number(char **rgb);
-// int		check_scene(void);
 
 /* check map */
 void	check_field(void);
@@ -51,7 +48,6 @@ int		closed_by_validfield(char **map);
 int		is_player(char c);
 
 /* data */
-// int		get_map_dimension(void);
 char	**get_scene(char *file);
 char	**get_map(void);
 void	get_player(void);

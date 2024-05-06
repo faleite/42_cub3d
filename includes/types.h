@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/06 18:17:12 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/06 20:21:27 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,16 @@
 /* images */
 
 /* window
- vm: W_W 1350 W_H 680 
+ vm: W_W 1350 W_H 680
 */
-# define W_WIDTH  1280
+# define W_WIDTH 1280
 # define W_HEIGHT 750
 # define MAP_SCALE 12.0
 # define FOV 60
 # define FOV_RAD 1.0472
 # define FOV_HALF 30
 # define RAY_VIEW 25
-# define TILE_SIZE 64.0 // 32 // 64
+# define TILE_SIZE 64.0
 
 /* elements */
 # define F "F"
@@ -70,15 +70,15 @@
 # define K_DOWN 164
 # define K_LEFT 161
 # define K_RIGHT 163
-// #define XK_Escape 107
 
-# define MOUSE_LEFT_BUTTON	1
-# define MOUSE_RIGHT_BUTTON	3
-# define MOUSE_THIRD_BUTTON	2
-# define MOUSE_SCROLL_UP	4
-# define MOUSE_SCROLL_DOWN	5
-# define MOUSE_SCROLL_LEFT	6
-# define MOUSE_SCROLL_RIGHT	7
+/* Mouse buttons */
+# define MOUSE_LEFT_BUTTON 1
+# define MOUSE_RIGHT_BUTTON 3
+# define MOUSE_THIRD_BUTTON 2
+# define MOUSE_SCROLL_UP 4
+# define MOUSE_SCROLL_DOWN 5
+# define MOUSE_SCROLL_LEFT 6
+# define MOUSE_SCROLL_RIGHT 7
 
 /**
  * Represents a 2D pixel position.
@@ -88,14 +88,14 @@
  */
 typedef struct s_vt_d
 {
-	int		x;
-	int		y;
-}			t_vt_d;
+	int	x;
+	int	y;
+}		t_vt_d;
 
 typedef struct s_vt_f
 {
-	double		x;
-	double		y;
+	double	x;
+	double	y;
 }			t_vt_f;
 
 typedef struct s_vector_2d
@@ -103,14 +103,13 @@ typedef struct s_vector_2d
 	int		x;
 	int		y;
 	double	angle;
-}		t_vector_2d;
+}			t_vector_2d;
 
 typedef struct s_vector_2d_f
 {
 	float	x;
 	float	y;
 }			t_vector_2d_f;
-
 
 typedef struct s_parse
 {
@@ -131,7 +130,7 @@ typedef struct s_parse
 	int		color_f;
 	int		map_height;
 	int		map_width;
-}	t_parse;
+}			t_parse;
 
 typedef struct s_image
 {
@@ -144,7 +143,7 @@ typedef struct s_image
 
 typedef struct s_texture
 {
-	t_image img;
+	t_image	img;
 	int		width;
 	int		height;
 }			t_texture;
@@ -167,7 +166,7 @@ typedef struct s_line
 	double	delta_x;
 	double	delta_y;
 	double	max;
-}				t_line;
+}			t_line;
 
 typedef struct s_map
 {
@@ -180,42 +179,16 @@ typedef struct s_map
 
 typedef struct s_plyer
 {
-	int			horizontal; // 0
-	int			vertical; // 0
-	double		angle_s;
-
-	double		move_speed; // 3
-	double		rotation_speed; // move_sp * (PI / 180)
-	float		angle; // 90
-	t_vt_f		pos; // //posição inicial xey
-	t_vt_f		dir; // //vetor de direção inicial
-	t_vt_f		plane; // //a versão 2d raycaster do plano da câmera
-	// double		camera_x;
-
-	int			move;
-	int			rotate;
-	// control keys.
-	int			key_bool[200];
-	int			prev_key_bool[200];
-}				t_plyer;
-
-
-/**
- * Represents data related to a ray's properties and interactions in
- * a 2D space.
- *
- * @param ra The ray's angle.
- * @param rx The ray's horizontal component.
- * @param ry The ray's vertical component.
- * @param xo The starting X-coordinate of the ray.
- * @param yo The starting Y-coordinate of the ray.
- * @param mx The map grid X-coordinate where the ray intersects.
- * @param my The map grid Y-coordinate where the ray intersects.
- * @param mp The type of map element the ray intersects with.
- * @param hit_horizontal Flag indicating if the ray hit a horizontal
- * map boundary.
- * @param texture Pointer to the texture associated with the ray.
- */
+	double	move_speed;
+	double	rotation_speed;
+	float	angle;
+	t_vt_f	pos;
+	t_vt_f	plane;
+	int		move;
+	int		rotate;
+	int		key_bool[200];
+	int		prev_key_bool[200];
+}			t_plyer;
 
 typedef struct s_ray
 {
@@ -225,48 +198,28 @@ typedef struct s_ray
 	t_line	position;
 }			t_ray;
 
-
 typedef struct s_raycast
 {
-	int			ww_half; // W_W / 2
-	int			flag; // 0
-	double		dist; // 0
-	double		angle; // 3 * PI / 2
-
-	// float		rx;
-	// float		ry;
-	t_vt_f		ray_dir;
-	t_vt_f		side_dist;
-	t_vt_f		delta_dist;
-	t_vt_d		step;
-	t_vt_d		pos;
-	t_vt_d		hor;
-	t_vt_d		ver;
-	int			hit;
-	int			side;
-
-	float		ra;
-	float		xo;
-	float		yo;
-	int			mx;
-	int			my;
-	int			mp;
-	int			hit_horizontal;
-	// t_texture	*texture;
-	int texture;
-}					t_raycast;
+	int		hit;
+	double	dist;
+	double	angle;
+	t_vt_d	step;
+	t_vt_d	pos;
+	t_vt_d	hor;
+	t_vt_d	ver;
+}			t_raycast;
 
 typedef struct s_cube
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
 	t_image		img;
+	t_plyer		*p;
+	t_raycast	*r;
 	t_texture	tex_no;
 	t_texture	tex_so;
 	t_texture	tex_we;
 	t_texture	tex_ea;
-	t_plyer		*p;
-	t_raycast	*r;
-}			t_cube;
+}				t_cube;
 
 #endif /* TYPES_H */

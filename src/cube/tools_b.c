@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_b.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:06:45 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/04 15:17:02 by marvin           ###   ########.fr       */
+/*   Updated: 2024/05/06 20:12:41 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,23 +51,6 @@ void	set_vector_f(t_vt_f *p, float x, float y)
 	p->y = y;
 }
 
-t_vt_f	set_dir(void)
-{
-	t_vt_f	dir;
-
-	if (parse()->orientation == 'N')
-		set_vector_f(&dir, 0, 1);
-	else if (parse()->orientation == 'S')
-		set_vector_f(&dir, 0, -1);
-	else if (parse()->orientation == 'W')
-		set_vector_f(&dir, 1, 0);
-	else
-		set_vector_f(&dir, -1, 0);
-	// set positions player to 0;
-	// map()->map[map()->ply_start.x][map()->ply_start.y] = '0';
-	return (dir);
-}
-
 void	init_values(t_cube *cube)
 {
 	cube->p = ft_calloc(1, sizeof(t_plyer));
@@ -80,9 +63,6 @@ void	init_values(t_cube *cube)
 	cube->p->move_speed = 4;
 	cube->p->rotation_speed = 0.045;
 	cube->p->angle = player_direction();
-	// cube->p->dir = set_dir(); // raio vetor inicial de direcao
-	cube->p->dir.x = -1; // set_dir(); // raio vetor inicial de direcao
-	// cube->p->dir.y = 0; // set_dir(); // raio vetor inicial de direcao
 	cube->p->pos.x = map()->ply_start.x * TILE_SIZE + TILE_SIZE / 2;
 	cube->p->pos.y = map()->ply_start.y * TILE_SIZE + TILE_SIZE / 2;
 	cube->p->plane.y = 0.66; // versão 2d raster do plano da câmera

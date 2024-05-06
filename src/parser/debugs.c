@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 19:27:52 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/23 19:47:48 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/06 20:22:41 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	print_struct_map(void)
 	printf("/* MAP */\n");
 	printf("\nMAP HEIGHT: %d ", map()->map_height);
 	printf("\nMAP WIDTH: %d ", map()->map_width);
-	printf("\nPLAYER: y: %d, x: %d\n\n",\
+	printf("\nPLAYER: y: %d, x: %d\n\n", \
 			map()->ply_start.y, map()->ply_start.x);
 	print_scene(map()->map, 1);
 }

@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 16:59:47 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/04/23 19:00:42 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/06 19:54:08 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ static void	validate_map(void)
 	map()->map_height = parse()->end_map - parse()->start_map;
 	map()->map_width = parse()->map_width;
 	get_player();
-	// get_map_dimension()
 }
 
 int	validate_scene(int argc, char *arg)

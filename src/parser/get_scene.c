@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 21:24:35 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/03 17:57:46 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/06 19:54:01 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,21 +123,3 @@ void	get_player(void)
 		}
 	}
 }
-
-/* Ainda nao usando */
-// int	get_map_dimension(void)
-// {
-// 	int	y;
-// 	int	len;
-
-// 	y = parse()->start_map;
-// 	while (parse()->scene[y] && y <= parse()->end_map)
-// 	{
-// 		len = ft_strlen(parse()->scene[y]);
-// 		if (len > parse()->map_width)
-// 			parse()->map_width = len;
-// 		parse()->map_height++;
-// 		y++;
-// 	}
-// 	return (0);
-// }
