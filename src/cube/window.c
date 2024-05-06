@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 20:29:40 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/06 11:58:30 by marvin           ###   ########.fr       */
+/*   Updated: 2024/05/06 12:13:12 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,35 @@ int	build_window(t_cube cube)
 	return (0);
 }
 
+void drawCircleWithCross(t_cube *cube) {
+
+    int centerx;
+    int centery;
+    int radious;
+
+    centerx = W_WIDTH / 2;
+    centery = W_HEIGHT / 2;
+    radious = 50;
+    int x, y, dx, dy;
+
+    // Draw the circle
+    for (double angle = 0; angle < 360; angle += 0.1) {
+        x = centerx + (int)(radious * cos(angle * M_PI / 180));
+        y = centery + (int)(radious * sin(angle * M_PI / 180));
+        img_draw_pixel(&cube->img, x, y, RED);
+    }
+
+    // Draw the vertical line of the cross
+    for (y = centery - radious; y <= centery + radious; y++) {
+        img_draw_pixel(&cube->img, centerx, y, WHITE);
+    }
+
+    // Draw the horizontal line of the cross
+    for (x = centerx - radious; x <= centerx + radious; x++) {
+        img_draw_pixel(&cube->img, x, centery, WHITE);
+    }
+}
+
 int	render_cub3d(t_cube *cube)
 {
 	if (!cube->mlx_ptr)
@@ -144,6 +173,7 @@ int	render_cub3d(t_cube *cube)
 	draw_player(cube, (cube->p->pos.x / TILE_SIZE), (cube->p->pos.y / TILE_SIZE));
 	raycasting(cube);
 	ft_player_movement(cube);
+	drawCircleWithCross(cube);
 	// ft_bresenham(&cube->img, )
 	// render_player(cube);
 

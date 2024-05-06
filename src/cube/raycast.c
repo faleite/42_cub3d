@@ -232,7 +232,7 @@ void	draw_wall_m(t_cube *cube, int ray, int t_pix, int b_pix)	// draw the wall
 			if (cube->r->angle < M_PI && cube->r->angle > 0 )
 				img_draw_pixel(&cube->img, ray, t_pix++, ORANGE);
 			else
-				img_draw_pixel(&cube->img, ray, t_pix++, WHITE);
+				img_draw_pixel(&cube->img, ray, t_pix++, BLACK / 2);
 		}
 		else
 		{
