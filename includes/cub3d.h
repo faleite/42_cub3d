@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/04 17:45:46 by marvin           ###   ########.fr       */
+/*   Updated: 2024/05/05 20:44:12 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,6 @@
 # include "types.h"
 # include "parser.h"
 
-#define K_UP 162
-#define K_DOWN 164
-#define K_LEFT 161
-#define K_RIGHT 163
-#define K_A 97
-#define K_W 119
-#define K_D 100
-#define K_S 115
-// #define XK_Escape 107
-
 /* struct */
 t_map	*map(void);
 
@@ -61,33 +51,27 @@ void	draw_circle(t_vt_d center, int color, int radius, t_image *img);
 /* mini map */
 int		draw_ceil_floor(t_image *img);
 int		render_minimap(t_cube *cube);
-int		render_player(t_cube *cube);
 void	draw_player(t_cube *cube, float x, float y);
-// void	init_player(void);
 
 /* math */
 float	ft_max(float a, float b);
 float	ft_mod(float a);
 
 /* screen */
-void	draw_player_screen(t_image *img, int x, int y);
-// void	draw_line_screen(int p_y, int p_x, t_image *img, double dir);
 
 /* moves */
-void	move_up(t_cube *cube, int move);
-void	move_right(t_cube *cube, int move);
-void	move_rotate(t_cube *cube, int rotate);
-void ft_angle_normal(float *angle);
+void	ft_angle_normal(float *angle);
+void	ft_player_movement(t_cube *cube);
+void	ft_angle_normal(float *angle);
+
 /* Raycast */
-int		hit_wall(float new_x, float new_y);
 int		hit_wall_m(float new_x, float new_y);
 void	raycasting(t_cube *cube);
+void	render_rays(t_cube *cube);
+
 // Study
-void	print_grid(t_image *img);
 void	set_grid_cell(t_image *img, int x, int y);
-void	print_player(t_cube *cube, t_image *img);
 void	ft_bresenham(t_image *img, t_vt_d p1, t_vt_d p2, int color);
-void	print_ray(t_cube *cube, t_image *img);
 
 /* tools */
 void	init_values(t_cube *cube);

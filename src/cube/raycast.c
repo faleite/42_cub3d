@@ -15,46 +15,7 @@
 int	unit_circle(float angle, char c);
 int	calc_step(float angle, float *inter, float *step, int is_horizon);
 int	hit_wall_m(float x, float y);
-int ft_check_distance(t_vt_f p1, t_vector_2d_f p2);
-
-void	draw_player_screen(t_image *img, int x, int y)
-{
-	t_vt_d	p;
-
-	p.y = 0;
-	while (p.y < TILE_SIZE / 2)
-	{
-		p.x = 0;
-		while (p.x < TILE_SIZE / 2)
-		{
-			img_draw_pixel(img, x + p.x, y + p.y, RED);
-			p.x++;
-		}
-		p.y++;
-	}
-}
-
-void	draw_line_screen(int x, int p_y, int p_x, t_image *img, double dir, double perp)
-{
-	t_line	line;
-
-	line.x0 = x;
-	line.y0 = p_y;
-	line.x1 = p_x + cos(dir) * perp;
-	line.y1 = p_y + sin(dir) * perp;
-	brasenham(line, img, WHITE);
-}
-
-void	draw_wall(int i, int start, int end, t_image *img, int color)
-{
-	t_line	line;
-
-	line.x0 = i;
-	line.y0 = start;
-	line.x1 = i;
-	line.y1 = end;
-	brasenham(line, img, color);
-}
+int	ft_check_distance(t_vt_f p1, t_vector_2d_f p2);
 
 int	hit_wall_m(float x, float y)
 {
@@ -103,33 +64,6 @@ float	calc_vertical_distance(t_cube *cube, float angl) // vertical intersection.
 	cube->r->ver.x = collition.x;
 	cube->r->ver.y = collition.y;
     return (ft_check_distance(cube->p->pos, collition));
-}
-
-void	render_wall(t_cube *cube, t_image *img, int color, int index)
-{
-	int		line_height;
-	int		draw_start;
-	int		draw_end;
-	double	perp_walldist;
-
-	// Calcula a distância projetada na direção da câmera
-	if (cube->r->side == 0)
-		perp_walldist = (cube->r->side_dist.x - cube->r->delta_dist.x);
-	else
-		perp_walldist = (cube->r->side_dist.y - cube->r->delta_dist.y);
-	//Calcula a altura da linha a ser desenhada na tela
-	line_height = (int)(W_HEIGHT / perp_walldist);
-	line_height *= 2;
-	//calcula o pixel mais baixo e mais alto para preencher a faixa atual
-	draw_start = -line_height / 2 + W_HEIGHT / 2;
-	if (draw_start < 0)
-		draw_start = 0;
-	draw_end = line_height / 2 + W_HEIGHT / 2;
-	if (draw_end >= W_HEIGHT)
-		draw_end = W_HEIGHT - 1;
-	if (cube->r->side == 1)
-		color = RED / 2;
-	draw_wall(index, draw_start, draw_end, img, color);
 }
 
 int ft_check_distance(t_vt_f p1, t_vector_2d_f p2)
@@ -267,18 +201,6 @@ void ft_draw_wall(t_cube *cube, int ray)
 	draw_wall_m(cube, ray, pixels.y, pixels.x);
 }
 
-void	draw_rays(t_cube *cube, t_image *img)
-{
-	t_vt_d	player;
-	t_vt_d	ray_end;
-
-	player.x = cube->p->pos.x / (TILE_SIZE / MAP_SCALE);
-	player.y = cube->p->pos.y / (TILE_SIZE / MAP_SCALE);
-	ray_end.x = cube->r->pos.x / (TILE_SIZE / MAP_SCALE);
-	ray_end.y = cube->r->pos.y / (TILE_SIZE / MAP_SCALE);
-	ft_bresenham(img, player, ray_end, WHITE);
-}
-
 void raycasting(t_cube *cube)
 {
     t_vector_2d_f intersection;
@@ -296,29 +218,58 @@ void raycasting(t_cube *cube)
         intersection.x = calc_hor_distance(cube, ray->angle);
         intersection.y = calc_vertical_distance(cube, ray->angle);
         if (intersection.y < intersection.x)
-        {
             ray->dist = intersection.y;
-			t_vt_d colide;
-			colide.x = ray->ver.x / (TILE_SIZE / MAP_SCALE);
-			colide.y = ray->ver.y / (TILE_SIZE / MAP_SCALE);
-			t_vt_d pos;
-			pos.x = cube->p->pos.x / (TILE_SIZE / MAP_SCALE);
-			pos.y = cube->p->pos.y / (TILE_SIZE / MAP_SCALE);
-			ft_bresenham(&cube->img, pos, colide, YELLOW);
-        }
         else
         {
             ray->dist = intersection.x;
             ray->hit = 1;
-						t_vt_d colide;
-			colide.x = ray->hor.x / (TILE_SIZE / MAP_SCALE);
-			colide.y = ray->hor.y / (TILE_SIZE / MAP_SCALE);
-			t_vt_d pos;
-			pos.x = cube->p->pos.x / (TILE_SIZE / MAP_SCALE);
-			pos.y = cube->p->pos.y / (TILE_SIZE / MAP_SCALE);
-			ft_bresenham(&cube->img, pos, colide, YELLOW);
         }
         ft_draw_wall(cube, num_ray);
         ray->angle += (FOV_RAD / W_WIDTH);
     }
+}
+
+void	draw_rays(t_image *img, t_vt_f p, t_vt_d r)
+{
+	t_vt_d	player;
+	t_vt_d	ray;
+	int		scale;
+
+	scale = MAP_SCALE;
+	if (parse()->map_height > 20 || parse()->map_width > 40)
+		scale /= 2;
+	player.x = p.x / (TILE_SIZE / scale);
+	player.y = p.y / (TILE_SIZE / scale);
+	ray.x = r.x / (TILE_SIZE / scale);
+	ray.y = r.y / (TILE_SIZE / scale);
+	ft_bresenham(img, player, ray, YELLOW);
+}
+
+void	render_rays(t_cube *cube)
+{
+	int				nry;
+	t_raycast		*ray;
+	t_vector_2d_f	intersection;
+
+	ray = cube->r;
+	ray->angle = cube->p->angle - 0.523599;
+	nry = -1;
+	while (++nry < (W_WIDTH * 2) || ray->angle <= (cube->p->angle + 0.523599))
+	{
+		ray->hit = 0;
+		intersection.x = calc_hor_distance(cube, ray->angle);
+		intersection.y = calc_vertical_distance(cube, ray->angle);
+		if (intersection.y < intersection.x)
+		{
+			ray->dist = intersection.y;
+			draw_rays(&cube->img, cube->p->pos, ray->ver);
+		}
+		else
+		{
+			ray->dist = intersection.x;
+			ray->hit = 1;
+			draw_rays(&cube->img, cube->p->pos, ray->hor);
+		}
+		ray->angle += 0.0002757;
+	}
 }
