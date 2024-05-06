@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/06 17:22:21 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/06 17:45:46 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 
 /* struct */
 t_map	*map(void);
+t_tex	*tex(void);
 
 /* cube */
 int		render_cub3d(t_cube *cube);
