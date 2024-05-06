@@ -172,6 +172,7 @@ int ft_looking_angle_up(float angle)
 		return (1);
 	if (angle > M_PI && angle < 2 * M_PI)
 		return (2);
+	return (0);
 }
 
 int ft_looking_angle_down(float angle)
@@ -181,6 +182,7 @@ int ft_looking_angle_down(float angle)
 		return (1);
 	else if (angle > 3 * M_PI / 2 && angle < M_PI)
 		return (2);
+	return (0);
 }
 int	unit_circle(float angle, char c)
 {
