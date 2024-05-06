@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 20:29:40 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/06 18:22:35 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/06 19:02:38 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,29 @@ t_tex	*tex(void)
 	return (&t);
 }
 
+int	destroy_image(t_cube *cube)
+{
+	if (tex()->path_no)
+		mlx_destroy_image(cube->mlx_ptr, tex()->path_no);
+	if (tex()->path_so)
+		mlx_destroy_image(cube->mlx_ptr, tex()->path_so);
+	if (tex()->path_we)
+		mlx_destroy_image(cube->mlx_ptr, tex()->path_we);
+	if (tex()->path_ea)
+		mlx_destroy_image(cube->mlx_ptr, tex()->path_ea);
+	return (1);
+}
+
+void	image_error(t_cube *cube)
+{
+	destroy_image(cube);
+	mlx_destroy_window(cube->mlx_ptr, cube->win_ptr);
+	mlx_destroy_display(cube->mlx_ptr);
+	free(cube->mlx_ptr);
+	free_data(cube);
+	err_case("Image doesn't work\n");
+}
+
 void	*file_to_image(t_cube *cube, char *path)
 {
 	void	*img;
@@ -53,8 +76,7 @@ void	*file_to_image(t_cube *cube, char *path)
 
 	img = mlx_xpm_file_to_image(cube->mlx_ptr, path, &width, &height);
 	if (!img)
-		printf("NOT TAKE THE IMAGE\n");
-		// image_error();
+		image_error(cube);
 	else
 		printf("IMAGE: %p\n", img);
 	return (img);
@@ -124,11 +146,6 @@ int	build_window(t_cube cube)
 	return (0);
 }
 
-/*
- altura (h) do mapa = end - start + 1
- largura (w) do mapa = maior linha do mapa
-*/
-
 void drawCircleWithCross(t_cube *cube) {
 
     int centerx;
@@ -164,17 +181,17 @@ int	render_cub3d(t_cube *cube)
 		return (1);
 	clear_img(cube->img);
 
-	// draw_ceil_floor(&cube->img);
-	// raycasting(cube);
+	draw_ceil_floor(&cube->img);
+	raycasting(cube);
 
 	// (Use Key for activate the minimap)
-	// render_minimap(cube);
-	// draw_player(cube, (cube->p->pos.x / TILE_SIZE), \
-	// 			(cube->p->pos.y / TILE_SIZE));
-	// render_rays(cube);
+	render_minimap(cube);
+	draw_player(cube, (cube->p->pos.x / TILE_SIZE), \
+				(cube->p->pos.y / TILE_SIZE));
+	render_rays(cube);
 
-	// ft_player_movement(cube);
-	// drawCircleWithCross(cube);
+	ft_player_movement(cube);
+	drawCircleWithCross(cube);
 
 	// TEXTURES //
 	// mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, \
@@ -201,7 +218,10 @@ void	keyboard(int keycode, t_cube *cube)
         cube->p->key_bool[keycode] = 1;
     }
 	if (keycode == ESC)
+	{
+		destroy_image(cube);
 		destroy_window(cube);
+	}
 	else if (keycode == K_W || keycode == K_D)
 		cube->p->move = 1;
 	else if (keycode == K_S || keycode == K_A)
