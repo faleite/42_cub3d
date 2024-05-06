@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/05 20:44:12 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/06 17:22:21 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void	raycasting(t_cube *cube);
 void	render_rays(t_cube *cube);
 
 // Study
-void	set_grid_cell(t_image *img, int x, int y);
 void	ft_bresenham(t_image *img, t_vt_d p1, t_vt_d p2, int color);
 
 /* tools */
