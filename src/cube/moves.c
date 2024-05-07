@@ -6,14 +6,17 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 16:00:53 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/06 17:13:19 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/07 19:36:11 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-//-------------------------------------------------------- movement updaate.
-// printf("NewX: %d, NewY: %d\n", (int)(new.x) / (int)TILE_SIZE, (int)(new.y) / (int)TILE_SIZE);
+/**
+ * movement updaate.
+ * printf("NewX: %d, NewY: %d\n", (int)(new.x) / (int)TILE_SIZE, \
+ *		 (int)(new.y) / (int)TILE_SIZE);
+*/
 void	ft_player_movement_update(t_cube *cube, int move)
 {
 	t_plyer	*player;
@@ -29,15 +32,15 @@ void	ft_player_movement_update(t_cube *cube, int move)
 	}
 	else if (move == 2)
 	{
-		new.x += (cos(player->angle + (M_PI / 2)) * player->move *\
+		new.x += (cos(player->angle + (M_PI / 2)) * player->move * \
 						player->move_speed);
-		new.y += (sin(player->angle + (M_PI / 2)) * player->move *\
+		new.y += (sin(player->angle + (M_PI / 2)) * player->move * \
 						player->move_speed);
 	}
-	if (map()->map[(int)new.y / (int)TILE_SIZE][(int)cube->p->pos.x /\
+	if (map()->map[(int)new.y / (int)TILE_SIZE][(int)cube->p->pos.x / \
 		(int)TILE_SIZE] != '1')
 		cube->p->pos.y = new.y;
-	if (map()->map[(int)cube->p->pos.y / (int)TILE_SIZE][(int)new.x /\
+	if (map()->map[(int)cube->p->pos.y / (int)TILE_SIZE][(int)new.x / \
 		(int)TILE_SIZE] != '1')
 		cube->p->pos.x = new.x;
 	player->angle += player->rotate * player->rotation_speed;

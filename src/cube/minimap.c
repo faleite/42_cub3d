@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 20:32:19 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/04 19:46:15 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/07 19:32:30 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,9 @@ static int	draw_minimap(t_image *img, int p_y, int p_x, int color);
 int	render_minimap(t_cube *cube)
 {
 	t_vt_d	p;
-	t_image *img;
+	t_image	*img;
 
 	img = &cube->img;
-
 	p.y = 0;
 	while (p.y <= parse()->map_height)
 	{
@@ -68,16 +67,6 @@ static int	draw_minimap(t_image *img, int p_y, int p_x, int color)
 	}
 	return (0);
 }
-
-/** WORKING***
- * Draws the player's position on the minimap.
- * The player's position is scaled and represented with a specific color.
- *
- * @param img - A pointer to the img structure.
- * @param y - Scaled Y-coordinate of the player's position.
- * @param x - Scaled X-coordinate of the player's position.
- */
-
 
 void	draw_player(t_cube *cube, float x, float y)
 {

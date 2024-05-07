@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 20:29:40 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/06 19:02:38 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/07 20:49:06 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,10 +218,7 @@ void	keyboard(int keycode, t_cube *cube)
         cube->p->key_bool[keycode] = 1;
     }
 	if (keycode == ESC)
-	{
-		destroy_image(cube);
 		destroy_window(cube);
-	}
 	else if (keycode == K_W || keycode == K_D)
 		cube->p->move = 1;
 	else if (keycode == K_S || keycode == K_A)

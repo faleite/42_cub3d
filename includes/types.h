@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/06 20:21:27 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/07 20:25:44 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,19 @@ typedef struct s_line
 	double	max;
 }			t_line;
 
+typedef struct s_bres
+{
+	int		dx;
+	int		dy;
+	int		xi;
+	int		yi;
+	int		x;
+	int		y;
+	int		d;
+	int		cst1;
+	int		cst2;
+}			t_bres;
+
 typedef struct s_map
 {
 	char	**map;
@@ -183,7 +196,6 @@ typedef struct s_plyer
 	double	rotation_speed;
 	float	angle;
 	t_vt_f	pos;
-	t_vt_f	plane;
 	int		move;
 	int		rotate;
 	int		key_bool[200];

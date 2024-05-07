@@ -1,22 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools_b.c                                          :+:      :+:    :+:   */
+/*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:06:45 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/06 20:12:41 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/07 20:30:12 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-t_map	*map(void)
-{
-	static t_map	m;
+static double	player_direction(void);
 
-	return (&m);
+void	init_values(t_cube *cube)
+{
+	int	i;
+
+	cube->p = ft_calloc(1, sizeof(t_plyer));
+	if (!cube->p)
+		exit(1);
+	cube->r = ft_calloc(1, sizeof(t_raycast));
+	if (!cube->r)
+		exit(1);
+	cube->p->move_speed = 4;
+	cube->p->rotation_speed = 0.045;
+	cube->p->angle = player_direction();
+	cube->p->pos.x = map()->ply_start.x * TILE_SIZE + TILE_SIZE / 2;
+	cube->p->pos.y = map()->ply_start.y * TILE_SIZE + TILE_SIZE / 2;
+	i = -1;
+	while (++i < 200)
+	{
+		cube->p->prev_key_bool[i] = 0;
+		cube->p->key_bool[i] = 0;
+	}
 }
 
 /**
@@ -32,7 +50,7 @@ t_map	*map(void)
  * Leste ('E'): π radianos, ou 180 graus.
  * Oeste ('W'): 0 radianos, ou 0 graus.
 */
-double	player_direction(void)
+static double	player_direction(void)
 {
 	if (parse()->orientation == 'N')
 		return ((3.0 * M_PI) / 2.0);
@@ -45,38 +63,15 @@ double	player_direction(void)
 	return (-1.0);
 }
 
-void	set_vector_f(t_vt_f *p, float x, float y)
-{
-	p->x = x;
-	p->y = y;
-}
-
-void	init_values(t_cube *cube)
-{
-	cube->p = ft_calloc(1, sizeof(t_plyer));
-	if (!cube->p)
-		exit(1);
-	cube->r = ft_calloc(1, sizeof(t_raycast));
-	if (!cube->r)
-		exit(1);
-
-	cube->p->move_speed = 4;
-	cube->p->rotation_speed = 0.045;
-	cube->p->angle = player_direction();
-	cube->p->pos.x = map()->ply_start.x * TILE_SIZE + TILE_SIZE / 2;
-	cube->p->pos.y = map()->ply_start.y * TILE_SIZE + TILE_SIZE / 2;
-	cube->p->plane.y = 0.66; // versão 2d raster do plano da câmera
-	int i =-1;
-	while (++i <200)
-	{
-		cube->p->prev_key_bool[i] = 0;
-		cube->p->key_bool[i] = 0;
-	}
-	
-}
-
 void	free_data(t_cube *cube)
 {
 	free(cube->p);
 	free(cube->r);
+}
+
+t_map	*map(void)
+{
+	static t_map	m;
+
+	return (&m);
 }

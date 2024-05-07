@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools_a.c                                          :+:      :+:    :+:   */
+/*   mlx_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:34:03 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/06 19:42:46 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/07 20:45:26 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	clear_img(t_image img)
 
 int	destroy_window(t_cube *cube)
 {
+	destroy_image(cube); // in testing
 	mlx_destroy_window(cube->mlx_ptr, cube->win_ptr);
 	mlx_destroy_image(cube->mlx_ptr, cube->img.mlx_img);
 	mlx_destroy_display(cube->mlx_ptr);
@@ -58,26 +59,4 @@ int	destroy_window(t_cube *cube)
 	free_data(cube);
 	free_parse();
 	exit(0);
-}
-
-void	draw_circle(t_vt_d center, int color, int radius, t_image *img)
-{
-	int	radius_squared;
-	int	x;
-	int	y;
-
-	radius_squared = pow(radius, 2);
-	x = center.x - radius;
-	y = center.y - radius;
-	while (y <= center.y + radius)
-	{
-		while (x <= center.x + radius)
-		{
-			if ((pow(x - center.x, 2) + pow(y - center.y, 2)) <= radius_squared)
-				img_draw_pixel(img, x, y, color);
-			x++;
-		}
-		y++;
-		x = center.x - radius;
-	}
 }
