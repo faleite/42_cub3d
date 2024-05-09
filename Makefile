@@ -17,7 +17,7 @@ FILES 		= $(GET)get_next_line.c $(GET)get_next_line_utils.c\
 			  $(PAR)parser.c $(CUB)window.c $(CUB)minimap.c $(CUB)mlx_utils.c\
 			  $(CUB)ft_max_mod.c $(CUB)init_data.c $(CUB)raycasting.c\
 			  $(CUB)ft_bresenham.c $(CUB)moves.c $(CUB)ray_utils.c\
-			  $(CUB)render_wall.c
+			  $(CUB)render.c
 OBJS		= $(FILES:.c=.o)
 MLX_L		= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm
 LIBFT		= ./libft/libft.a

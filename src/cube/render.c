@@ -101,3 +101,24 @@ void	render_rays(t_cube *cube)
 		ray->angle += 0.0002757;
 	}
 }
+
+int	draw_ceil_floor(t_image *img)
+{
+	t_vt_d	pos;
+
+	pos.y = -1;
+	while (++pos.y < W_HEIGHT / 2)
+	{
+		pos.x = -1;
+		while (++pos.x < W_WIDTH)
+			img_draw_pixel(img, pos.x, pos.y, parse()->color_c);
+	}
+	while (pos.y < W_HEIGHT)
+	{
+		pos.x = -1;
+		while (++pos.x < W_WIDTH)
+			img_draw_pixel(img, pos.x, pos.y, parse()->color_f);
+		++pos.y;
+	}
+	return (0);
+}

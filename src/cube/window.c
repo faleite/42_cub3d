@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 20:29:40 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/07 20:49:06 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/09 21:50:25 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,31 +30,16 @@ int	ft_mouse_handlertrack(int x, int y, t_cube *param)
 	return (0);
 }
 
-void	ft_load_texture(void *mlx, t_texture *texture)
-{
-	texture->img.addr = mlx_get_data_addr(texture->img.mlx_img,
-			&texture->img.bpp,
-			&texture->img.line_len,
-			&texture->img.endian);
-}
-
-t_tex	*tex(void)
-{
-	static t_tex	t;
-
-	return (&t);
-}
-
 int	destroy_image(t_cube *cube)
 {
-	if (tex()->path_no)
-		mlx_destroy_image(cube->mlx_ptr, tex()->path_no);
-	if (tex()->path_so)
-		mlx_destroy_image(cube->mlx_ptr, tex()->path_so);
-	if (tex()->path_we)
-		mlx_destroy_image(cube->mlx_ptr, tex()->path_we);
-	if (tex()->path_ea)
-		mlx_destroy_image(cube->mlx_ptr, tex()->path_ea);
+	if (cube->tex_no.img.mlx_img)
+		mlx_destroy_image(cube->mlx_ptr, cube->tex_no.img.mlx_img);
+	if (cube->tex_so.img.mlx_img)
+		mlx_destroy_image(cube->mlx_ptr, cube->tex_so.img.mlx_img);
+	if (cube->tex_we.img.mlx_img)
+		mlx_destroy_image(cube->mlx_ptr, cube->tex_we.img.mlx_img);
+	if (cube->tex_ea.img.mlx_img)
+		mlx_destroy_image(cube->mlx_ptr, cube->tex_ea.img.mlx_img);
 	return (1);
 }
 
@@ -68,58 +53,96 @@ void	image_error(t_cube *cube)
 	err_case("Image doesn't work\n");
 }
 
-void	*file_to_image(t_cube *cube, char *path)
+/* TEXTURE */
+void	get_data_texture(t_cube *cube)
 {
-	void	*img;
-	int		width;
-	int		height;
+	cube->tex_no.img.addr = mlx_get_data_addr(cube->tex_no.img.mlx_img, \
+						&cube->tex_no.img.bpp, &cube->tex_no.img.line_len, \
+						&cube->tex_no.img.endian);
+	cube->tex_so.img.addr = mlx_get_data_addr(cube->tex_so.img.mlx_img, \
+						&cube->tex_so.img.bpp, &cube->tex_so.img.line_len, \
+						&cube->tex_so.img.endian);
+	cube->tex_we.img.addr = mlx_get_data_addr(cube->tex_we.img.mlx_img, \
+						&cube->tex_we.img.bpp, &cube->tex_we.img.line_len, \
+						&cube->tex_we.img.endian);
+	cube->tex_ea.img.addr = mlx_get_data_addr(cube->tex_ea.img.mlx_img, \
+						&cube->tex_ea.img.bpp, &cube->tex_ea.img.line_len, \
+						&cube->tex_ea.img.endian);
+}
 
-	img = mlx_xpm_file_to_image(cube->mlx_ptr, path, &width, &height);
-	if (!img)
+int	texture_xpm_to_image(t_cube *cube)
+{
+	cube->tex_no.img.mlx_img = mlx_xpm_file_to_image(cube->mlx_ptr, \
+				parse()->path_no, &cube->tex_no.width, &cube->tex_no.height);
+	cube->tex_so.img.mlx_img = mlx_xpm_file_to_image(cube->mlx_ptr, \
+				parse()->path_so, &cube->tex_so.width, &cube->tex_so.height);
+	cube->tex_we.img.mlx_img = mlx_xpm_file_to_image(cube->mlx_ptr, \
+				parse()->path_we, &cube->tex_we.width, &cube->tex_we.height);
+	cube->tex_ea.img.mlx_img = mlx_xpm_file_to_image(cube->mlx_ptr, \
+				parse()->path_ea, &cube->tex_ea.width, &cube->tex_ea.height);
+	if (!cube->tex_no.img.mlx_img || !cube->tex_so.img.mlx_img \
+		|| !cube->tex_we.img.mlx_img || !cube->tex_ea.img.mlx_img)
 		image_error(cube);
-	else
-		printf("IMAGE: %p\n", img);
-	return (img);
+	get_data_texture(cube);
+	return (0);
 }
-
-void	get_image(t_cube *cube)
+/* PRINT ONE TEXTURE */
+int	draw_one_texture(t_cube *cube, t_texture dir)
 {
-	tex()->path_no = file_to_image(cube, parse()->path_no);
-	cube->tex_no.img.mlx_img = tex()->path_no;
-	tex()->path_so = file_to_image(cube, parse()->path_so);
-	tex()->path_we = file_to_image(cube, parse()->path_we);
-	tex()->path_ea = file_to_image(cube, parse()->path_ea);
+	t_vt_d	pos;
+
+	pos.y = -1;
+	while (++pos.y <= TILE_SIZE)
+	{
+		pos.x = -1;
+		while (++pos.x <= TILE_SIZE)
+			img_draw_pixel(&cube->img, pos.x, pos.y, \
+			wall_draw_pixel(dir, pos.x, pos.y));
+	}
+	return (0);
 }
 
-void	image_to_window(t_cube *cube, void *img, int x, int y)
+/* PRINT ALL TEXTURE */
+int	draw_texture(t_cube *cube)
 {
-	mlx_put_image_to_window
-	(
-		cube->mlx_ptr,
-		cube->win_ptr,
-		img,
-		x * TILE_SIZE,
-		y * TILE_SIZE
-	);
+    t_vt_d	pos;
+
+    // Desenhar tex_no e tex_so
+    pos.y = -1;
+    while (++pos.y <= TILE_SIZE)
+    {
+        pos.x = -1;
+        while (++pos.x <= TILE_SIZE)
+            img_draw_pixel(&cube->img, pos.x, pos.y, \
+            wall_draw_pixel(cube->tex_no, pos.x, pos.y));
+    }
+    pos.y = -1;
+    while (++pos.y <= TILE_SIZE)
+	{
+        pos.x = TILE_SIZE + 10;
+        while (++pos.x <= (TILE_SIZE * 2) + 10)
+            img_draw_pixel(&cube->img, pos.x, pos.y, \
+            wall_draw_pixel(cube->tex_so, pos.x - TILE_SIZE - 10, pos.y));
+    }
+    // Desenhar tex_we e tex_ea
+    pos.y = TILE_SIZE + 10;
+    while (++pos.y <= (TILE_SIZE * 2) + 10)
+    {
+        pos.x = -1;
+        while (++pos.x <= TILE_SIZE)
+            img_draw_pixel(&cube->img, pos.x, pos.y, \
+            wall_draw_pixel(cube->tex_we, pos.x, pos.y - TILE_SIZE - 10));
+    }
+    pos.y = TILE_SIZE + 10;
+    while (++pos.y <= (TILE_SIZE * 2) + 10)
+    {
+        pos.x = TILE_SIZE + 10;
+        while (++pos.x <= (TILE_SIZE * 2) + 10)
+            img_draw_pixel(&cube->img, pos.x, pos.y, \
+            wall_draw_pixel(cube->tex_ea, pos.x - TILE_SIZE - 10, pos.y - TILE_SIZE - 10));
+    }
+    return (0);
 }
-
-// void ft_init_textures(t_cube *cube)
-// {
-// 	char *path_no;
-// 	char *path_so;
-// 	char *path_we;
-// 	char *path_ea;
-
-// 	path_no = "../../textures/walls/w3d_e.xpm";
-// 	path_so = "../../textures/walls/w3d_n.xpm";
-// 	path_we = "../../textures/walls/w3d_s.xpm";
-// 	path_ea = "../../textures/walls/w3d_w.xpm";
-
-// 	ft_load_texture(cube->mlx_ptr, &cube->tex_no, path_no);
-// 	ft_load_texture(cube->mlx_ptr, &cube->tex_so, path_so);
-// 	ft_load_texture(cube->mlx_ptr, &cube->tex_we, path_we);
-// 	ft_load_texture(cube->mlx_ptr, &cube->tex_ea, path_ea);
-// }
 
 int	build_window(t_cube cube)
 {
@@ -132,11 +155,10 @@ int	build_window(t_cube cube)
 		free(cube.win_ptr);
 		return (1);
 	}
-	get_image(&cube);
+	texture_xpm_to_image(&cube);
 	cube.img.mlx_img = mlx_new_image(cube.mlx_ptr, W_WIDTH, W_HEIGHT);
 	cube.img.addr = mlx_get_data_addr(cube.img.mlx_img, &cube.img.bpp, \
 					&cube.img.line_len, &cube.img.endian);
-	ft_load_texture(cube.mlx_ptr, &cube.tex_no); //
 	mlx_hook(cube.win_ptr, 2, 1L, (void *)keyboard, &cube);
 	mlx_hook(cube.win_ptr, 3, (1L << 1), (void *)keyboard_release, &cube);
 	mlx_hook(cube.win_ptr, 17, 0L, (void *)destroy_window, &cube);
@@ -181,21 +203,23 @@ int	render_cub3d(t_cube *cube)
 		return (1);
 	clear_img(cube->img);
 
-	draw_ceil_floor(&cube->img);
-	raycasting(cube);
+	// draw_ceil_floor(&cube->img);
+	// raycasting(cube);
 
-	// (Use Key for activate the minimap)
-	render_minimap(cube);
-	draw_player(cube, (cube->p->pos.x / TILE_SIZE), \
-				(cube->p->pos.y / TILE_SIZE));
-	render_rays(cube);
+	// // (Use Key for activate the minimap)
+	// render_minimap(cube);
+	// draw_player(cube, (cube->p->pos.x / TILE_SIZE), \
+	// 			(cube->p->pos.y / TILE_SIZE));
+	// render_rays(cube);
 
-	ft_player_movement(cube);
-	drawCircleWithCross(cube);
+	// ft_player_movement(cube);
+	// drawCircleWithCross(cube);
 
 	// TEXTURES //
-	// mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, \
-							tex()->path_no, 0, 0);
+	/* PRINT ALL TEXTURE */
+	draw_texture(cube);
+	/* PRINT ONE TEXTURE */
+	// draw_one_texture(cube, cube->tex_we);
 
 	/* After render this function put image to window */
 	mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, \
@@ -243,25 +267,4 @@ void	keyboard_release(int key, t_cube *cube)
 		player->move = 0;
 		player->rotate = 0;
 	}
-}
-
-int	draw_ceil_floor(t_image *img)
-{
-	t_vt_d	pos;
-
-	pos.y = -1;
-	while (++pos.y < W_HEIGHT / 2)
-	{
-		pos.x = -1;
-		while (++pos.x < W_WIDTH)
-			img_draw_pixel(img, pos.x, pos.y, parse()->color_c);
-	}
-	while (pos.y < W_HEIGHT)
-	{
-		pos.x = -1;
-		while (++pos.x < W_WIDTH)
-			img_draw_pixel(img, pos.x, pos.y, parse()->color_f);
-		++pos.y;
-	}
-	return (0);
 }

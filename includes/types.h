@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/07 20:25:44 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/09 21:52:07 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,22 +139,9 @@ typedef struct s_image
 	int		bpp;
 	int		line_len;
 	int		endian;
-}			t_image;
-
-typedef struct s_texture
-{
-	t_image	img;
 	int		width;
 	int		height;
-}			t_texture;
-
-typedef struct s_tex
-{
-	void	*path_no;
-	void	*path_so;
-	void	*path_we;
-	void	*path_ea;
-}			t_tex;
+}			t_image;
 
 typedef struct s_line
 {
@@ -220,6 +207,13 @@ typedef struct s_raycast
 	t_vt_d	hor;
 	t_vt_d	ver;
 }			t_raycast;
+
+typedef struct s_texture
+{
+	t_image	img;
+	int		width;
+	int		height;
+}			t_texture;
 
 typedef struct s_cube
 {

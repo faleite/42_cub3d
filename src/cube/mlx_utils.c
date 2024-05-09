@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:34:03 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/07 20:45:26 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/09 21:27:47 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,24 @@ void	img_draw_pixel(t_image *img, int x, int y, int color)
 		*(int *)pixel = color;
 	}
 }
+
+// unsigned int	wall_draw_pixel(t_image *img, int x, int y)
+// {
+// 	char	*color;
+
+// 	if (x >= 0 && x <= img->width && y >= 0 && y <= img->height)
+// 	{
+// 		color = img->addr + (y * img->line_len + x * (img->bpp / 8));
+// 		return (*(unsigned int *)color);
+// 	}
+// 	return (1);
+// }
+
+unsigned int	wall_draw_pixel(t_texture texture, int x, int y)
+{
+	return (*(int *)(texture.img.addr + 4 * (x + y * texture.width)));
+}
+
 
 void	clear_img(t_image img)
 {
