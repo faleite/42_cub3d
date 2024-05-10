@@ -16,6 +16,35 @@
  * draw the wall
 */
 
+// int get_tex_x(t_cube *cube, t_ray *ray, t_image *tex)
+// {
+//   // Calculating exact hit position
+//   double perp_angle = PI_2 - ray->angle + cube->p->angle;
+//   double  hit_length = ray->distance * 0.5f * TILE_SIZE / sin(perp_angle);
+//   t_vt_f wall_x = create_vect_f_from_origin(cube->player.pos, ray->angle, hit_length);
+
+//   float cell_pos;
+//   // Getting hit position relative to the cell
+//   if (ray->side_hit == 1 || ray->side_hit == 3) // Horizontal hit
+//     cell_pos = wall_x.y - (int)(wall_x.y / data->cell_size) * data->cell_size;
+//   else // Vertical hit
+//     cell_pos = wall_x.x - (int)(wall_x.x / data->cell_size) * data->cell_size;
+
+//   if (ray->side_hit == 3 || ray->side_hit == 2) // Converting cell_pos to ratio
+//     cell_pos = cell_pos / data->cell_size;
+//   else // Flip texture if the side hit is the top or the right side of a cell
+//     cell_pos = 1.0f - cell_pos / data->cell_size;
+
+//   int tex_x = cell_pos * texture->width_img; // Mapping ratio to texture dimension
+
+//   return (tex_x);
+// }
+
+unsigned int	wall_draw_pixel_1(t_image tex, int x, int y)
+{
+	return (*(int *)(tex.addr + 4 * (x + y * tex.width)));
+}
+
 int ft_get_postion(t_cube *cube)
 {
 	float position;
@@ -45,8 +74,10 @@ void	draw_wall(t_cube *cube, int ray, int t_pix, int b_pix, double wall_height)
 		position.y = 0;
 	while (t_pix < b_pix)
 	{
+		// img_draw_pixel(&cube->img, ray, t_pix++, \
+            wall_draw_pixel(&cube->tex_ea, ray, position.y));
 		img_draw_pixel(&cube->img, ray, t_pix++, \
-            wall_draw_pixel(cube->tex_no, ray, position.y));
+            wall_draw_pixel_1(cube->tex_ea, ray, position.y));
 		position.y += ratio;
 		// if (cube->r->hit)
 		// {

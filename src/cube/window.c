@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 20:29:40 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/10 16:55:32 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/10 19:36:46 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ int	ft_mouse_handlertrack(int x, int y, t_cube *param)
 
 int	destroy_image(t_cube *cube)
 {
-	if (cube->tex_no.img.mlx_img)
-		mlx_destroy_image(cube->mlx_ptr, cube->tex_no.img.mlx_img);
-	if (cube->tex_so.img.mlx_img)
-		mlx_destroy_image(cube->mlx_ptr, cube->tex_so.img.mlx_img);
-	if (cube->tex_we.img.mlx_img)
-		mlx_destroy_image(cube->mlx_ptr, cube->tex_we.img.mlx_img);
-	if (cube->tex_ea.img.mlx_img)
-		mlx_destroy_image(cube->mlx_ptr, cube->tex_ea.img.mlx_img);
+	if (cube->tex_no.mlx_img)
+		mlx_destroy_image(cube->mlx_ptr, cube->tex_no.mlx_img);
+	if (cube->tex_so.mlx_img)
+		mlx_destroy_image(cube->mlx_ptr, cube->tex_so.mlx_img);
+	if (cube->tex_we.mlx_img)
+		mlx_destroy_image(cube->mlx_ptr, cube->tex_we.mlx_img);
+	if (cube->tex_ea.mlx_img)
+		mlx_destroy_image(cube->mlx_ptr, cube->tex_ea.mlx_img);
 	return (1);
 }
 
@@ -56,38 +56,38 @@ void	image_error(t_cube *cube)
 /* TEXTURE */
 void	get_data_texture(t_cube *cube)
 {
-	cube->tex_no.img.addr = mlx_get_data_addr(cube->tex_no.img.mlx_img, \
-						&cube->tex_no.img.bpp, &cube->tex_no.img.line_len, \
-						&cube->tex_no.img.endian);
-	cube->tex_so.img.addr = mlx_get_data_addr(cube->tex_so.img.mlx_img, \
-						&cube->tex_so.img.bpp, &cube->tex_so.img.line_len, \
-						&cube->tex_so.img.endian);
-	cube->tex_we.img.addr = mlx_get_data_addr(cube->tex_we.img.mlx_img, \
-						&cube->tex_we.img.bpp, &cube->tex_we.img.line_len, \
-						&cube->tex_we.img.endian);
-	cube->tex_ea.img.addr = mlx_get_data_addr(cube->tex_ea.img.mlx_img, \
-						&cube->tex_ea.img.bpp, &cube->tex_ea.img.line_len, \
-						&cube->tex_ea.img.endian);
+	cube->tex_no.addr = mlx_get_data_addr(cube->tex_no.mlx_img, \
+						&cube->tex_no.bpp, &cube->tex_no.line_len, \
+						&cube->tex_no.endian);
+	cube->tex_so.addr = mlx_get_data_addr(cube->tex_so.mlx_img, \
+						&cube->tex_so.bpp, &cube->tex_so.line_len, \
+						&cube->tex_so.endian);
+	cube->tex_we.addr = mlx_get_data_addr(cube->tex_we.mlx_img, \
+						&cube->tex_we.bpp, &cube->tex_we.line_len, \
+						&cube->tex_we.endian);
+	cube->tex_ea.addr = mlx_get_data_addr(cube->tex_ea.mlx_img, \
+						&cube->tex_ea.bpp, &cube->tex_ea.line_len, \
+						&cube->tex_ea.endian);
 }
 
 int	texture_xpm_to_image(t_cube *cube)
 {
-	cube->tex_no.img.mlx_img = mlx_xpm_file_to_image(cube->mlx_ptr, \
+	cube->tex_no.mlx_img = mlx_xpm_file_to_image(cube->mlx_ptr, \
 				parse()->path_no, &cube->tex_no.width, &cube->tex_no.height);
-	cube->tex_so.img.mlx_img = mlx_xpm_file_to_image(cube->mlx_ptr, \
+	cube->tex_so.mlx_img = mlx_xpm_file_to_image(cube->mlx_ptr, \
 				parse()->path_so, &cube->tex_so.width, &cube->tex_so.height);
-	cube->tex_we.img.mlx_img = mlx_xpm_file_to_image(cube->mlx_ptr, \
+	cube->tex_we.mlx_img = mlx_xpm_file_to_image(cube->mlx_ptr, \
 				parse()->path_we, &cube->tex_we.width, &cube->tex_we.height);
-	cube->tex_ea.img.mlx_img = mlx_xpm_file_to_image(cube->mlx_ptr, \
+	cube->tex_ea.mlx_img = mlx_xpm_file_to_image(cube->mlx_ptr, \
 				parse()->path_ea, &cube->tex_ea.width, &cube->tex_ea.height);
-	if (!cube->tex_no.img.mlx_img || !cube->tex_so.img.mlx_img \
-		|| !cube->tex_we.img.mlx_img || !cube->tex_ea.img.mlx_img)
+	if (!cube->tex_no.mlx_img || !cube->tex_so.mlx_img \
+		|| !cube->tex_we.mlx_img || !cube->tex_ea.mlx_img)
 		image_error(cube);
 	get_data_texture(cube);
 	return (0);
 }
 /* PRINT ONE TEXTURE */
-int	draw_one_texture(t_cube *cube, t_texture dir)
+int	draw_one_texture(t_cube *cube, t_image dir)
 {
 	t_vt_d	pos;
 
@@ -97,52 +97,52 @@ int	draw_one_texture(t_cube *cube, t_texture dir)
 		pos.x = -1;
 		while (++pos.x <= TILE_SIZE)
 			img_draw_pixel(&cube->img, pos.x, pos.y, \
-			wall_draw_pixel(dir, pos.x, pos.y));
+			wall_draw_pixel(&dir, pos.x, pos.y));
 	}
 	return (0);
 }
 
-/* PRINT ALL TEXTURE */
-int	draw_texture(t_cube *cube)
-{
-    t_vt_d	pos;
+// /* PRINT ALL TEXTURE */
+// int	draw_texture(t_cube *cube)
+// {
+//     t_vt_d	pos;
 
-    // Desenhar tex_no e tex_so
-    pos.y = -1;
-    while (++pos.y <= TILE_SIZE)
-    {
-        pos.x = -1;
-        while (++pos.x <= TILE_SIZE)
-            img_draw_pixel(&cube->img, pos.x, pos.y, \
-            wall_draw_pixel(cube->tex_no, pos.x, pos.y));
-    }
-    pos.y = -1;
-    while (++pos.y <= TILE_SIZE)
-	{
-        pos.x = TILE_SIZE + 10;
-        while (++pos.x <= (TILE_SIZE * 2) + 10)
-            img_draw_pixel(&cube->img, pos.x, pos.y, \
-            wall_draw_pixel(cube->tex_so, pos.x - TILE_SIZE - 10, pos.y));
-    }
-    // Desenhar tex_we e tex_ea
-    pos.y = TILE_SIZE + 10;
-    while (++pos.y <= (TILE_SIZE * 2) + 10)
-    {
-        pos.x = -1;
-        while (++pos.x <= TILE_SIZE)
-            img_draw_pixel(&cube->img, pos.x, pos.y, \
-            wall_draw_pixel(cube->tex_we, pos.x, pos.y - TILE_SIZE - 10));
-    }
-    pos.y = TILE_SIZE + 10;
-    while (++pos.y <= (TILE_SIZE * 2) + 10)
-    {
-        pos.x = TILE_SIZE + 10;
-        while (++pos.x <= (TILE_SIZE * 2) + 10)
-            img_draw_pixel(&cube->img, pos.x, pos.y, \
-            wall_draw_pixel(cube->tex_ea, pos.x - TILE_SIZE - 10, pos.y - TILE_SIZE - 10));
-    }
-    return (0);
-}
+//     // Desenhar tex_no e tex_so
+//     pos.y = -1;
+//     while (++pos.y <= TILE_SIZE)
+//     {
+//         pos.x = -1;
+//         while (++pos.x <= TILE_SIZE)
+//             img_draw_pixel(&cube->img, pos.x, pos.y, \
+//             wall_draw_pixel(cube->tex_no, pos.x, pos.y));
+//     }
+//     pos.y = -1;
+//     while (++pos.y <= TILE_SIZE)
+// 	{
+//         pos.x = TILE_SIZE + 10;
+//         while (++pos.x <= (TILE_SIZE * 2) + 10)
+//             img_draw_pixel(&cube->img, pos.x, pos.y, \
+//             wall_draw_pixel(cube->tex_so, pos.x - TILE_SIZE - 10, pos.y));
+//     }
+//     // Desenhar tex_we e tex_ea
+//     pos.y = TILE_SIZE + 10;
+//     while (++pos.y <= (TILE_SIZE * 2) + 10)
+//     {
+//         pos.x = -1;
+//         while (++pos.x <= TILE_SIZE)
+//             img_draw_pixel(&cube->img, pos.x, pos.y, \
+//             wall_draw_pixel(cube->tex_we, pos.x, pos.y - TILE_SIZE - 10));
+//     }
+//     pos.y = TILE_SIZE + 10;
+//     while (++pos.y <= (TILE_SIZE * 2) + 10)
+//     {
+//         pos.x = TILE_SIZE + 10;
+//         while (++pos.x <= (TILE_SIZE * 2) + 10)
+//             img_draw_pixel(&cube->img, pos.x, pos.y, \
+//             wall_draw_pixel(cube->tex_ea, pos.x - TILE_SIZE - 10, pos.y - TILE_SIZE - 10));
+//     }
+//     return (0);
+// }
 
 int	build_window(t_cube cube)
 {
@@ -219,7 +219,7 @@ int	render_cub3d(t_cube *cube)
 	/* PRINT ALL TEXTURE */
 	// draw_texture(cube);
 	/* PRINT ONE TEXTURE */
-	draw_one_texture(cube, cube->tex_we);
+	// draw_one_texture(cube, cube->tex_we);
 
 	/* After render this function put image to window */
 	mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, \

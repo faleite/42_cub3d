@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/09 21:50:02 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/10 20:07:15 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void			img_draw_pixel(t_image *img, int x, int y, int color);
 void			ft_bresenham(t_image *img, t_vt_d p1, t_vt_d p2, int color);
 void			clear_img(t_image img);
 void			render_wall(t_cube *cube, int ray);
-unsigned int	wall_draw_pixel(t_texture texture, int x, int y);
+unsigned int	wall_draw_pixel(t_image *img, int x, int y);
 
 /* mini map */
 int				draw_ceil_floor(t_image *img);

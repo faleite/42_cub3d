@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:34:03 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/10 11:45:01 by marvin           ###   ########.fr       */
+/*   Updated: 2024/05/10 20:06:42 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,36 @@ void	img_draw_pixel(t_image *img, int x, int y, int color)
 	}
 }
 
-// unsigned int	wall_draw_pixel(t_image *img, int x, int y)
-// {
-// 	char	*color;
-
-// 	if (x >= 0 && x <= img->width && y >= 0 && y <= img->height)
-// 	{
-// 		color = img->addr + (y * img->line_len + x * (img->bpp / 8));
-// 		return (*(unsigned int *)color);
-// 	}
-// 	return (1);
-// }
-
-unsigned int	wall_draw_pixel(t_texture texture, int x, int y)
+unsigned int	wall_draw_pixel(t_image *img, int x, int y)
 {
-	return (*(int *)(texture.img.addr + 4 * (x + y * texture.width)));
+	char	*color;
+
+	if (x >= 0 && x <= img->width && y >= 0 && y <= img->height)
+	{
+		color = img->addr + (y * img->line_len + x * (img->bpp / 8));
+		return (*(unsigned int *)color);
+	}
+	return (1);
 }
+
+// int	wall_draw_pixel(t_image *text, int x, int y)
+// {
+// 	int	color;
+	
+// 	if (text == NULL)
+// 	{
+// 		dprintf(1, "Invalid texture pointer\n");
+// 		return (0);
+// 	}
+// 	if (x < 0 || x >= text->width || y < 0 || y >= text->height)
+// 	{
+// 		// dprintf(1, "Invalid texture coordinate\n");
+// 		return (0);
+// 	}
+// 	color = (*(int *)(text->addr + (x * text->bpp / 8) + (y * text->line_len)));
+
+// 	return (color);
+// }
 
 void	clear_img(t_image img)
 {

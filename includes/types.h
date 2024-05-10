@@ -6,12 +6,15 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/09 21:52:07 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/10 19:49:44 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TYPES_H
 # define TYPES_H
+
+
+# define PI_2	1.57
 
 # include "cub3d.h"
 
@@ -222,10 +225,10 @@ typedef struct s_cube
 	t_image		img;
 	t_plyer		*p;
 	t_raycast	*r;
-	t_texture	tex_no;
-	t_texture	tex_so;
-	t_texture	tex_we;
-	t_texture	tex_ea;
+	t_image		tex_no;
+	t_image		tex_so;
+	t_image		tex_we;
+	t_image		tex_ea;
 }				t_cube;
 
 #endif /* TYPES_H */
