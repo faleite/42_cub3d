@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 20:29:40 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/09 21:50:25 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/10 16:40:50 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	draw_one_texture(t_cube *cube, t_texture dir)
 	t_vt_d	pos;
 
 	pos.y = -1;
-	while (++pos.y <= TILE_SIZE)
+	while (++pos.y <= TILE_SIZE )
 	{
 		pos.x = -1;
 		while (++pos.x <= TILE_SIZE)
@@ -217,9 +217,9 @@ int	render_cub3d(t_cube *cube)
 
 	// TEXTURES //
 	/* PRINT ALL TEXTURE */
-	draw_texture(cube);
+	// draw_texture(cube);
 	/* PRINT ONE TEXTURE */
-	// draw_one_texture(cube, cube->tex_we);
+	draw_one_texture(cube, cube->tex_we);
 
 	/* After render this function put image to window */
 	mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, \
@@ -227,10 +227,13 @@ int	render_cub3d(t_cube *cube)
 	return (0);
 }
 
+/**
+ * LOOK -> key 'Ctrl' = 107 iqual key 'ESC'
+*/
 void	keyboard(int keycode, t_cube *cube)
 {
 	keycode %= 200;
-	// printf("key press %d\n", keycode);
+	printf("key press %d\n", keycode);
 	if (keycode < 200)
 	{
 		cube->p->prev_key_bool[keycode] = cube->p->key_bool[keycode];
