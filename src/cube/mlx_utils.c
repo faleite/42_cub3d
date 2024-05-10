@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:34:03 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/09 21:27:47 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/10 11:45:01 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ unsigned int	wall_draw_pixel(t_texture texture, int x, int y)
 {
 	return (*(int *)(texture.img.addr + 4 * (x + y * texture.width)));
 }
-
 
 void	clear_img(t_image img)
 {

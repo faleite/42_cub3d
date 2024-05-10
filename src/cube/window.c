@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 20:29:40 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/10 16:40:50 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/10 16:55:32 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,17 +203,17 @@ int	render_cub3d(t_cube *cube)
 		return (1);
 	clear_img(cube->img);
 
-	// draw_ceil_floor(&cube->img);
-	// raycasting(cube);
+	draw_ceil_floor(&cube->img);
+	raycasting(cube);
 
 	// // (Use Key for activate the minimap)
-	// render_minimap(cube);
-	// draw_player(cube, (cube->p->pos.x / TILE_SIZE), \
-	// 			(cube->p->pos.y / TILE_SIZE));
-	// render_rays(cube);
+	render_minimap(cube);
+	draw_player(cube, (cube->p->pos.x / TILE_SIZE), \
+				(cube->p->pos.y / TILE_SIZE));
+	render_rays(cube);
 
-	// ft_player_movement(cube);
-	// drawCircleWithCross(cube);
+	ft_player_movement(cube);
+	drawCircleWithCross(cube);
 
 	// TEXTURES //
 	/* PRINT ALL TEXTURE */
