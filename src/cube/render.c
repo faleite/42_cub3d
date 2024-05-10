@@ -15,24 +15,53 @@
 /**
  * draw the wall
 */
-void	draw_wall(t_cube *cube, int ray, int t_pix, int b_pix)
+
+int ft_get_postion(t_cube *cube)
 {
+	float position;
+
+	if (cube->r->hit == 1)
+	{
+		position = fmod(cube->r->hor.x * (cube->tex_ea.width / TILE_SIZE), cube->tex_ea.width);
+	}
+	else
+	{
+		position = fmod(cube->r->ver.y * (cube->tex_ea.width / TILE_SIZE), cube->tex_ea.width);
+	}
+	return (position);
+}
+
+void	draw_wall(t_cube *cube, int ray, int t_pix, int b_pix, double wall_height)
+{
+	t_vector_2d position;
+	unsigned int texure;
+	double ratio;
+
+	ratio = cube->tex_ea.height / wall_height;
+	position.x = ft_get_postion(cube);
+	position.y = (t_pix - (W_WIDTH / 2) + (wall_height / 2) * ratio);
+
+	if (position.y < 0)
+		position.y = 0;
 	while (t_pix < b_pix)
 	{
-		if (cube->r->hit)
-		{
-			if (cube->r->angle < M_PI && cube->r->angle > 0)
-				img_draw_pixel(&cube->img, ray, t_pix++, ORANGE);
-			else
-				img_draw_pixel(&cube->img, ray, t_pix++, RED);
-		}
-		else
-		{
-			if (cube->r->angle > M_PI / 2 && cube->r->angle < 3 * M_PI / 2)
-				img_draw_pixel(&cube->img, ray, t_pix++, GREEN);
-			else
-				img_draw_pixel(&cube->img, ray, t_pix++, BLACK);
-		}
+		img_draw_pixel(&cube->img, ray, t_pix++, \
+            wall_draw_pixel(cube->tex_no, ray, position.y));
+		position.y += ratio;
+		// if (cube->r->hit)
+		// {
+		// 	if (cube->r->angle < M_PI && cube->r->angle > 0)
+		// 		img_draw_pixel(&cube->img, ray, t_pix++, ORANGE);
+		// 	else
+		// 		img_draw_pixel(&cube->img, ray, t_pix++, RED);
+		// }
+		// else
+		// {
+		// 	if (cube->r->angle > M_PI / 2 && cube->r->angle < 3 * M_PI / 2)
+		// 		img_draw_pixel(&cube->img, ray, t_pix++, GREEN);
+		// 	else
+		// 		img_draw_pixel(&cube->img, ray, t_pix++, BLACK);
+		// }
 	}
 }
 
@@ -54,7 +83,7 @@ void	render_wall(t_cube *cube, int ray)
 		pixels.x = W_HEIGHT;
 	if (pixels.y < 0)
 		pixels.y = 0;
-	draw_wall(cube, ray, pixels.y, pixels.x);
+	draw_wall(cube, ray, pixels.y, pixels.x, wall_height);
 }
 
 static void	draw_rays(t_image *img, t_vt_f p, t_vt_d r)
