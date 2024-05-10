@@ -16,52 +16,72 @@
  * draw the wall
 */
 
-int ft_get_postion(t_cube *cube)
+double ft_get_postion(t_cube *cube, t_texture texture)
 {
-	float position;
+	double position;
+	double cell;
 
 	if (cube->r->hit == 1)
 	{
-		position = fmod(cube->r->hor.x * (cube->tex_ea.width / TILE_SIZE), cube->tex_ea.width);
+		cell = floor(cube->r->hor.x / TILE_SIZE);
+		position = cube->r->hor.x - (cell * TILE_SIZE);
+		// position = (int)fmodf((cube->r->hor.x * \
+		// (texture.width / TILE_SIZE)), texture.width);
 	}
 	else
 	{
-		position = fmod(cube->r->ver.y * (cube->tex_ea.width / TILE_SIZE), cube->tex_ea.width);
+		cell = floor(cube->r->ver.y / TILE_SIZE);
+		position = cube->r->hor.x - (cell * TILE_SIZE);
+		// position = (int)fmodf((cube->r->ver.y * \
+		// (texture.width / TILE_SIZE)), texture.width);
 	}
 	return (position);
+}
+
+t_texture ft_extract_text_up(t_cube *cube)
+{
+	if (cube->r->angle < M_PI && cube->r->angle > 0)
+		return(cube->tex_so);
+	else
+		return(cube->tex_no);
+}
+
+
+t_texture ft_extract_text_side(t_cube *cube)
+{
+	if (cube->r->angle > M_PI / 2 && cube->r->angle < 3 * M_PI / 2)
+		return(cube->tex_ea);
+	else
+		return(cube->tex_we);
 }
 
 void	draw_wall(t_cube *cube, int ray, int t_pix, int b_pix, double wall_height)
 {
 	t_vector_2d position;
 	unsigned int texure;
+	t_texture texture_painter;
 	double ratio;
-
-	ratio = cube->tex_ea.height / wall_height;
-	position.x = ft_get_postion(cube);
-	position.y = (t_pix - (W_WIDTH / 2) + (wall_height / 2) * ratio);
-
+	
+	if (cube->r->hit)
+		texture_painter = ft_extract_text_up(cube);
+	else
+		texture_painter = ft_extract_text_side(cube);
+	// ratio = (double)texture_painter.height / wall_height;
+	ratio = (double)texture_painter.height / wall_height ;
+	position.x = ft_get_postion(cube, texture_painter);
+	// position.y = (t_pix - b_pix) * ratio;
+	position.y = (t_pix - (W_HEIGHT / 2) + (wall_height / 2) * ratio);
 	if (position.y < 0)
 		position.y = 0;
+	int posy = position.y;
 	while (t_pix < b_pix)
 	{
-		img_draw_pixel(&cube->img, ray, t_pix++, \
-            wall_draw_pixel(cube->tex_no, ray, position.y));
-		position.y += ratio;
-		// if (cube->r->hit)
-		// {
-		// 	if (cube->r->angle < M_PI && cube->r->angle > 0)
-		// 		img_draw_pixel(&cube->img, ray, t_pix++, ORANGE);
-		// 	else
-		// 		img_draw_pixel(&cube->img, ray, t_pix++, RED);
-		// }
-		// else
-		// {
-		// 	if (cube->r->angle > M_PI / 2 && cube->r->angle < 3 * M_PI / 2)
-		// 		img_draw_pixel(&cube->img, ray, t_pix++, GREEN);
-		// 	else
-		// 		img_draw_pixel(&cube->img, ray, t_pix++, BLACK);
-		// }
+		img_draw_pixel(&cube->img, ray, t_pix, \
+            wall_draw_pixel(texture_painter, ray, position.y));
+		position.y+= ratio;
+		if(position.y > b_pix)
+			break;
+		t_pix++;
 	}
 }
 
@@ -77,8 +97,8 @@ void	render_wall(t_cube *cube, int ray)
 	cube->r->dist *= cos(angle);
 	wall_height = (TILE_SIZE / cube->r->dist) * \
 				((W_WIDTH / 2) / tan(FOV_RAD / 2));
-	pixels.x = (W_HEIGHT / 2) + (wall_height / 2);
-	pixels.y = (W_HEIGHT / 2) - (wall_height / 2);
+	pixels.x = floor(W_HEIGHT / 2) + floor(wall_height / 2);
+	pixels.y = floor(W_HEIGHT / 2) - floor(wall_height / 2);
 	if (pixels.x > W_HEIGHT)
 		pixels.x = W_HEIGHT;
 	if (pixels.y < 0)
