@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:34:03 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/10 11:45:01 by marvin           ###   ########.fr       */
+/*   Updated: 2024/05/11 09:09:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,6 @@ void	img_draw_pixel(t_image *img, int x, int y, int color)
 	}
 }
 
-// unsigned int	wall_draw_pixel(t_image *img, int x, int y)
-// {
-// 	char	*color;
-
-// 	if (x >= 0 && x <= img->width && y >= 0 && y <= img->height)
-// 	{
-// 		color = img->addr + (y * img->line_len + x * (img->bpp / 8));
-// 		return (*(unsigned int *)color);
-// 	}
-// 	return (1);
-// }
-
 unsigned int	wall_draw_pixel(t_texture texture, int x, int y)
 {
 	return (*(int *)(texture.img.addr + 4 * (x + y * texture.width)));
@@ -68,7 +56,7 @@ void	clear_img(t_image img)
 
 int	destroy_window(t_cube *cube)
 {
-	destroy_image(cube); // in testing
+	destroy_image(cube);
 	mlx_destroy_window(cube->mlx_ptr, cube->win_ptr);
 	mlx_destroy_image(cube->mlx_ptr, cube->img.mlx_img);
 	mlx_destroy_display(cube->mlx_ptr);

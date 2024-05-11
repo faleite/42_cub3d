@@ -25,7 +25,7 @@ void	raycasting(t_cube *cube)
 	ray->angle = cube->p->angle - 0.523599;
 	ft_angle_normal((float *)&ray->angle);
 	num_ray = -1;
-	while (++num_ray < W_WIDTH || ray->angle <= (cube->p->angle + 0.523599))
+	while (++num_ray < W_WIDTH)
 	{
 		ft_angle_normal((float *)&ray->angle);
 		ray->hit = 0;

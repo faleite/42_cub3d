@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/09 21:50:02 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/11 09:15:07 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void			ft_bresenham(t_image *img, t_vt_d p1, t_vt_d p2, int color);
 void			clear_img(t_image img);
 void			render_wall(t_cube *cube, int ray);
 unsigned int	wall_draw_pixel(t_texture texture, int x, int y);
+int             texture_xpm_to_image(t_cube *cube);
 
 /* mini map */
 int				draw_ceil_floor(t_image *img);
@@ -61,10 +62,11 @@ void			ft_angle_normal(float *angle);
 
 /* moves */
 void			ft_player_movement(t_cube *cube);
+int             ft_mouse_handlertrack(int x, int y, t_cube *param);
 
 /* Raycast */
 int				hit_wall(float x, float y);
-int				ft_check_distance(t_vt_f p1, t_vector_2d_f p2);
+double				ft_check_distance(t_vt_f p1, t_vector_2d_f p2);
 int				ft_looking_angle_up(float angle);
 int				ft_looking_angle_down(float angle);
 int				unit_circle(float angle, char c);
@@ -76,5 +78,9 @@ void			raycasting(t_cube *cube);
 void			init_values(t_cube *cube);
 void			free_data(t_cube *cube);
 void			print_struct_map(void);
+
+/* Draw */
+void drawCircleWithCross(t_cube *cube);
+void	draw_rays(t_image *img, t_vt_f p, t_vt_d r);
 
 #endif /* CUB3D_H */

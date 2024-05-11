@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/09 21:52:07 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/11 08:46:57 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,16 @@ typedef struct s_vector_2d
 {
 	int		x;
 	int		y;
+	int		dx;
+	int		dy;
 	double	angle;
 }			t_vector_2d;
 
+typedef struct s_vector_2dob
+{
+	double		x;
+	double		y;
+}			t_vector_2dob;
 typedef struct s_vector_2d_f
 {
 	float	x;
