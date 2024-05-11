@@ -59,6 +59,8 @@ void	keyboard(int keycode, t_cube *cube)
 		cube->p->rotate = 1;
 	else if (keycode == LEFT)
 		cube->p->rotate = -1;
+	else if (keycode == SPACE)
+		cube->flag_map = !cube->flag_map;
 }
 
 void	keyboard_release(int key, t_cube *cube)

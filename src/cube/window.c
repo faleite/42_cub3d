@@ -46,10 +46,13 @@ int	render_cub3d(t_cube *cube)
 	clear_img(cube->img);
 	draw_ceil_floor(&cube->img);
 	raycasting(cube);
-	render_minimap(cube);
-	draw_player(cube, (cube->p->pos.x / TILE_SIZE), \
+	if (cube->flag_map)
+	{
+		render_minimap(cube);
+		draw_player(cube, (cube->p->pos.x / TILE_SIZE), \
 				(cube->p->pos.y / TILE_SIZE));
-	render_rays(cube);
+		render_rays(cube);
+	}
 	ft_player_movement(cube);
 	drawCircleWithCross(cube);
 	mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, \

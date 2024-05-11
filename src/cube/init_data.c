@@ -24,6 +24,7 @@ void	init_values(t_cube *cube)
 	cube->r = ft_calloc(1, sizeof(t_raycast));
 	if (!cube->r)
 		exit(1);
+	cube->flag_map = 0;
 	cube->p->move_speed = 4;
 	cube->p->rotation_speed = 0.045;
 	cube->p->angle = player_direction();

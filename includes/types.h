@@ -51,7 +51,7 @@
 # define WOOD 7166474
 # define BROWN 3218945
 # define ORANGE 16744448
-
+# define SPACE 32
 /* fields */
 # define WALL '1'
 # define FLOOR '0'
@@ -233,6 +233,7 @@ typedef struct s_cube
 	t_texture	tex_so;
 	t_texture	tex_we;
 	t_texture	tex_ea;
+	int			flag_map;
 }				t_cube;
 
 #endif /* TYPES_H */
