@@ -6,19 +6,20 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 17:53:21 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/07 19:29:09 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/11 15:14:19 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static void	plot_aux(t_bres	*bres, t_vt_d p1, t_vt_d p2)
+static void	plot_aux(t_bres	*bres, t_vector_2int p1, t_vector_2int p2)
 {
 	bres->dx = p2.x - p1.x;
 	bres->dy = p2.y - p1.y;
 }
 
-static void	plot_line_high(t_image *data, t_vt_d p1, t_vt_d p2, int color)
+static void	plot_line_high(t_image *data, t_vector_2int p1, \
+							t_vector_2int p2, int color)
 {
 	t_bres	bres;
 
@@ -47,7 +48,8 @@ static void	plot_line_high(t_image *data, t_vt_d p1, t_vt_d p2, int color)
 	}
 }
 
-static void	plot_line_low(t_image *data, t_vt_d p1, t_vt_d p2, int color)
+static void	plot_line_low(t_image *data, t_vector_2int p1, \
+							t_vector_2int p2, int color)
 {
 	t_bres	bres;
 
@@ -76,7 +78,8 @@ static void	plot_line_low(t_image *data, t_vt_d p1, t_vt_d p2, int color)
 	}
 }
 
-void	ft_bresenham(t_image *img, t_vt_d p1, t_vt_d p2, int color)
+void	ft_bresenham(t_image *img, t_vector_2int p1, \
+						t_vector_2int p2, int color)
 {
 	if (abs(p2.y - p1.y) < abs(p2.x - p1.x))
 	{

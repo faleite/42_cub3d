@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:06:45 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/09 21:22:39 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/11 14:06:08 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,16 @@ static double	player_direction(void)
 	if (parse()->orientation == 'W')
 		return (0.0);
 	return (-1.0);
+}
+
+void	image_error(t_cube *cube)
+{
+	destroy_image(cube);
+	mlx_destroy_window(cube->mlx_ptr, cube->win_ptr);
+	mlx_destroy_display(cube->mlx_ptr);
+	free(cube->mlx_ptr);
+	free_data(cube);
+	err_case("Image doesn't work\n");
 }
 
 void	free_data(t_cube *cube)

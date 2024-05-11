@@ -29,7 +29,7 @@ int	hit_wall(float x, float y)
 	return (1);
 }
 
-double	ft_check_distance(t_vt_f p1, t_vector_2d_f p2)
+double	ft_check_distance(t_vector_2dob p1, t_vector_2d_f p2)
 {
 	double	dx;
 	double	dy;

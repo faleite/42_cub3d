@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 20:32:19 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/07 19:32:30 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/11 15:15:02 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static int	draw_minimap(t_image *img, int p_y, int p_x, int color);
 
 int	render_minimap(t_cube *cube)
 {
-	t_vt_d	p;
-	t_image	*img;
+	t_vector_2int	p;
+	t_image			*img;
 
 	img = &cube->img;
 	p.y = 0;
@@ -44,10 +44,10 @@ int	render_minimap(t_cube *cube)
 */
 static int	draw_minimap(t_image *img, int p_y, int p_x, int color)
 {
-	t_vt_d	p;
-	int		x_end;
-	int		y_end;
-	int		scale;
+	t_vector_2int	p;
+	int				x_end;
+	int				y_end;
+	int				scale;
 
 	scale = MAP_SCALE;
 	if (parse()->map_height > 20 || parse()->map_width > 40)
@@ -70,9 +70,9 @@ static int	draw_minimap(t_image *img, int p_y, int p_x, int color)
 
 void	draw_player(t_cube *cube, float x, float y)
 {
-	t_vt_d	p;
-	t_vt_d	end;
-	int		scale;
+	t_vector_2int	p;
+	t_vector_2int	end;
+	int				scale;
 
 	scale = MAP_SCALE;
 	if (parse()->map_height > 20 || parse()->map_width > 40)

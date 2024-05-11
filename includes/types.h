@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/11 08:46:57 by marvin           ###   ########.fr       */
+/*   Updated: 2024/05/11 15:09:39 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,17 +86,17 @@
  * @param x coordinate of the pixel.
  * @param y coordinate of the pixel.
  */
-typedef struct s_vt_d
+typedef struct s_vector_2int
 {
 	int	x;
 	int	y;
-}		t_vt_d;
+}		t_vector_2int;
 
-typedef struct s_vt_f
+typedef struct s_wall
 {
-	double	x;
-	double	y;
-}			t_vt_f;
+	double	bottom;
+	double	top;
+}			t_wall;
 
 typedef struct s_vector_2d
 {
@@ -109,9 +109,10 @@ typedef struct s_vector_2d
 
 typedef struct s_vector_2dob
 {
-	double		x;
-	double		y;
+	double	x;
+	double	y;
 }			t_vector_2dob;
+
 typedef struct s_vector_2d_f
 {
 	float	x;
@@ -177,24 +178,24 @@ typedef struct s_bres
 
 typedef struct s_map
 {
-	char	**map;
-	t_vt_d	ply_start;
-	double	orientation;
-	int		map_height;
-	int		map_width;
-}			t_map;
+	int				map_width;
+	int				map_height;
+	char			**map;
+	double			orientation;
+	t_vector_2int	ply_start;
+}					t_map;
 
 typedef struct s_plyer
 {
-	double	move_speed;
-	double	rotation_speed;
-	float	angle;
-	t_vt_f	pos;
-	int		move;
-	int		rotate;
-	int		key_bool[200];
-	int		prev_key_bool[200];
-}			t_plyer;
+	int				move;
+	int				rotate;
+	int				key_bool[200];
+	int				prev_key_bool[200];
+	float			angle;
+	double			move_speed;
+	double			rotation_speed;
+	t_vector_2dob	pos;
+}					t_plyer;
 
 typedef struct s_ray
 {
@@ -206,14 +207,14 @@ typedef struct s_ray
 
 typedef struct s_raycast
 {
-	int		hit;
-	double	dist;
-	double	angle;
-	t_vt_d	step;
-	t_vt_d	pos;
-	t_vt_d	hor;
-	t_vt_d	ver;
-}			t_raycast;
+	int				hit;
+	double			dist;
+	double			angle;
+	t_vector_2int	step;
+	t_vector_2int	pos;
+	t_vector_2int	hor;
+	t_vector_2int	ver;
+}					t_raycast;
 
 typedef struct s_texture
 {

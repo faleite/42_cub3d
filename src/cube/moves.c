@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 16:00:53 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/07 19:36:11 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/11 15:14:38 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 */
 void	ft_player_movement_update(t_cube *cube, int move)
 {
-	t_plyer	*player;
-	t_vt_f	new;
+	t_plyer			*player;
+	t_vector_2dob	new;
 
 	player = cube->p;
 	new = player->pos;

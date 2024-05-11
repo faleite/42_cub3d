@@ -1,7 +1,7 @@
 # Bresenham's Line Drawing Algorithm
 
 ```c
-static void	plot_line_high(t_image *data, t_vt_d p1, t_vt_d p2, int color)
+static void	plot_line_high(t_image *data, t_vector_2int p1, t_vector_2int p2, int color)
 {
 	int dx = p2.x - p1.x;
 	int dy = p2.y - p1.y;
@@ -31,7 +31,7 @@ static void	plot_line_high(t_image *data, t_vt_d p1, t_vt_d p2, int color)
 	}
 }
 
-static void	plot_line_low(t_image *data, t_vt_d p1, t_vt_d p2, int color)
+static void	plot_line_low(t_image *data, t_vector_2int p1, t_vector_2int p2, int color)
 {
 	int dx = p2.x - p1.x;
 	int dy = p2.y - p1.y;
@@ -62,7 +62,7 @@ static void	plot_line_low(t_image *data, t_vt_d p1, t_vt_d p2, int color)
 	}
 }
 
-void	ft_bresenham(t_image *img, t_vt_d p1, t_vt_d p2, int color)
+void	ft_bresenham(t_image *img, t_vector_2int p1, t_vector_2int p2, int color)
 {
 	if (abs(p2.y - p1.y) < abs(p2.x - p1.x))
 	{

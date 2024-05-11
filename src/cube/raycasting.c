@@ -74,7 +74,6 @@ float	calc_vertical_distance(t_cube *cube, float angl)
 {
 	t_vector_2d_f	collition;
 	t_vector_2d_f	delta;
-	float			y_step;
 	int				pixel;
 
 	ft_angle_normal(&angl);

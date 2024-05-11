@@ -12,16 +12,6 @@
 
 #include "../../includes/cub3d.h"
 
-void	image_error(t_cube *cube)
-{
-	destroy_image(cube);
-	mlx_destroy_window(cube->mlx_ptr, cube->win_ptr);
-	mlx_destroy_display(cube->mlx_ptr);
-	free(cube->mlx_ptr);
-	free_data(cube);
-	err_case("Image doesn't work\n");
-}
-
 /* TEXTURE */
 void	get_data_texture(t_cube *cube)
 {
@@ -54,4 +44,45 @@ int	texture_xpm_to_image(t_cube *cube)
 		image_error(cube);
 	get_data_texture(cube);
 	return (0);
+}
+
+double	ft_get_postion(t_cube *cube, t_texture texture)
+{
+	double	position;
+
+	if (cube->r->hit == 1)
+	{
+		position = (int)fmodf((cube->r->hor.x * \
+		(texture.width / TILE_SIZE)), texture.width);
+	}
+	else
+	{
+		position = (int)fmodf((cube->r->ver.y * \
+		(texture.width / TILE_SIZE)), texture.width);
+	}
+	return (position);
+}
+
+t_texture	ft_extract_text_up(t_cube *cube)
+{
+	float	angle;
+
+	angle = cube->r->angle;
+	ft_angle_normal(&angle);
+	if (angle < M_PI && angle > 0)
+		return (cube->tex_so);
+	else
+		return (cube->tex_no);
+}
+
+t_texture	ft_extract_text_side(t_cube *cube)
+{
+	float	angle;
+
+	angle = cube->r->angle;
+	ft_angle_normal(&angle);
+	if (angle > M_PI / 2 && angle < 3 * M_PI / 2)
+		return (cube->tex_ea);
+	else
+		return (cube->tex_we);
 }

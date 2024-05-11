@@ -10,14 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../../includes/cub3d.h"
 
-void	draw_rays(t_image *img, t_vt_f p, t_vt_d r)
+void	draw_rays(t_image *img, t_vector_2dob p, t_vector_2int r)
 {
-	t_vt_d	player;
-	t_vt_d	ray;
-	int		scale;
+	t_vector_2int	player;
+	t_vector_2int	ray;
+	int				scale;
 
 	scale = MAP_SCALE;
 	if (parse()->map_height > 20 || parse()->map_width > 40)
@@ -29,36 +28,35 @@ void	draw_rays(t_image *img, t_vt_f p, t_vt_d r)
 	ft_bresenham(img, player, ray, YELLOW);
 }
 
-void drawCircleWithCross(t_cube *cube)
+void	draw_circle_with_cross(t_cube *cube)
 {
+	int			radious;
+	double		angle;
+	t_vector_2d	coord;
+	t_vector_2d	center;
 
-    t_vector_2d center;
-	t_vector_2d coord;
-    int radious;
-	double angle;
-
-    center.x = W_WIDTH / 2;
-    center.y = W_HEIGHT / 2;
-    radious = 50;
+	center.x = W_WIDTH / 2;
+	center.y = W_HEIGHT / 2;
+	radious = 50;
 	angle = 0;
-    while (angle < 360)
+	while (angle < 360)
 	{
-        coord.x = center.x + (int)(radious * cos(angle * M_PI / 180));
-        coord.y = center.y + (int)(radious * sin(angle * M_PI / 180));
-        img_draw_pixel(&cube->img, coord.x, coord.y, RED);
-		angle+= 0.1;
+		coord.x = center.x + (int)(radious * cos(angle * M_PI / 180));
+		coord.y = center.y + (int)(radious * sin(angle * M_PI / 180));
+		img_draw_pixel(&cube->img, coord.x, coord.y, RED);
+		angle += 0.1;
 	}
 	coord.y = center.y - radious;
-    while ( coord.y++ <= center.y + radious)
-        img_draw_pixel(&cube->img, center.x, coord.y, WHITE);
+	while (coord.y++ <= center.y + radious)
+		img_draw_pixel(&cube->img, center.x, coord.y, WHITE);
 	coord.x = center.x - radious;
-    while ( coord.x++ <= center.x + radious)
-        img_draw_pixel(&cube->img, coord.x, center.y, WHITE);
+	while (coord.x++ <= center.x + radious)
+		img_draw_pixel(&cube->img, coord.x, center.y, WHITE);
 }
 
 int	draw_ceil_floor(t_image *img)
 {
-	t_vt_d	pos;
+	t_vector_2int	pos;
 
 	pos.y = -1;
 	while (++pos.y < W_HEIGHT / 2)

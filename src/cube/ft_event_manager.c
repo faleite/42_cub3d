@@ -44,11 +44,11 @@ void	keyboard(int keycode, t_cube *cube)
 		cube->p->prev_key_bool[keycode] = cube->p->key_bool[keycode];
 		cube->p->key_bool[keycode] = 1;
 	}
-    if (keycode < 200)
-    {
-        cube->p->prev_key_bool[keycode] = cube->p->key_bool[keycode] ;
-        cube->p->key_bool[keycode] = 1;
-    }
+	if (keycode < 200)
+	{
+		cube->p->prev_key_bool[keycode] = cube->p->key_bool[keycode];
+		cube->p->key_bool[keycode] = 1;
+	}
 	if (keycode == ESC)
 		destroy_window(cube);
 	else if (keycode == K_W || keycode == K_D)
@@ -69,7 +69,6 @@ void	keyboard_release(int key, t_cube *cube)
 
 	player = cube->p;
 	key %= 200;
-
 	if (key < 200)
 	{
 		player->prev_key_bool[key] = player->key_bool[key];

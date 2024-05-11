@@ -153,7 +153,7 @@ int	mouse_click(int button, int x, int y, t_image *img)
 
 void	set_grid_cell(t_image *img, int x, int y)
 {
-	t_vt_d	map_pos;
+	t_vector_2int	map_pos;
 	// (void)img;
 	// Converting pixel coordinates into tab coordinates
 	map_pos.x = x / TILE_SIZE;
