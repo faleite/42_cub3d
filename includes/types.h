@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:14:22 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/11 15:09:39 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/11 17:24:41 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 
 /* BUFFER SIZE OF SCENE*/
 # define BUFFER_CUB 1024
-
-/* images */
 
 /* window
  vm: W_W 1350 W_H 680
@@ -52,9 +50,6 @@
 # define BROWN 3218945
 # define ORANGE 16744448
 # define SPACE 32
-/* fields */
-# define WALL '1'
-# define FLOOR '0'
 
 /* keycode */
 # define K_W 119
