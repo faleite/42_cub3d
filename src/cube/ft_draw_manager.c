@@ -37,7 +37,7 @@ void	draw_circle_with_cross(t_cube *cube)
 
 	center.x = W_WIDTH / 2;
 	center.y = W_HEIGHT / 2;
-	radious = 50;
+	radious = 20;
 	angle = 0;
 	while (angle < 360)
 	{
