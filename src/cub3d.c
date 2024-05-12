@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 16:59:47 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/11 14:55:42 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/12 16:52:02 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ int	main(int argc, char *argv[])
 	return (0);
 }
 
+/**
+ * Use mouse for rotate the player: (not work well)
+ * mlx_hook(cube.win_ptr, 6, (1L << 6), ft_mouse_handlertrack, &cube);
+ */
 int	build_window(t_cube cube)
 {
 	cube.mlx_ptr = mlx_init();
@@ -48,7 +52,6 @@ int	build_window(t_cube cube)
 	mlx_hook(cube.win_ptr, 2, 1L, (void *)keyboard, &cube);
 	mlx_hook(cube.win_ptr, 3, (1L << 1), (void *)keyboard_release, &cube);
 	mlx_hook(cube.win_ptr, 17, 0L, (void *)destroy_window, &cube);
-	mlx_hook(cube.win_ptr, 6, (1L << 6), ft_mouse_handlertrack, &cube);
 	mlx_loop_hook(cube.mlx_ptr, &render_cub3d, &cube);
 	mlx_loop(cube.mlx_ptr);
 	return (0);
