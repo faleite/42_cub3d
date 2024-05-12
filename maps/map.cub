@@ -3,7 +3,7 @@ SO ./textures/walls/w3d_s.xpm
 WE ./textures/walls/w3d_w.xpm
 EA ./textures/walls/w3d_e.xpm
 
-C 63,63,127
+C 0,63,127
 F 63,63,63
 
 11111111111111111

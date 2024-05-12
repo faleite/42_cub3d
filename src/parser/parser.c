@@ -6,7 +6,7 @@
 /*   By: faaraujo <faaraujo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 16:59:47 by faaraujo          #+#    #+#             */
-/*   Updated: 2024/05/06 19:54:08 by faaraujo         ###   ########.fr       */
+/*   Updated: 2024/05/12 15:44:03 by faaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,13 @@ static void	validate_elements(void)
 	clean_comma();
 	check_rgb_number(parse()->rgb_f);
 	check_rgb_number(parse()->rgb_c);
-	parse()->color_f = set_color_ceil_floor(parse()->rgb_f);
-	parse()->color_c = set_color_ceil_floor(parse()->rgb_c);
+	if (parse()->rgb_f[0][0] == '\0' || parse()->rgb_c[0][0] == '\0')
+		err_case("Invalid rgb `99'\n");
+	else
+	{
+		parse()->color_f = set_color_ceil_floor(parse()->rgb_f);
+		parse()->color_c = set_color_ceil_floor(parse()->rgb_c);
+	}
 }
 
 static void	validate_map(void)
@@ -51,7 +56,7 @@ static void	validate_map(void)
 int	validate_scene(int argc, char *arg)
 {
 	if (argc != 2)
-		err_case("Use: ./prog file.cub `19'\n");
+		err_case("Use: ./cub3D file.cub `19'\n");
 	check_type(arg);
 	parse()->scene = get_scene(arg);
 	validate_elements();
