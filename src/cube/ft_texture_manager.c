@@ -70,9 +70,9 @@ t_texture	ft_extract_text_up(t_cube *cube)
 	angle = cube->r->angle;
 	ft_angle_normal(&angle);
 	if (angle < M_PI && angle > 0)
-		return (cube->tex_so);
-	else
 		return (cube->tex_no);
+	else
+		return (cube->tex_so);
 }
 
 t_texture	ft_extract_text_side(t_cube *cube)
@@ -82,7 +82,7 @@ t_texture	ft_extract_text_side(t_cube *cube)
 	angle = cube->r->angle;
 	ft_angle_normal(&angle);
 	if (angle > M_PI / 2 && angle < 3 * M_PI / 2)
-		return (cube->tex_ea);
-	else
 		return (cube->tex_we);
+	else
+		return (cube->tex_ea);
 }
