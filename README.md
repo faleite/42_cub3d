@@ -11,8 +11,8 @@
 
  Skills | Grade |
 :------:|:-----:|
-[**Graphics**] [**Imperative programming**] [**Rigor**] [**Algorithms & AI**] | **Subscribed :atom:**
-<!-- **:white_check_mark: 100%** -->
+[**Graphics**] [**Imperative programming**] [**Rigor**] [**Algorithms & AI**] | **:white_check_mark: 113%**
+<!-- **Subscribed :atom:** -->
 
 <!-- * ### [Introduction]() -->
 * ### [Mandatory part](#mandatory-part-1)
