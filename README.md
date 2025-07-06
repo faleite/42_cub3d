@@ -15,6 +15,7 @@
 <!-- **Subscribed :atom:** -->
 
 <!-- * ### [Introduction]() -->
+* ### [Run the project](#run-the-project)
 * ### [Usage](#usage)
 * ### [Implementação](#implementação)
 <!-- * ### [Mind Map](./dcs/readme/mind_map.md) -->
@@ -27,7 +28,7 @@
 * ### [Study resources](#study-resources-1)
 * ### [Tools](#tools-1)
 
-## Usage
+## Run the project
 - Clone the repository
   - Make sure you have `git` installed on your system.
   - Open your terminal and run the following command to clone the repository:
@@ -48,6 +49,12 @@ make
 ```bash
 ./cub3D maps/<name-of-map>.cub
 ```
+
+## Usage
+- Use the **right and left arrow keys** to look around.
+- Use the **W**, **A**, **S**, and **D** keys to move around the maze.
+- Press the **ESC** key to exit the program.
+- Use **space** to toggle the minimap.
 
 ## Implementação
 
