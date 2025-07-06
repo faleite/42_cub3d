@@ -77,7 +77,7 @@ static void	draw_wall(t_cube *cube, int ray, t_wall pix, double wall_height)
 	ratio = (double)texture_painter.height / wall_height ;
 	position_o.x = ft_get_postion(cube, texture_painter);
 	text_adrr = (int *)texture_painter.img.addr;
-	position_o.y = (pix.top - (W_WIDTH / 2) + (wall_height / 2)) * ratio;
+	position_o.y = (pix.top - (W_HEIGHT / 2) + (wall_height / 2)) * ratio;
 	if (position_o.y < 0)
 		position_o.y = 0;
 	while (pix.top < pix.bottom)

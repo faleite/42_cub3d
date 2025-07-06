@@ -15,7 +15,8 @@
 <!-- **Subscribed :atom:** -->
 
 <!-- * ### [Introduction]() -->
-* ### [Mandatory part](#mandatory-part-1)
+* ### [Usage](#usage)
+* ### [Implementação](#implementação)
 <!-- * ### [Mind Map](./dcs/readme/mind_map.md) -->
 <!-- * ### [Mind Map](#mind-map-1) -->
 <!-- * ### [Overview](./dcs/readme/bash_brief.md) -->
@@ -26,8 +27,29 @@
 * ### [Study resources](#study-resources-1)
 * ### [Tools](#tools-1)
 
-## Mandatory part
-<!-- *Subject Comentado** -->
+## Usage
+- Clone the repository
+  - Make sure you have `git` installed on your system.
+  - Open your terminal and run the following command to clone the repository:
+```bash
+git clone https://github.com/faleite/42_cub3d.git
+```
+- Change into the project directory:
+```bash
+cd 42_cub3d 
+```
+- Build the project:
+```bash
+make
+```
+- Choose a map file from the `maps` directory or create your own. 
+  - The map file should be in the `.cub` format.
+  - Run the project with a map file:
+```bash
+./cub3D maps/<name-of-map>.cub
+```
+
+## Implementação
 
 Program name | cub3D
 ------------ | ---------
